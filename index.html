@@ -1,26 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimeTube</title>
+    <title>Home page</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body>
+
+<body class="home-page">
     <header class="header">
         <nav class="navbar">
-            <a href="#">Home</a>
+            <a href="index.html">Home</a>
+            <a href="#">Anime</a>
+            <a href="#">Community</a>
             <a href="#">About</a>
-            <a href="#">Services</a>
             <a href="#">Contact</a>
         </nav>
         <form action="#" class="search-btn">
             <input type="text" placeholder="Search" class="search-input">
             <button type="submit"><i class='bx bx-search'></i></button>
         </form>
+        <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
     </header>
-    <div class="container">
+    <div class="hero-container">
+        <div class="hero-left">
+            <h1>Welcome to my awesome anime website</h1>
+            <p>
+                Embark on an unforgettable journey into the captivating world of anime. Dive deep into vibrant realms,
+                where every frame pulses with emotion and every character springs to life. Our anime sanctuary awaits,
+                ready to ignite your imagination and stir your soul. Join us as we celebrate the power of storytelling,
+                the beauty of artistry, and the magic of anime
+            </p>
+            <button><a href="signup.html">Sign up</a></button>
+        </div>
+        <div class="hero-right">
+            <img src="https://img.goodfon.com/wallpaper/big/b/7b/boku-no-hero-academia-art.webp" alt="">
+        </div>
     </div>
+    <div class="recommendation-container">
+        <h1>Your Anime Recommendation</h1>
+        <div class="recommendations-grid">
+            <div class="recommendation-box">
+                <img src="https://images.everyeye.it/img-notizie/my-hero-academia-anime-verrA-presentato-comic-new-york-v6-672104-1200x1200.webp"
+                    alt="My Hero Academia">
+                <p>My Hero Academia</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="https://m.media-amazon.com/images/M/MV5BZjZjNzI5MDctY2Y4YS00NmM4LTljMmItZTFkOTExNGI3ODRhXkEyXkFqcGdeQXVyNjc3MjQzNTI@._V1_.jpg"
+                    alt="Demon Slayer: Kimetsu no Yaiba">
+                <p>Demon Slayer: Kimetsu no Yaiba</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="https://m.media-amazon.com/images/M/MV5BZDc3NGQ3ZWQtYjNkOC00MjhiLTg2N2YtNmZlOGNiZTFkOWNhXkEyXkFqcGdeQXVyNjc2NjA5MTU@._V1_FMjpg_UX1000_.jpg"
+                    alt="JoJo's Bizarre Adventure">
+                <p>JoJo's Bizarre Adventure</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="https://m.media-amazon.com/images/M/MV5BY2I2MzI1ODYtMWRlOS00MzdhLWEyOWEtYWJhNmFiZTIxMGJhXkEyXkFqcGdeQXVyMTExNDQ2MTI@._V1_.jpg"
+                    alt="Dragon Ball Super">
+                <p>Dragon Ball Super</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="https://m.media-amazon.com/images/M/MV5BNGM0YTk3MWEtN2JlZC00ZmZmLWIwMDktZTMxZGE5Zjc2MGExXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg"
+                    alt="Hunter x Hunter">
+                <p>Hunter x Hunter</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="https://static.wikia.nocookie.net/shingekinokyojin/images/d/d8/Attack_on_Titan_Season_1.jpg/revision/latest?cb=20211005182832"
+                    alt="Attack on Titan">
+                <p>Attack on Titan</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/bleach.jpg"
+                    alt="Bleach: Thousand Year Blood War">
+                <p>Bleach: Thousand Year Blood War</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/naruto.jpg"
+                    alt="Naruto">
+                <p>Naruto</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/tokyo-ghoul.jpg"
+                    alt="Tokyo Ghoul">
+                <p>Tokyo Ghoul</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/sword-art-online.jpg"
+                    alt="Sword Art Online">
+                <p>Sword Art Online</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/dr-stone.jpg"
+                    alt="Dr. Stone">
+                <p>Dr. Stone</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/one-piece.jpg"
+                    alt="One Piece">
+                <p>One Piece</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/re-zero.jpg"
+                    alt="Re: Zero - Starting Life in Another World">
+                <p>Re: Zero - Starting Life in Another World</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/bungo-stray-dogs.jpg"
+                    alt="Bungo Stray Dogs">
+                <p>Bungo Stray Dogs</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+            <div class="recommendation-box">
+                <img src="assets/neon-genesis-evangelion.jpg"
+                    alt="Neon Genesis Evangelion">
+                <p>Neon Genesis Evangelion</p>
+                <i class='bx bx-play-circle play-button'></i>
+            </div>
+        </div>
+        <button>View More</button>
+    </div>
+    <br>
+    <div class="quote-container">
+        <blockquote cite="https://quotetheanime.com/quotes/trigun-quotes/">
+            <p>Every journey begins with a single step. We just have to have patience.</p>
+            <footer class="quote-footer">-Milly Thompson (Trigun)</footer>
+        </blockquote>
+    </div>
+    <br>
+    <br>
+    <div class="call-to-action-container">
+        <div class="call-to-action-left">
+            <h1>Immerse Yourself in Anime - Let's Begin!</h1>
+            <p>Sign up to not miss a single update of your favorite anime by clicking that button right over there!</p>
+        </div>
+        <div class="call-to-action-right">
+            <button><a href="signup.html">Sign up</a></button>
+        </div>
+    </div>
+    <br>
+    <footer class="page-footer">
+        <p>Copyright © The Odin Project 2024</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
+
 </html>
