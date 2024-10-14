@@ -15,6 +15,10 @@
     padding: 0;
 }
 
+.about-page * {
+    box-sizing: border-box;
+}
+
 .login-page {
     background: url(assets/ani-background.jpeg) no-repeat center center;
     background-size: cover;
@@ -431,6 +435,8 @@
     text-decoration: underline;
 }
 
+
+/* Home Page */
 .hero-container {
     display: flex;
     justify-content: space-between;
@@ -558,25 +564,17 @@
     color: white;
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 2; /* Ensure it's above the image */
+    z-index: 2;
 }
 
 .recommendation-box:hover .play-button {
-    opacity: 1; /* Show play button on hover */
+    opacity: 1;
 }
-
-/* .recommendation-box p {
-    padding: 10px 0;
-    font-size: 1.2rem;
-    color: #fff;
-    font-weight: 600;
-    text-transform: uppercase;
-} */
 
 .recommendation-container button {
     padding: 12px 25px;
     font-size: 1.2rem;
-    background-color: #ff4d4d;
+    background-color: #f39c12;
     color: white;
     border: none;
     border-radius: 25px;
@@ -585,7 +583,7 @@
 }
 
 .recommendation-container button:hover {
-    background-color: #fe5757;
+    background-color: #e67e22;
     transform: scale(1.1);
 }
 
@@ -686,4 +684,114 @@ blockquote p::after {
     text-align: center;
     color: white;
     margin-top: 30px;
+}
+
+
+/* About Page */
+.about-page {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1b1b1b;
+    color: #fff;
+}
+
+.about-container {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #242424;
+}
+
+.about-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #f39c12;
+}
+
+.about-content h1 span {
+    color: #e74c3c;
+}
+
+.about-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+}
+
+.about-features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    box-sizing: unset !important;
+}
+
+.feature-box {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    width: 250px;
+    text-align: center;
+    box-sizing: unset !important;
+}
+
+.feature-box img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.feature-box h3 {
+    font-size: 22px;
+    color: #e67e22;
+    margin-bottom: 10px;
+}
+
+.feature-box p {
+    font-size: 16px;
+}
+
+.feature-box:hover {
+    transform: scale(1.1);
+}
+
+.community-callout {
+    padding: 40px 20px;
+    background-color: #1e272e;
+    text-align: center;
+}
+
+.community-callout h2 {
+    font-size: 36px;
+    color: #f39c12;
+}
+
+.community-callout p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.join-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.join-btn:hover {
+    background-color: #c0392b;
+}
+
+.about-footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #2c3e50;
+    color: #bdc3c7;
+    font-size: 14px;
 }
