@@ -500,6 +500,7 @@
     margin-top: 50px;
     text-align: center;
     padding: 0 20px;
+    box-sizing: unset !important;
 }
 
 .recommendation-container h1 {
@@ -511,9 +512,10 @@
 
 .recommendations-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 20px;
     margin-bottom: 40px;
+    box-sizing: unset !important;
 }
 
 .recommendation-box {
@@ -529,6 +531,7 @@
     background-color: #1a1a1a;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: unset !important;
 }
 
 .recommendation-box:hover {
@@ -541,6 +544,7 @@
     height: 320px;
     border-radius: 6px;
     transition: filter 0.3s ease;
+    box-sizing: unset !important;
 }
 
 .recommendation-box:hover img {
