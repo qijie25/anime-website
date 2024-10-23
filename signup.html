@@ -14,13 +14,13 @@
         <nav class="navbar">
             <a href="index.html">Home</a>
             <a href="#">Anime</a>
-            <a href="#">Community</a>
+            <a href="community.html">Community</a>
             <a href="about.html">About</a>
             <a href="#">Contact</a>
         </nav>
         <form action="#" class="search-btn">
             <input type="text" placeholder="Search" class="search-input">
-            <button type="submit"><i class='bx bx-search'></i></button>
+            <button type="submit" title="Search"><i class='bx bx-search'></i></button>
         </form>
     </header>
 
@@ -53,33 +53,33 @@
                     <div class="input-row">
                         <div class="input-box register">
                             <span class="icon"><i class='bx bxs-user'></i></span>
-                            <input type="text" name="username" minlength="2" maxlength="50" placeholder="" required>
-                            <label>Name</label>
+                            <input type="text" name="username" minlength="2" maxlength="50" id="username" placeholder="" required>
+                            <label for="username">Name</label>
                         </div>
                         <div class="input-box register">
                             <span class="icon"><i class='bx bxs-envelope'></i></span>
-                            <input type="email" name="email" minlength="6" maxlength="50" placeholder="" required>
-                            <label>Email</label>
+                            <input type="email" name="email" minlength="6" maxlength="50" id="email" placeholder="" required>
+                            <label for="email">Email</label>
                         </div>
                     </div>
                     <div class="input-row">
                         <div class="input-box register">
                             <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                            <input type="password" name="password" minlength="5" maxlength="50" placeholder="" required>
-                            <label>Password</label>
+                            <input type="password" name="password" minlength="5" maxlength="50" placeholder="" id="password" required>
+                            <label for="password">Password</label>
                         </div>
                         <div class="input-box register">
                             <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                            <input type="password" name="confirmPassword" minlength="5" maxlength="50" placeholder=""
+                            <input type="password" name="confirmPassword" minlength="5" maxlength="50" id="confirmPassword" placeholder=""
                                 required>
-                            <label>Confirm Password</label>
+                            <label for="confirmPassword">Confirm Password</label>
                         </div>
                     </div>
                     <div class="remember-forget">
                         <label for="rememberMe"><input type="checkbox" name="rememberMe" id="rememberMe"> I agree to the
                             terms & conditions</label>
                     </div>
-                    <button class="btn" type="submit">Register</button>
+                    <button class="btn" type="submit" name="registerBtn" id="registerBtn">Register</button>
                     <div class="footer">
                         <p>Already have an account? <a href="signin.html">Log in</a></p>
                     </div>
@@ -87,6 +87,7 @@
             </div>
         </div>
     </div>
+    <script src="register.js"></script>
 </body>
 
 </html>

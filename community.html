@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,32 +8,61 @@
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body>
+
+<body class="community-page">
     <header class="header">
         <nav class="navbar">
             <a href="index.html">Home</a>
             <a href="#">Anime</a>
-            <a href="#">Community</a>
+            <a href="community.html">Community</a>
             <a href="about.html">About</a>
             <a href="#">Contact</a>
         </nav>
         <form action="#" class="search-btn">
             <input type="text" placeholder="Search" class="search-input">
-            <button type="submit"><i class='bx bx-search'></i></button>
+            <button type="submit" title="Search"><i class='bx bx-search'></i></button>
         </form>
         <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
     </header>
-    <div class="community-container">
-        <form action="#" method="post">
-            <h1>AniTube Community</h1>
-            <div class="community-chatbox">
-                <div class="community-historybox">
-                    
+    <div class="main-container community">
+        <h1 class="community-header">AniTube Community</h1>
+        <div class="community-container">
+            <form action="#" method="post">
+                <div class="community-chatbox">
+                    <div class="community-historybox" id="community-historybox">
+
+                    </div>
+                    <div class="community-textbox">
+                        <input type="text" class="form-control-textarea" name="message" id="message"
+                            placeholder="Type your message here..." maxlength="200">
+                        <button type="submit" class="send-btn" id="send-btn">Send</button>
+                    </div>
                 </div>
-                <input type="text" class="form-control-textarea" name="message" id="message" placeholder="Type your message here..." maxlength="200">
-                <button type="submit" class="send-btn">Send</button>
+            </form>
+        </div>
+        <!-- Events -->
+        <div class="events-section">
+            <h2>Upcoming Events</h2>
+            <div class="event">
+                <h3>Virtual Anime Convention 2024</h3>
+                <p>Date: March 15, 2024</p>
+                <p>Location: Online</p>
             </div>
-        </form>
+            <div class="event">
+                <h3>Cosplay Contest</h3>
+                <p>Date: April 2, 2024</p>
+                <p>Location: Tokyo, Japan</p>
+            </div>
+        </div>
+
+        <div class="help-forum">
+            <div class="help-container">
+                <h2>Help & Forum</h2>
+            </div>
+        </div>
     </div>
+    <script src="community.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </body>
+
 </html>
