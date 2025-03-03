@@ -21,43 +21,43 @@ const animeRecommendations = [
     },
     {
         title: 'Attack on Titan',
-        imageUrl: 'assets/attack-on-titan.jpg'
+        imageUrl: '../assets/attack-on-titan.jpg'
     },
     {
         title: 'Bleach: Thousand Year Blood War',
-        imageUrl: 'assets/bleach.jpg'
+        imageUrl: '../assets/bleach.jpg'
     },
     {
         title: 'Naruto',
-        imageUrl: 'assets/naruto.jpg'
+        imageUrl: '../assets/naruto.jpg'
     },
     {
         title: 'Tokyo Ghoul',
-        imageUrl: 'assets/tokyo-ghoul.jpg'
+        imageUrl: '../assets/tokyo-ghoul.jpg'
     },
     {
         title: 'Sword Art Online',
-        imageUrl: 'assets/sword-art-online.jpg'
+        imageUrl: '../assets/sword-art-online.jpg'
     }, 
     {
         title: 'One Piece',
-        imageUrl: 'assets/one-piece.jpg'
+        imageUrl: '../assets/one-piece.jpg'
     },
     {
         title: 'Dr. Stone',
-        imageUrl: 'assets/dr-stone.jpg'
+        imageUrl: '../assets/dr-stone.jpg'
     }, 
     {
         title: 'Re: Zero Starting Life in Another World',
-        imageUrl: 'assets/re-zero.jpg'
+        imageUrl: '../assets/re-zero.jpg'
     }, 
     {
         title: 'Bungo Stray Dogs',
-        imageUrl: 'assets/bungo-stray-dogs.jpg'
+        imageUrl: '../assets/bungo-stray-dogs.jpg'
     },
     {
         title: 'Neon Genesis Evangelion',
-        imageUrl: 'assets/neon-genesis-evangelion.jpg'
+        imageUrl: '../assets/neon-genesis-evangelion.jpg'
     }
 ];
 

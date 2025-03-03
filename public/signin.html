@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body class="login-page">
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="#">Anime</a>
+            <a href="community.html">Community</a>
+            <a href="about.html">About</a>
+            <a href="#">Contact</a>
+        </nav>
+        <form action="#" class="search-btn">
+            <input type="text" placeholder="Search" class="search-input">
+            <button type="submit" title="Search"><i class='bx bx-search'></i></button>
+        </form>
+    </header>
+
+    <div class="container login">
+        <div class="left-section register">
+            <video class="anime_video" autoplay muted loop>
+                <source src="../assets/231156_medium.mp4" type="video/mp4">
+            </video>
+            <!-- Video by <a href="https://pixabay.com/users/syahronanda-17148518/?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Bobby
+                Syahronanda</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Pixabay</a> -->
+        </div>
+        <div class="right-section">
+            <div class="form-box login">
+                <form action="#" method="post">
+                    <h2>Login</h2>
+                    <p style="padding-bottom: 20px;">AniTube - The best anime streaming platform in the world!</p>
+                    <div class="input-row">
+                        <div class="input-box login">
+                            <span class="icon"><i class='bx bxs-envelope'></i></span>
+                            <input type="email" name="email" maxlength="50" placeholder="" id="email" required>
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-box login">
+                            <span class="icon"><i class='bx bxs-lock-alt'></i></span>
+                            <input type="password" name="password" maxlength="50" placeholder="" id="password" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label for="rememberMe"><input type="checkbox" name="rememberMe" id="rememberMe"> Remember
+                            me</label>
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <button class="btn" type="submit">Login</button>
+                    <div class="footer">
+                        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

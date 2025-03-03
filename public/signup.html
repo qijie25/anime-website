@@ -25,61 +25,58 @@
     </header>
 
     <div class="container register">
-        <div class="content register">
-            <h2 class="logo"><i class='bx bxs-ghost'></i> AniTube</h2>
-            <div class="text-sci">
-                <h2>Welcome<br><span>To Our New Website!</span></h2>
-                <p>
-                    We are excited to introduce a brand-new experience for anime lovers everywhere! Dive
-                    into a world where you can explore your favorite shows, discover hidden gems, and
-                    connect with fellow fans. Our platform is designed to bring you the best in anime streaming, all
-                    in one place. Stay tuned for more exciting features and content, crafted just for you. Enjoy your
-                    journey with AniTube!
-                </p>
-            </div>
-            <div class="social-icons">
-                <a href="#"><i class='bx bxl-facebook'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-tiktok'></i></a>
-                <a href="#"><i class='bx bxl-twitter'></i></a>
-            </div>
+        <div class="left-section register">
+            <video class="anime_video" autoplay muted loop>
+                <source src="../assets/231156_medium.mp4" type="video/mp4">
+            </video>
+            <!-- Video by <a href="https://pixabay.com/users/syahronanda-17148518/?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Bobby
+                Syahronanda</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Pixabay</a> -->
         </div>
-        <div class="main-box">
+        <div class="right-section">
             <div class="form-box register">
                 <form action="#" method="post">
                     <h2>Register</h2>
-                    <p>Please fill in this form to create an account. To become a member, enjoy the full features of the
+                    <p style="padding-bottom: 20px;">Please fill in this form to create an account. To become a member, enjoy the full features of the
                         site</p>
                     <div class="input-row">
                         <div class="input-box register">
                             <span class="icon"><i class='bx bxs-user'></i></span>
-                            <input type="text" name="username" minlength="2" maxlength="50" id="username" placeholder="" required>
-                            <label for="username">Name</label>
+                            <input type="text" name="username" id="username" maxlength="100" placeholder="" required>
+                            <label for="username">Username</label>
+                            <p class="error-message" id="usernameError"></p>
                         </div>
+                    </div>
+                    <div class="input-row">
                         <div class="input-box register">
                             <span class="icon"><i class='bx bxs-envelope'></i></span>
-                            <input type="email" name="email" minlength="6" maxlength="50" id="email" placeholder="" required>
+                            <input type="email" name="email" id="email" maxlength="100" placeholder="" required>
                             <label for="email">Email</label>
+                            <p class="error-message" id="emailError"></p>
                         </div>
                     </div>
                     <div class="input-row">
                         <div class="input-box register">
                             <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                            <input type="password" name="password" minlength="5" maxlength="50" placeholder="" id="password" required>
+                            <input type="password" name="password" id="password" maxlength="50" placeholder="" required>
                             <label for="password">Password</label>
+                            <p class="error-message" id="passwordError"></p>
                         </div>
+                    </div>
+                    <div class="input-row">
                         <div class="input-box register">
                             <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                            <input type="password" name="confirmPassword" minlength="5" maxlength="50" id="confirmPassword" placeholder=""
+                            <input type="password" name="confirmPassword" id="confirmPassword" maxlength="50" placeholder=""
                                 required>
                             <label for="confirmPassword">Confirm Password</label>
+                            <p class="error-message" id="confirmPasswordError"></p>
                         </div>
                     </div>
-                    <div class="remember-forget">
+                    <div class="form-options">
                         <label for="rememberMe"><input type="checkbox" name="rememberMe" id="rememberMe"> I agree to the
                             terms & conditions</label>
+                        <p class="error-message" id="checkboxError"></p>
                     </div>
-                    <button class="btn" type="submit" name="registerBtn" id="registerBtn">Register</button>
+                    <button class="btn" type="submit" name="registerBtn" id="registerBtn" disabled>Register</button>
                     <div class="footer">
                         <p>Already have an account? <a href="signin.html">Log in</a></p>
                     </div>
