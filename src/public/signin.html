@@ -27,14 +27,14 @@
     <div class="container login">
         <div class="left-section register">
             <video class="anime_video" autoplay muted loop>
-                <source src="../../assets/231156_medium.mp4" type="video/mp4">
+                <source src="./assets/231156_medium.mp4" type="video/mp4">
             </video>
             <!-- Video by <a href="https://pixabay.com/users/syahronanda-17148518/?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Bobby
                 Syahronanda</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Pixabay</a> -->
         </div>
         <div class="right-section">
             <div class="form-box login">
-                <form action="#" method="post">
+                <form id="signinForm" action="#" method="post">
                     <h2>Login</h2>
                     <p style="padding-bottom: 20px;">AniTube - The best anime streaming platform in the world!</p>
                     <div class="input-row">
@@ -64,6 +64,48 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById("signinForm").addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Get email and password values
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value;
+
+                // Send the request with the email and password as JSON data using fetch
+                fetch("/users/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email: email, password: password })
+                })
+                    .then(function (response) {
+                        if (response.ok) {
+                            return response.json().then(function (data) {
+                                console.log("Login successful:", data);
+
+                                // Store token and user details in sessionStorage
+                                sessionStorage.setItem('token', data.token);
+                                sessionStorage.setItem('username', data.user.username);
+                                sessionStorage.setItem('email', data.user.email);
+                                sessionStorage.setItem('id', data.user.id);
+
+                                sessionStorage.setItem('loginStatus', "success");
+                                window.location.href = "/index.html";
+                            });
+                        } else {
+                            // If the response is not OK, parse the error message
+                            return response.json().then(function (errorData) {
+                                throw new Error(errorData.message || "Login failed");
+                            });
+                        }
+                    })
+                    .catch(function (error) {
+                        alert(error.message || "An error occurred during login");
+                    });
+            });
+    </script>
 </body>
 
 </html>

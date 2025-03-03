@@ -125,7 +125,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-	background: url("../../assets/ani-background.jpeg") no-repeat center center;
+	background: url("./assets/ani-background.jpeg") no-repeat center center;
 	background-size: cover;
 	background-attachment: fixed;
     min-height: 100vh;
@@ -482,7 +482,7 @@
 
 .recommendation-box img {
     width: 100%;
-    height: 320px;
+    height: 360px;
     border-radius: 6px;
     transition: filter 0.3s ease;
     box-sizing: unset !important;
@@ -776,7 +776,7 @@ blockquote p::after {
     min-height: 1120px;
     height: auto;
     padding: 60px 20px;
-    background: url('../../assets/community-background.jpg') no-repeat center center;
+    background: url('./assets/community-background.jpg') no-repeat center center;
     background-size: cover;
     z-index: 1;
 }
