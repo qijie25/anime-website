@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Anime {
+  id              Int      @id @default(autoincrement())
+  title           String
+  description     String
+  duration        Int?
+  type            String
+  studios         String
+  date_aired      DateTime
+  status          String
+  img_url         String
+  genre           String
+  total_episodes  Int?
+  created_at      DateTime   @default(now())
+  updated_at      DateTime   @updatedAt
+  episodes        Episode[]
+}
+
+model Episode {
+  id            Int      @id @default(autoincrement())
+  title         String
+  episode_num   Int
+  release_date  DateTime?
+  animeId       Int
+  anime         Anime    @relation(fields: [animeId], references: [id])
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  username      String   @unique
+  email         String   @unique
+  password      String
+  profile_img   String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  admin         Admin?
+}
+
+model Admin {
+  id            Int      @id @default(autoincrement())
+  user_id       Int      @unique
+  user          User     @relation(fields: [user_id], references: [id])
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}

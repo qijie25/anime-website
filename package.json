@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.4.1",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "prisma": "^6.4.1"
+  }
+}
