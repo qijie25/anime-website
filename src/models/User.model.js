@@ -14,3 +14,26 @@ module.exports.login = async function login(email, password) {
 
   return user;
 };
+
+module.exports.register = async function register(username, email, password) {
+  // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Create the user in the database
+  const newUser = await prisma.user.create({
+    data: {
+      username,
+      email,
+      password: hashedPassword,
+    },
+  });
+
+  return newUser;
+};
+
+module.exports.updateProfile = async function updateProfile(id, updatedFields) {
+  return prisma.user.update({
+    where: { id },
+    data: updatedFields,
+  });
+};

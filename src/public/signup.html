@@ -34,7 +34,7 @@
         </div>
         <div class="right-section">
             <div class="form-box register">
-                <form action="#" method="post">
+                <form id="signupForm" action="#" method="post">
                     <h2>Register</h2>
                     <p style="padding-bottom: 20px;">Please fill in this form to create an account. To become a member, enjoy the full features of the
                         site</p>
@@ -85,6 +85,47 @@
         </div>
     </div>
     <script src="register.js"></script>
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            // Send the request with the form data as JSON
+            fetch("/users/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, email, password })
+            })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json().then(function (data) {
+                        alert("Registration successful!");
+                        window.location.href = "/signin.html"; // Redirect to login page
+                     });
+                } else {
+                    return response.json().then(function (errorData) {
+                        throw new Error(errorData.message || "Registration failed");
+                    });
+                }
+            })
+            .catch(function (error) {
+                alert(error.message || "An error occurred during registration");
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -23,6 +23,12 @@
             <button type="submit" title="Search"><i class='bx bx-search'></i></button>
         </form>
         <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+        <div id="user-profile" style="display: none;">
+            <a href="profile.html">
+                <i class='bx bxs-user-circle' style="font-size: 24px; cursor: pointer; color: white;"></i>
+            </a>
+            <button id="logout-btn" class="logout-btn">Logout</button>
+        </div>
     </header>
     <div class="hero-container">
         <div class="hero-left">
@@ -68,6 +74,31 @@
     <footer class="page-footer">
         <p>Copyright © 2024 AniTube - All about anime, all the time!</p>
     </footer>
+    <script>
+        // Check login status and update the header
+        const loginStatus = sessionStorage.getItem("loginStatus");
+        const userId = sessionStorage.getItem("id");
+
+        const loginButton = document.getElementById("login-btn");
+        const userProfile = document.getElementById("user-profile");
+        const logoutButton = document.getElementById("logout-btn");
+
+        if (loginStatus === "success" && userId) {
+            // User is logged in
+            loginButton.style.display = "none"; // Hide login button
+            userProfile.style.display = "flex"; // Show profile icon and logout button
+        } else {
+            // User is not logged in
+            loginButton.style.display = "block"; // Show login button
+            userProfile.style.display = "none"; // Hide profile icon and logout button
+        }
+
+        // Logout functionality
+        logoutButton.addEventListener("click", function () {
+            sessionStorage.clear(); // Clear session storage
+            window.location.href = "/signin.html"; // Redirect to login page
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 
