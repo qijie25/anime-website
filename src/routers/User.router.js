@@ -1,5 +1,5 @@
 const express = require('express');
-const { login, register, updateProfile } = require("../models/User.model");
+const { login, register, updateProfile, verifyCurrentPassword } = require("../models/User.model");
 const { generateToken } = require("../middleware/jwtMiddleware");
 const bcrypt = require('bcrypt');
 const router = express.Router();
@@ -58,22 +58,29 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+
 router.put("/update-profile", async (req, res, next) => {
   try {
-    const { id, username, password } = req.body;
+    const { id, username, currentPassword, newPassword } = req.body;
 
     if (!id) {
       return res.status(400).json({ message: "User ID is required." });
     }
 
+    // Verify the current password
+    const isCurrentPasswordValid = await verifyCurrentPassword(id, currentPassword);
+    if (!isCurrentPasswordValid) {
+      return res.status(401).json({ message: "Current password is incorrect." });
+    }
+
     const updatedFields = {};
 
     if (username) {
-      updatedFields.name = username;
+      updatedFields.username = username;
     }
 
-    if (password) {
-      updatedFields.password = await bcrypt.hash(password, 10); // Hash the password
+    if (newPassword) {
+      updatedFields.password = await bcrypt.hash(newPassword, 10); // Hash the new password
     }
 
     const updatedPerson = await updateProfile(id, updatedFields);

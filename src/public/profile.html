@@ -65,6 +65,9 @@
             <div class="password-change">
                 <button type="button" id="toggle-password">Change password</button>
                 <div id="password-fields" class="hidden">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" name="current-password">
+
                     <label for="new-password">New Password</label>
                     <input type="password" id="new-password" name="new-password">
 
@@ -105,6 +108,7 @@
                 event.preventDefault();
 
                 const updatedUsername = document.getElementById('name').value;
+                const currentPassword = document.getElementById('current-password').value;
                 const newPassword = document.getElementById('new-password').value;
                 const confirmPassword = document.getElementById('confirm-password').value;
 
@@ -125,7 +129,8 @@
                             id: parseInt(userId),
                             email,
                             username: updatedUsername,
-                            password: newPassword
+                            currentPassword: currentPassword,
+                            newPassword: newPassword
                         })
                     });
 

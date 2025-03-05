@@ -37,3 +37,13 @@ module.exports.updateProfile = async function updateProfile(id, updatedFields) {
     data: updatedFields,
   });
 };
+
+module.exports.verifyCurrentPassword = async function verifyCurrentPassword(id, currentPassword) {
+  const user = await prisma.user.findUnique({ where: { id } });
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+  return isPasswordValid;
+};
