@@ -44,112 +44,49 @@
             <a href="#">Settings</a>
         </nav>
     </div>
+    <h2>Edit Profile</h2>
     <div class="profile-container">
-        <h2>Edit Profile</h2>
-        <form id="profile-form">
-            <!-- Email Address -->
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" readonly>
-
-            <!-- Verification Status -->
-            <div class="verification-status">
-                <span class="not-verified">Not Verified</span>
-                <p>Your account has not been verified. <a href="#">Click here</a> to resend verification request.</p>
-            </div>
-
-            <!-- Name -->
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name">
-
-            <!-- Password Change -->
-            <div class="password-change">
-                <button type="button" id="toggle-password">Change password</button>
-                <div id="password-fields" class="hidden">
-                    <label for="current-password">Current Password</label>
-                    <input type="password" id="current-password" name="current-password">
-
-                    <label for="new-password">New Password</label>
-                    <input type="password" id="new-password" name="new-password">
-
-                    <label for="confirm-password">Confirm New Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password">
+        <div class="profile-image-section">
+            <img id="profile-image" src="assets/profile-icon.png" alt="Profile Img" class="profile-image">
+            <input type="file" id="profile-picture-upload" accept="image/*">
+            <button class="upload-image-btn">Upload Image</button>
+        </div>
+        <div class="form-section">
+            <form id="profile-form">
+                <!-- Email Address -->
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" readonly>
+            
+                <!-- Verification Status -->
+                <div class="verification-status">
+                    <span class="not-verified">Not Verified</span>
+                    <p>Your account has not been verified. <a href="#">Click here</a> to resend verification request.</p>
                 </div>
-            </div>
-
-            <button type="submit" class="save-button">Save</button>
-        </form>
+            
+                <!-- Name -->
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name">
+            
+                <!-- Password Change -->
+                <div class="password-change">
+                    <button type="button" id="toggle-password">Change password</button>
+                    <div id="password-fields" class="hidden">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" id="current-password" name="current-password">
+            
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" name="new-password">
+            
+                        <label for="confirm-password">Confirm New Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password">
+                    </div>
+                </div>
+            
+                <button type="submit" class="save-button">Save</button>
+            </form>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const profileForm = document.getElementById("profile-form");
-            const userId = sessionStorage.getItem('id');
-            const username = sessionStorage.getItem('username');
-            const email = sessionStorage.getItem('email');
-            const togglePasswordBtn = document.getElementById("toggle-password");
-            const passwordFields = document.getElementById("password-fields");
-
-            document.getElementById('username').textContent = username;
-            document.getElementById('name').value = username;
-            document.getElementById('email').value = email;
-
-            togglePasswordBtn.addEventListener("click", () => {
-                // Toggle visibility of password fields
-                if (passwordFields.classList.contains("hidden")) {
-                    passwordFields.classList.remove("hidden");
-                    togglePasswordBtn.textContent = "Cancel password change";
-                } else {
-                    passwordFields.classList.add("hidden");
-                    togglePasswordBtn.textContent = "Change password";
-                }
-            });
-
-            profileForm.addEventListener("submit", async (event) => {
-                event.preventDefault();
-
-                const updatedUsername = document.getElementById('name').value;
-                const currentPassword = document.getElementById('current-password').value;
-                const newPassword = document.getElementById('new-password').value;
-                const confirmPassword = document.getElementById('confirm-password').value;
-
-                // Validate inputs
-                if (newPassword && newPassword !== confirmPassword) {
-                    alert("Passwords do not match!");
-                    return;
-                }
-
-                try {
-                    // Send data to backend
-                    const response = await fetch('/users/update-profile', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            id: parseInt(userId),
-                            email,
-                            username: updatedUsername,
-                            currentPassword: currentPassword,
-                            newPassword: newPassword
-                        })
-                    });
-
-                    const result = await response.json();
-
-                    if (response.ok) {
-                        alert("Profile updated successfully!");
-                        sessionStorage.setItem('name', updatedUsername);
-                        document.getElementById('username').textContent = updatedUsername;
-                    } else {
-                        alert(`Error: ${result.message}`);
-                    }
-                } catch (error) {
-                    console.error("Error updating profile:", error);
-                    alert("Failed to update profile. Please try again.");
-                }
-            });
-        });
-    </script>
+    <script src="profile.js"></script>
 </body>
 
 </html>

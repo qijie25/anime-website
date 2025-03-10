@@ -1,6 +1,7 @@
 const express = require('express');
-const { login, register, updateProfile, verifyCurrentPassword } = require("../models/User.model");
+const { login, register, updateProfile, verifyCurrentPassword, updateProfilePicture, getUserProfilePictures } = require("../models/User.model");
 const { generateToken } = require("../middleware/jwtMiddleware");
+const upload = require("../middleware/uploadMiddleware");
 const bcrypt = require('bcrypt');
 const router = express.Router();
 
@@ -92,6 +93,30 @@ router.put("/update-profile", async (req, res, next) => {
     res.status(200).json({ message: "Profile updated successfully", user: updatedPerson });
   } catch (err) {
     next(err);
+  }
+});
+
+// Upload new profile picture
+router.post("/upload-profile-picture/:id", upload.single("image"), async (req, res) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const imageUrl = req.file.path;
+
+    const updatedUser = await updateProfilePicture(userId, imageUrl);
+    res.status(200).json({ message: "Profile picture uploaded successfully", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get all profile pictures of a user
+router.get("/profile-pictures/:id", async (req, res) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const pictures = await getUserProfilePictures(userId);
+    res.status(200).json({ pictures });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 

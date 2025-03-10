@@ -47,3 +47,42 @@ module.exports.verifyCurrentPassword = async function verifyCurrentPassword(id, 
   const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
   return isPasswordValid;
 };
+
+module.exports.updateProfilePicture = async function updateProfilePicture(userId,imageUrl) {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw new Error("User not found");
+
+  const now = new Date();
+  const lastUpdate = user.lastProfilePictureUpdate;
+
+  // Check if 24 hours have passed since the last update
+  if (lastUpdate) {
+    const timeSinceLastUpdate = now - lastUpdate;
+    const timeRemaining = 24 * 60 * 60 * 1000 - timeSinceLastUpdate;
+
+    if (timeRemaining > 0) {
+      const hours = Math.floor(timeRemaining / (60 * 60 * 1000));
+      const minutes = Math.floor((timeRemaining % (60 * 60 * 1000)) / (60 * 1000));
+      throw new Error(`You can change your profile picture again in ${hours}h ${minutes}m.`);
+    }
+  }
+
+  return prisma.user.update({
+    where: { id: userId },
+    data: {
+      profile_imgs: { push: imageUrl }, // Append new image to array
+      lastProfilePictureUpdate: now,
+    },
+  });
+};
+
+module.exports.getUserProfilePictures = async function getUserProfilePictures(userId) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { profile_imgs: true },
+  });
+
+  if (!user) throw new Error("User not found");
+
+  return user.profile_imgs;
+};

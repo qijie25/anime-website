@@ -41,14 +41,15 @@ model Episode {
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  username      String   @unique
-  email         String   @unique
-  password      String
-  profile_img   String?
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-  admin         Admin?
+  id                Int      @id @default(autoincrement())
+  username          String   @unique
+  email             String   @unique
+  password          String
+  profile_imgs      String[] @default([])
+  lastProfilePictureUpdate DateTime?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  admin             Admin?
 }
 
 model Admin {
