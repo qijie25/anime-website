@@ -14,15 +14,17 @@ router.post("/login", async (req, res, next) => {
       throw new Error("Invalid credentials");
     }
 
+    if (!req.session) {
+      throw new Error("Session is not initialized");
+    }
+
     console.log("User:", user);
 
-    // req.session.userId = user.id;
+    req.session.user_id = user.id;
 
     res.locals.id = user.id;
     res.locals.username = user.username;
     res.locals.email = user.email;
-
-    // console.log("Session:", req.session);
 
     generateToken(req, res, () => {
       res.status(200).json({

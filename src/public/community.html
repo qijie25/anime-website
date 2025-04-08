@@ -27,19 +27,36 @@
     <div class="main-container community">
         <h1 class="community-header">AniTube Community</h1>
         <div class="community-container">
-            <form action="#" method="post">
-                <div class="community-chatbox">
-                    <div class="community-historybox" id="community-historybox">
-
+            <form id="messageForm">
+                <div class="message-box">
+                    <div class="message-historybox" id="message-historybox">
+                        <!-- Message list rendered dynamically -->
                     </div>
-                    <div class="community-textbox">
-                        <input type="text" class="form-control-textarea" name="message" id="message"
-                            placeholder="Type your message here..." maxlength="200">
-                        <button type="submit" class="send-btn" id="send-btn">Send</button>
+                    <div class="message-textbox">
+                        <input type="text" id="message" placeholder="Type your message here..." maxlength="200">
+                        <button type="submit">Send</button>
                     </div>
                 </div>
             </form>
         </div>
+
+        <template id="message-template">
+            <div class="message-wrapper">
+                <img id="profile-icon" src="assets/profile-icon.png" class="profile-icon" alt="Profile Img"></img>
+                <div class="message-container">
+                    <p class="message-username"></p>
+                    <p class="message"></p>
+                    <div class="like-wrapper">
+                        <i class="bx bx-like"></i>
+                        <span class="like-count">0</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                    </div>
+                </div>
+            </div>
+        </template>
+
         <!-- Events -->
         <div class="events-section">
             <h2>Upcoming Events</h2>

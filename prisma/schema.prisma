@@ -29,6 +29,7 @@ model Anime {
   created_at      DateTime   @default(now())
   updated_at      DateTime   @updatedAt
   episodes        Episode[]
+  Message         Message[]
 }
 
 model Episode {
@@ -38,6 +39,7 @@ model Episode {
   release_date  DateTime?
   animeId       Int
   anime         Anime    @relation(fields: [animeId], references: [id])
+  Message Message[]
 }
 
 model User {
@@ -50,6 +52,9 @@ model User {
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
   admin             Admin?
+  Message           Message[]
+  MessageLike       MessageLike[]
+  MessageReport     MessageReport[]
 }
 
 model Admin {
@@ -58,4 +63,41 @@ model Admin {
   user          User     @relation(fields: [user_id], references: [id])
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
+}
+
+model Message {
+  id            Int      @id @default(autoincrement())
+  user_id       Int  
+  anime_id      Int?
+  episode_id    Int?
+  text          String
+  created_at    DateTime  @default(now())
+  user          User      @relation(fields: [user_id], references: [id])
+  anime         Anime?    @relation(fields: [anime_id], references: [id])
+  episode       Episode?  @relation(fields: [episode_id], references: [id])
+  MessageLike   MessageLike[]
+  MessageReport MessageReport[]
+}
+
+model MessageLike {
+  id            Int       @id @default(autoincrement())
+  message_id    Int
+  user_id       Int
+  created_at    DateTime  @default(now())
+  message       Message   @relation(fields: [message_id], references: [id], onDelete: Cascade)
+  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([message_id, user_id])
+}
+
+model MessageReport {
+  id            Int       @id @default(autoincrement())
+  message_id    Int
+  user_id       Int
+  description   String
+  reported_at   DateTime  @default(now())
+  message       Message   @relation(fields: [message_id], references: [id], onDelete: Cascade)
+  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([message_id, user_id])
 }
