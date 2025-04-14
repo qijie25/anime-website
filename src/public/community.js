@@ -221,3 +221,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchMessages();
 });
+
+const accordions = document.querySelectorAll(".accordion");
+
+accordions.forEach((accordion, index) => {
+  const header = accordion.querySelector(".accordion-header");
+  const content = accordion.querySelector(".accordion-content");
+  const icon = accordion.querySelector("#accordion-icon");
+
+  header.addEventListener("click", () => {
+    const isOpen = content.style.height === `${content.scrollHeight}px`;
+
+    accordions.forEach((a, i) => {
+      const c = a.querySelector(".accordion-content");
+      const ic = a.querySelector("#accordion-icon");
+
+      c.style.height = i === index && !isOpen ? `${c.scrollHeight}px` : "0px";
+
+      ic.classList.remove("bx-plus", "bx-minus");
+
+      ic.classList.add("bx");
+
+      // Add correct icon class
+      if (i === index && !isOpen) {
+        ic.classList.add("bx-minus");
+      } else {
+        ic.classList.add("bx-plus");
+      }
+    });
+  });
+});

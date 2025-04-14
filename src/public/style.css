@@ -1,3 +1,7 @@
+html {
+    font-size: 62.5%;
+}
+
 /* Header */
 .header {
     display: flex;
@@ -5,7 +9,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 25px 10% !important;
+    padding: 2.5rem 10% !important;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: space-between;
     align-items: center;
@@ -14,12 +18,12 @@
 
 .navbar a {
     position: relative;
-    font-size: 18px;
+    font-size: 1.8rem;
     color: white;
     font-family: 'Times New Roman', Times, serif !important;
     text-decoration: none;
     font-weight: 500;
-    margin-right: 40px;
+    margin-right: 4rem;
 }
 
 .navbar a::after {
@@ -28,9 +32,9 @@
     left: 0;
     bottom: -6px;
     width: 100%;
-    height: 2px;
+    height: 0.2rem;
     background: white;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     transform-origin: right;
     transform: scaleX(0);
     transition: transform .5s;
@@ -42,14 +46,14 @@
 }
 
 .search-btn {
-    width: 250px;
-    height: 45px;
+    width: 25rem;
+    height: 4.5rem;
     background: transparent;
     border: 2px solid white;
-    border-radius: 6px;
+    border-radius: 0.6rem;
     display: flex;
     align-items: center;
-    margin-left: 80px !important;
+    margin-left: 8rem !important;
 }
 
 .search-input {
@@ -58,8 +62,8 @@
     border: none;
     outline: none;
     color: white;
-    font-size: 16px;
-    padding-left: 10px !important;
+    font-size: 1.6rem;
+    padding-left: 1rem !important;
 }
 
 .search-btn input::placeholder {
@@ -67,7 +71,7 @@
 }
 
 .search-btn button {
-    width: 40px;
+    width: 4rem;
     height: 100%;
     background: transparent;
     border: none;
@@ -80,20 +84,20 @@
 
 .search-btn button i {
     color: white;
-    font-size: 22px;
+    font-size: 2.2rem;
 }
 
 .login-btn {
     background: #ffdd95;
     color: #000;
     border: none;
-    padding: 12.5px 20px;
-    border-radius: 5px;
+    padding: 1.25rem 2rem;
+    border-radius: 0.5rem;
     align-items: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.6rem;
     transition: 0.3s ease;
-    margin-left: -30px;
+    margin-left: -3rem;
 }
 
 .login-btn:hover {
@@ -120,7 +124,7 @@
     background: none;
     border: none;
     color: white;
-    font-size: 16px;
+    font-size: 1.6rem;
     cursor: pointer;
 }
 
@@ -130,32 +134,36 @@
 
 /* Footer */
 .anime-footer {
-  background-color: #1e1e2f;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e2f;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .anime-footer .footer-content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 16px;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.6rem;
+}
+
+.anime-footer .footer-content p {
+    font-size: 1.6rem;
 }
 
 .anime-footer .social-icons {
-  margin-top: 10px;
+    margin-top: 1rem;
 }
 
 .anime-footer .social-icons a {
-  margin: 0 8px;
-  color: #fff;
-  font-size: 24px;
-  transition: color 0.3s;
+    margin: 0 0.8rem;
+    color: #fff;
+    font-size: 2.4rem;
+    transition: color 0.3s;
 }
 
 .anime-footer .social-icons a:hover {
-  color: #ff4d6d;
+    color: #ff4d6d;
 }
 
 
@@ -177,7 +185,7 @@
 	background-size: cover;
 	background-attachment: fixed;
     min-height: 100vh;
-    padding: 80px 0 0 0;
+    padding: 8rem 0 0 0;
     margin: 0;
 }
 
@@ -189,21 +197,21 @@
     width: 100%;
     height: 100%;
     max-height: 90vh;
-    max-width: 1500px;
+    max-width: 150rem;
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border-radius: 1.2rem;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
     z-index: 2;
 }
 
 .container.login {
-    min-height: 490px;
-    margin-top: 80px;
+    min-height: 49rem;
+    margin-top: 8rem;
 }
 
 .container.register {
-    min-height: 570px;
-    margin-top: 100px;
+    min-height: 57rem;
+    margin-top: 10rem;
 }
 
 .left-section.login, .left-section.register {
@@ -248,12 +256,12 @@
 }
 
 .form-box.login {
-	min-height: 480px;
+	min-height: 48rem;
 }
 
 .form-box.register {
-    min-height: 560px;
-    padding: 40px 50px 20px;
+    min-height: 56rem;
+    padding: 4rem 5rem 2rem;
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: none;
@@ -265,14 +273,15 @@
 }
 
 .form-box h2 {
-    font-size: 32px;
+    font-size: 3.2rem;
     text-align: center;
 }
 
 .form-box p {
+    font-size: 1.6rem;
 	display: inline-block;
     text-align: center;
-    margin: 10px 0;
+    margin: 1rem 0;
 }
 
 .input-row {
@@ -289,23 +298,23 @@
     position: relative;
     width: 100%;
     min-height: 0px;
-    margin: 10px 0;
+    margin: 1rem 0;
 }
 
 .input-box input {
     width: 100%;
-    height: 50px;
-    padding: 0 36px 0 10px;
-    border-width: 1px;
-    border-radius: 10px;
+    height: 5rem;
+    padding: 0 3.6rem 0 1rem;
+    border-width: 0.1rem;
+    border-radius: 1rem;
     background: transparent;
     color: #ddd;
-    font-size: 16px;
-    margin: 0 10px 0 10px;
+    font-size: 1.6rem;
+    margin: 0 1rem 0 1rem;
 }
 
 .input-box.login input {
-    margin-bottom: 20px !important;
+    margin-bottom: 2rem !important;
 }
 
 .input-box input:focus {
@@ -318,11 +327,11 @@
     top: 35%;
     left: 1.6%;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
     color: #ddd;
     transition: 0.5s ease;
-    margin-left: 5px;
+    margin-left: 0.5rem;
     pointer-events: none;
 }
 
@@ -331,7 +340,7 @@
 .input-box input:not(:placeholder-shown)~label {
     left: 5px;
     top: -10px;
-    font-size: 13.5px;
+    font-size: 1.35rem;
     color: #222;
 }
 
@@ -340,32 +349,32 @@
     top: 35%;
     right: 20px;
     transform: translateY(-50%);
-    font-size: 18.5px;
+    font-size: 1.85rem;
     color: #ddd;
 }
 
 .error-message {
     color: #ff3333;
-    font-size: 12.5px;
-    margin-top: 3px;
+    font-size: 1.25px;
+    margin-top: 0.3rem;
 }
 
 .form-options {
 	display: flex;
     justify-content: space-between;
-    font-size: 14.5px;
+    font-size: 1.45rem;
     font-weight: 500;
-    margin: -5px 5px 25px;
+    margin: -0.5rem 0.5rem 2.5rem;
 }
 
 .form-options label input {
     accent-color: #ddd;
-    margin-right: 3px;
+    margin-right: 0.3rem;
 }
 
 .form-options input[type="checkbox"] {
     transform: scale(1.2);
-    margin-right: 6px;
+    margin-right: 0.6rem;
 }
 
 .form-options a {
@@ -379,14 +388,14 @@
 
 .btn {
     width: 95%;
-    height: 45px;
+    height: 4.5rem;
     background: #CC0000;
     border: none;
     outline: none;
-    margin: 0 10px 0 10px;
-    border-radius: 4px;
+    margin: 0 1rem 0 1rem;
+    border-radius: 0.4rem;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #ddd;
     font-weight: 500;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -399,14 +408,19 @@
 }
 
 .footer {
-    font-style: 14.5px;
+    font-style: 1.45rem;
     font-weight: 500;
     text-align: center;
-    margin-top: 25px;
+    margin-top: 2.5rem;
+}
+
+.footer p {
+    font-size: 1.45rem;
 }
 
 .footer p a {
     color: #ddd;
+    font-size: 1.45rem;
     font-weight: 600;
     text-decoration: none;
 }
@@ -431,13 +445,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
+    padding: 5rem;
     background-color: #181818;
 }
 
 .hero-left {
     flex: 1;
-    padding-right: 50px;
+    padding-right: 5rem;
 }
 
 .hero-right {
@@ -445,25 +459,25 @@
 }
 
 .hero-left h1 {
-    font-size: 48px;
+    font-size: 3.6rem;
     font-weight: 800;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     color: #ddd;
 }
 
 .hero-left p {
-    font-size: 18px;
+    font-size: 1.8rem;
     line-height: 1.5;
     color: #c0d8e8;
 }
 
 .hero-left button {
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -483,13 +497,13 @@
 
 .hero-right img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 1rem;
 }
 
 .recommendation-container {
-    margin-top: 50px;
+    margin-top: 5rem;
     text-align: center;
-    padding: 0 20px;
+    padding: 0 2rem;
     box-sizing: unset !important;
 }
 
@@ -504,13 +518,13 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 30px;
-    margin-bottom: 60px;
+    margin-bottom: 6rem;
     box-sizing: unset !important;
 }
 
 .recommendation-box {
-    flex: 0 0 calc(25% - 20px);
-    margin: 10px;
+    flex: 0 0 calc(25% - 2rem);
+    margin: 1rem;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
@@ -520,9 +534,9 @@
 
 .recommendation-box .box-head {
     position: relative;
-    height: 320px;
-    border-radius: 15px;
-    margin-bottom: 15px;
+    height: 32rem;
+    border-radius: 1.5rem;
+    margin-bottom: 1.5rem;
     overflow: hidden;
 }
 
@@ -533,7 +547,7 @@
 
 .recommendation-box img {
     width: 100%;
-    height: 320px;
+    height: 32rem;
     box-sizing: unset !important;
 }
 
@@ -542,11 +556,11 @@
 }
 
 .recommendation-box .box-title {
-    margin-top: 10px;
-    font-size: 18.5px;
+    margin-top: 1rem;
+    font-size: 1.85rem;
     color: #bbb;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
     z-index: 2;
 }
 
@@ -557,7 +571,7 @@
 .recommendation-box .box-footer {
     display: flex;
     justify-content: space-evenly;
-    font-size: 13px;
+    font-size: 1.4rem;
     color: #ddd;
 }
 
@@ -576,9 +590,10 @@
 .recommendation-box .favorite-btn, .recommendation-box .rating-btn {
     position: absolute;
     top: 15px;
-    padding: 8px;
-    border-radius: 10px;
+    padding: 0.8rem;
+    border-radius: 1rem;
     color: #007FFF;
+    font-size: 1.5rem;
 }
 
 .recommendation-box .favorite-btn {
@@ -596,17 +611,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 54px;
+    font-size: 5rem;
     color: white;
 }
 
 .recommendation-container button {
-    padding: 12px 25px;
-    font-size: 1.2rem;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.6rem;
     background-color: #f39c12;
     color: white;
     border: none;
-    border-radius: 25px;
+    border-radius: 2.5rem;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -617,11 +632,11 @@
 }
 
 .quote-container {
-    margin-top: 100px;
-    padding: 50px 20px;
+    margin-top: 5rem;
+    padding: 5rem 2rem;
     text-align: center;
     background-color: #181818;
-    border-radius: 5px;
+    border-radius: 0.5rem;
 }
 
 blockquote {
@@ -630,12 +645,12 @@ blockquote {
 }
 
 blockquote p {
-    font-size: 32px;
-    margin-bottom: 20px;
+    font-size: 3.2rem;
+    margin-bottom: 2rem;
 }
 
 .quote-footer {
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #8d8989;
 }
 
@@ -651,11 +666,11 @@ blockquote p::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 2rem;
     background-color: #26282A;
     color: #fff;
-    border-radius: 10px;
-    margin: 40px 160px;
+    border-radius: 1rem;
+    margin: 4rem 16rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 
@@ -664,34 +679,34 @@ blockquote p::after {
 }
 
 .call-to-action-left {
-    padding-right: 15px;
+    padding-right: 1.5rem;
     flex: 1;
 }
 
 .call-to-action-container h1 {
-    font-size: 30px;
+    font-size: 3rem;
     color: #fff;
-    margin-bottom: 5px;
-    margin-left: 50px;
+    margin-bottom: 0.5rem;
+    margin-left: 5rem;
 }
   
 .call-to-action-container p {
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #fff;
-    margin-bottom: 15px;
-    margin-left: 50px;
+    margin-bottom: 1.5rem;
+    margin-left: 5rem;
 }
   
 .call-to-action-container button {
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
     background-color: #007791;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-right: 50px;
+    margin-right: 5rem;
 }
   
 .call-to-action-container button:hover {
@@ -709,10 +724,10 @@ blockquote p::after {
 
 .page-footer {
     background-color: #1F2937;
-    padding: 6px;
+    padding: 0.6rem;
     text-align: center;
     color: white;
-    margin-top: 30px;
+    margin-top: 3rem;
 }
 
 
@@ -874,13 +889,14 @@ blockquote p::after {
 
 .about-container {
     text-align: center;
-    padding: 50px 20px;
+    padding: 5rem 2rem;
     background-color: #242424;
 }
 
 .about-content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    margin-top: 7rem;
     color: #f39c12;
 }
 
@@ -889,10 +905,10 @@ blockquote p::after {
 }
 
 .about-content p {
-    font-size: 18px;
+    font-size: 1.8rem;
     line-height: 1.6;
     max-width: 600px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 4rem auto;
 }
 
 .about-slider-wrapper {
@@ -931,6 +947,7 @@ blockquote p::after {
 }
 
 .inner h2 {
+    font-size: 2.8rem;
     text-transform: uppercase;
     font-weight: 800;
 }
@@ -952,31 +969,32 @@ blockquote p::after {
 }
 
 .content p {
+    font-size: 1.8rem;
     line-height: 1.5;
     font-weight: 600;
 }
 
 .community-callout {
-    padding: 40px 20px;
+    padding: 4rem 2rem;
     background-color: #1e272e;
     text-align: center;
 }
 
 .community-callout h2 {
-    font-size: 36px;
+    font-size: 3.2rem;
     color: #f39c12;
 }
 
 .community-callout p {
-    font-size: 18px;
-    margin-bottom: 30px;
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
 }
 
 .join-btn {
     background-color: #e74c3c;
     color: white;
-    padding: 12px 30px;
-    font-size: 18px;
+    padding: 1.2rem 3rem;
+    font-size: 1.8rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -997,18 +1015,34 @@ blockquote p::after {
 }
 
 .mission-section {
-    padding: 40px 20px;
+    padding: 4rem 2rem;
     background-color: #2c3e50;
     text-align: center;
 }
 
 .mission-section h2 {
-    font-size: 36px;
+    font-size: 3.2rem;
+}
+
+.mission-section p {
+    font-size: 1.6rem;
 }
 
 .team-section {
-    padding: 40px 20px;
+    padding: 4rem 2rem;
     text-align: center;
+}
+
+.team-section h2 {
+    font-size: 3.2rem;
+}
+
+.team-section h3 {
+    font-size: 2.4rem;
+}
+
+.team-section p {
+    font-size: 1.6rem;
 }
 
 .team-members {
@@ -1019,21 +1053,24 @@ blockquote p::after {
 }
 
 .team-member img {
-    width: 150px;
+    width: 15rem;
     border-radius: 50%;
 }
 
 
 /* Community Page */
-/* .community-page * {
+.community-page * {
     box-sizing: border-box;
-} */
+}
 
 .community-page {
     margin: 0;
     padding: 0;
     color: #fff;
     background-color: #1b1b1b;
+    font-family: sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
 }
 
 .main-container.community {
@@ -1042,9 +1079,9 @@ blockquote p::after {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-height: 1120px;
+    min-height: 112rem;
     height: auto;
-    padding: 60px 20px;
+    padding: 6rem 2rem;
     background: url('./assets/community-background.jpg') no-repeat center center;
     background-size: cover;
     z-index: 1;
@@ -1080,11 +1117,12 @@ blockquote p::after {
 }
 
 .community-header {
-    font-size: 72px;
+    font-size: 6rem;
     font-weight: 800;
     text-align: center;
     color: white;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
+    margin-top: 5rem;
     position: relative;
     z-index: 2;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -1096,45 +1134,45 @@ blockquote p::after {
     align-items: flex-start;
     height: auto;
     width: 92%;
-    margin-top: 20px;
+    margin-top: 2rem;
     background-color: rgba(45, 45, 45, 0.7);
-    border-radius: 18px;
-    padding: 30px 20px 30px 20px;
+    border-radius: 2rem;
+    padding: 3rem 2rem;
 }
 
 .message-box {
     width: 100%;
-    min-width: 1120px;
+    min-width: 112rem;
     height: auto;
-    min-height: 920px;
+    min-height: 92rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: transparent;
-    border-radius: 18px;
+    border-radius: 2rem;
     padding: 0;
 }
 
 .message-textbox {
     width: 98%;
     height: 100%;
-    min-height: 62px;
+    min-height: 6.2rem;
     display: flex;
     justify-content: space-between;
     background-color: transparent;
     align-items: center;
-    margin: 0 -15px 5px 5px;
+    margin: 0 0.5rem 0.5rem;
 }
 
 .message-textbox input {
-    width: 89%;
-    height: 50px;
+    width: 88%;
+    height: 5rem;
     border: none;
     outline: none;
-    font-size: 16.5px;
-    padding: 0 10px;
-    border-radius: 5px;
-    margin: 0 20px 0 12px;
+    font-size: 1.65rem;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    margin: 0 2rem 0 0.8rem;
 }
 
 .message-textbox input:focus {
@@ -1142,44 +1180,45 @@ blockquote p::after {
 }
 
 .message-textbox button {
-    width: calc(10% - 8px);
-    height: 50px;
+    width: calc(10% - 1rem);
+    height: 5rem;
     border: none;
     outline: none;
     background-color: #f39c12;
     color: #000;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     cursor: pointer;
+    margin-right: 2rem;
 }
 
 .message-historybox {
-    min-width: 980px;
+    min-width: 98rem;
     height: 100%;
     background: transparent;
     border: none;
     outline: none;
     color: white;
-    font-size: 20px;
-    padding-left: 10px;
+    font-size: 2rem;
+    padding-left: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    margin: 0 20px 0 0;
+    margin: 0 2rem 0 0;
 }
 
 .message-wrapper {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
 .profile-icon {
-    margin-right: 10px;
-    width: 36px;
-    height: 36px;
+    margin-right: 1rem;
+    width: 3.6rem;
+    height: 3.6rem;
     border-radius: 50%;
     color: #fff;
 }
@@ -1187,27 +1226,27 @@ blockquote p::after {
 .message-container {
     position: relative;
     width: auto;
-    min-width: 380px;
+    min-width: 38rem;
     max-width: 80%;
-    min-height: 76px;
-    padding: 10px 30px 10px 10px;
+    min-height: 7.6rem;
+    padding: 1rem 3rem 1rem 1rem;
     background-color: rgba(68, 65, 65, 0.8);
-    border-radius: 10px;
-    margin-bottom: 12px;
-    margin-left: 10px;
+    border-radius: 1rem;
+    margin-bottom: 1.2rem;
+    margin-left: 1rem;
 }
 
 .message-username {
     color: #fff;
-    font-size: 20px !important;
+    font-size: 2rem !important;
     font-weight: 500;
-    margin: 2px 0 18px 10px;
+    margin: 0.2rem 0 1.8rem 1rem;
 }
 
 .message {
     color: #fff;
-    font-size: 16.5px;
-    margin: 0 0 0 10px;
+    font-size: 1.65rem;
+    margin: 0 0 0 1rem;
 }
 
 .icon-wrapper {
@@ -1223,43 +1262,308 @@ blockquote p::after {
 .like-wrapper {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 1rem;
 }
       
 .like-wrapper .bx-like {
-    font-size: 20px;
+    font-size: 2rem;
     color: #f39c12;
-    margin-right: 5px;
+    margin-right: 0.5rem;
 }
       
 .like-count {
-    font-size: 16px;
+    font-size: 1.6rem;
     color: white;
 }
 
 .events-section {
     width: 80%;
-    margin: 40px auto 20px;
+    margin: 4rem auto 2rem;
     background-color: #555555;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 2rem;
+    border-radius: 1rem;
     color: white;
 }
 
 .events-section h2 {
-    font-size: 36px;
-    margin-bottom: 15px;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
 }
 
 .event {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
 .event h3 {
-    font-size: 26px;
+    font-size: 1.9rem;
 }
 
 .event p {
-    font-size: 18px;
-    margin: 5px 0;
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.accordion-container{ 
+    width: 100%;
+    margin: auto;
+    min-height: 100vh;
+    padding: 2rem;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.accordion-wrapper {
+    background-color: #fff;
+    box-shadow: 0px 40px 36px -20px rgba(9, 30, 100, 0.1);
+    border-radius: 2rem;
+    width: 100%;
+    max-width: 60rem;
+    padding: 4rem;
+}
+
+.accordion-title{
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #242242;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.accordion {
+    border-bottom: 0.1rem solid #e5e5e5;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+} 
+
+.accordion-icon {
+    background-color: #ff3232;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.accordion-question{
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #242242;
+}
+
+.accordion-answer{
+    padding: 1rem 0;
+    color: #121212;
+}
+
+.accordion-content{
+    overflow: hidden;
+    height: 0;
+    transition: 0.4s ease-in-out;
+}
+
+.accordion-content a {
+    color: #ff3232;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.accordion-content a:hover {
+    text-decoration: underline;
+}
+
+/* Contact Us Page */
+.contact-page * {
+    box-sizing: border-box;
+}
+
+.contact-page {
+    padding: 0;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #faf3e0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding: 2rem 5%;
+    margin-bottom: 2rem;
+}
+
+.contact-page h1 {
+    text-align: center;
+    margin: 10rem 0 3rem;
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #ff994f;
+}
+
+.contact-page h1 span {
+    color: #faf3e0;
+}
+
+.contact-container {
+    display: flex;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact-left {
+    flex: 1;
+    min-width: 30rem;
+    max-width: 50rem;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.contact-left-title h2 {
+    font-size: 3.5rem;
+    margin-bottom: 0.8rem;
+    color: #faf3e0;
+    text-align: center;
+}
+
+.contact-left-title hr {
+    width: 10rem;
+    height: 5px;
+    background: linear-gradient(to right, #ff994f, #fa6d86);
+    border: none;
+    margin-bottom: 4rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fa6d86;
+    font-size: 1.8rem;
+}
+
+.contact-inputs {
+    width: 100%;
+    padding: 1.5rem 2rem 1.5rem 4rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 5rem;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s;
+}
+
+.contact-inputs:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 153, 79, 0.5);
+    background: white;
+}
+
+textarea.contact-inputs {
+    border-radius: 2rem;
+    min-height: 15rem;
+    resize: vertical;
+}
+
+.contact-left button {
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.65rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(45deg, #ff994f, #fa6d86);
+    border: none;
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contact-left button:hover {
+    background: linear-gradient(45deg, #fa6d86, #ff994f);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(250, 109, 134, 0.4);
+}
+
+.contact-right {
+    flex: 1;
+    max-width: 50rem;
+    text-align: center;
+}
+
+.contact-right img {
+    width: 100%;
+    max-height: 40rem;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1.2/1;
+    border-radius: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+}
+
+.contact-info {
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 2rem;
+    border-radius: 2rem;
+}
+
+.contact-info h3 {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+    color: #ff994f;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+}
+
+.info-item i {
+    color: #fa6d86;
+    font-size: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+    }
+    
+    .contact-left, .contact-right {
+        width: 100%;
+        max-width: 100%;
+    }
 }
