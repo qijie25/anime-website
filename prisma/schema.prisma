@@ -24,12 +24,13 @@ model Anime {
   date_aired      DateTime
   status          String
   img_url         String
-  genre           String
   total_episodes  Int?
+  season          Int        @default(1)
   created_at      DateTime   @default(now())
   updated_at      DateTime   @updatedAt
   episodes        Episode[]
   Message         Message[]
+  genres          AnimeGenre[]
 }
 
 model Episode {
@@ -39,7 +40,25 @@ model Episode {
   release_date  DateTime?
   animeId       Int
   anime         Anime    @relation(fields: [animeId], references: [id])
-  Message Message[]
+  Message   Message[]
+}
+
+model Genre {
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  created_at   DateTime  @default(now())
+  animes       AnimeGenre[]
+}
+
+model AnimeGenre {
+  id       Int    @id @default(autoincrement())
+  animeId  Int
+  genreId  Int
+
+  anime    Anime  @relation(fields: [animeId], references: [id], onDelete: Cascade)
+  genre    Genre  @relation(fields: [genreId], references: [id], onDelete: Cascade)
+
+  @@unique([animeId, genreId])
 }
 
 model User {

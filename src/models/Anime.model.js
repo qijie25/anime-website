@@ -1,26 +1,88 @@
 const prisma = require("./prismaClient");
 
-module.exports.getAllAnimes = async function getAllAnimes() {
-    return prisma.anime.findMany({
-        orderBy: {
-            created_at: "asc",
-        },
-    })
-    .then((animes) => {
-        return animes;
-    });
+function formatAnimeGenres(animes) {
+  return animes.map((anime) => ({
+    ...anime,
+    genres: anime.genres.map((g) => g.genre.name),
+  }));
 }
 
+module.exports.getAllAnimes = async function getAllAnimes() {
+  const animes = await prisma.anime.findMany({
+    orderBy: {
+      created_at: "asc",
+    },
+    include: {
+      genres: {
+        include: {
+          genre: true,
+        },
+      },
+    },
+  });
+
+  return formatAnimeGenres(animes);
+};
+
 module.exports.getAnimeById = async function getAnimeById(id) {
-    return prisma.anime.findMany({
-        where: {
-            id: parseInt(id, 10),
+  const anime = await prisma.anime.findUnique({
+    where: {
+      id: parseInt(id, 10),
+    },
+    include: {
+      genres: {
+        include: {
+          genre: true,
         },
-        orderBy: {
-            created_at: "asc",
+      },
+    },
+  });
+
+  if (!anime) return null;
+
+  return {
+    ...anime,
+    genres: anime.genres.map((g) => g.genre.name),
+  };
+};
+
+module.exports.getAnimeByGenre = async function getAnimeByGenre(genreName) {
+  const animes = await prisma.anime.findMany({
+    where: {
+      genres: {
+        some: {
+          genre: {
+            is: {
+              name: {
+                equals: genreName,
+                mode: "insensitive",
+              },
+            },
+          },
         },
-    })
-    .then((animes) => {
-        return animes;
-    });
+      },
+    },
+    include: {
+      genres: {
+        include: {
+          genre: true,
+        },
+      },
+    },
+  });
+
+  return animes;
+};
+
+module.exports.updateAnime = async function updateAnime(id, data) {
+  const anime = await prisma.anime.findUnique({where: {id} });
+
+  if (!anime) {
+    throw new Error("Anime not found");
+  }
+
+  return prisma.anime.update({
+    where: {id},
+    data,
+  });
 };

@@ -447,6 +447,7 @@ html {
     align-items: center;
     padding: 5rem;
     background-color: #181818;
+    margin-top: 9rem;
 }
 
 .hero-left {
@@ -500,31 +501,53 @@ html {
     border-radius: 1rem;
 }
 
-.recommendation-container {
-    margin-top: 5rem;
+.recommendation-container, .recently-updated-section {
     text-align: center;
-    padding: 0 2rem;
     box-sizing: unset !important;
 }
 
-.recommendation-container h1 {
+.recommendation-container {
+    padding: 0 1.5rem;
+    margin-top: 5rem;
+}
+
+.recently-updated-section {
+    padding: 0 1rem;
+    margin-top: 3rem;
+}
+
+.recommendation-container h2 {
     font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 1.5rem;
+    color: #ccc;
+}
+
+.recently-updated-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
     color: #ccc;
 }
 
 .recommendations-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 30px;
-    margin-bottom: 6rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 2rem;
     box-sizing: unset !important;
 }
 
-.recommendation-box {
-    flex: 0 0 calc(25% - 2rem);
-    margin: 1rem;
+.recently-updated-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 6px;
+    margin-bottom: 2rem;
+    box-sizing: unset !important;
+}
+
+.recommendation-box, .recently-updated-box {
+    margin: 0.7rem;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
@@ -535,12 +558,20 @@ html {
 .recommendation-box .box-head {
     position: relative;
     height: 32rem;
-    border-radius: 1.5rem;
-    margin-bottom: 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
     overflow: hidden;
 }
 
-.recommendation-box:hover {
+.recently-updated-box .box-head {
+    position: relative;
+    height: 24rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.recommendation-box:hover, .recently-updated-box:hover {
     transform: scale(1.1);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
 }
@@ -551,31 +582,51 @@ html {
     box-sizing: unset !important;
 }
 
-.recommendation-box:hover img {
-    transform: scale(1.1);
+.recently-updated-box img {
+    width: 100%;
+    height: 26rem;
+    box-sizing: unset !important;
 }
 
-.recommendation-box .box-title {
+.recommendation-box:hover img, .recently-updated-box:hover img {
+    transform: scale(1.05);
+}
+
+.recommendation-box .box-title, .recently-updated-box .box-title {
     margin-top: 1rem;
-    font-size: 1.85rem;
     color: #bbb;
     font-weight: bold;
     margin-bottom: 0.5rem;
     z-index: 2;
 }
 
-.recommendation-box:hover .box-title {
+.recommendation-box .box-title {
+    font-size: 1.85rem;
+}
+
+.recently-updated-box .box-title {
+    font-size: 1.5rem;
+}
+
+.recommendation-box:hover .box-title, .recently-updated-box:hover .box-title {
     color: #fff;
 }
 
-.recommendation-box .box-footer {
+.recommendation-box .box-footer, .recently-updated-box .box-footer {
     display: flex;
     justify-content: space-evenly;
-    font-size: 1.4rem;
     color: #ddd;
 }
 
-.recommendation-box .box-content {
+.recommendation-box .box-footer {
+    font-size: 1.4rem
+}
+
+.recently-updated-box .box-footer {
+    font-size: 1.2rem
+}
+
+.recommendation-box .box-content, .recently-updated-box .box-content {
     position: absolute;
     inset: 0;
     opacity: 0;
@@ -583,36 +634,51 @@ html {
     backdrop-filter: blur(5px);
 }
 
-.recommendation-box:hover .box-content {
+.recommendation-box:hover .box-content, .recently-updated-box:hover .box-content {
     opacity: 1;
 }
 
-.recommendation-box .favorite-btn, .recommendation-box .rating-btn {
+.recommendation-box .favorite-btn, .recommendation-box .rating-btn, .recently-updated-box .favorite-btn, .recently-updated-box .rating-btn {
     position: absolute;
     top: 15px;
-    padding: 0.8rem;
     border-radius: 1rem;
     color: #007FFF;
+}
+
+.recommendation-box .favorite-btn, .recommendation-box .rating-btn {
+    padding: 0.8rem;
     font-size: 1.5rem;
 }
 
-.recommendation-box .favorite-btn {
+.recently-updated-box .favorite-btn, .recently-updated-box .rating-btn {
+    padding: 0.6rem;
+    font-size: 1.2rem;
+}
+
+.recommendation-box .favorite-btn, .recently-updated-box .favorite-btn {
     left: 15px;
     background-color: #020a17;
 }
 
-.recommendation-box .rating-btn {
+.recommendation-box .rating-btn, .recently-updated-box .rating-btn {
     right: 15px;
     background-color: #020e1e;
 }
 
-.recommendation-box .play-btn {
+.recommendation-box .play-btn, .recently-updated-box .play-btn {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 5rem;
     color: white;
+}
+
+.recommendation-box .play-btn {
+    font-size: 5rem;
+}
+
+.recently-updated-box .play-btn {
+    font-size: 4rem;
 }
 
 .recommendation-container button {
@@ -1556,6 +1622,216 @@ textarea.contact-inputs {
     font-size: 2rem;
 }
 
+/* Anime page */
+.anime-page * {
+    box-sizing: border-box;
+}
+
+.anime-page {
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    overflow-x: hidden;
+}
+
+.anime-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 1rem;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.swiper {
+    position: relative;
+    width: 100%;
+    height: 45rem;
+    overflow: hidden;
+    z-index: 99;
+    touch-action: pan-y;
+}
+
+.swiper-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    z-index: 10;
+}
+
+.swiper-slide {
+    position: relative;
+    text-align: center;
+    background: #1b1b1b;
+    border-radius: 1rem;
+    color: white;
+    height: 45rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    z-index: 2;
+    border-radius: 1rem;
+}
+
+.swiper-pagination {
+    position: absolute;
+    top: 1rem !important;
+    right: 1rem !important;
+    width: 80%;
+    left: auto;
+    bottom: auto;
+    text-align: right;
+    z-index: 10;
+}
+
+.swiper-pagination-bullet {
+    width: 1rem;
+    height: 1rem;
+    background-color: white;
+    opacity: 1;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #790e79;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: white;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+}
+
+.swiper-button-next {
+    right: 1rem;
+}
+
+.swiper-button-prev {
+    left: 1rem;
+}
+
+.anime-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.anime-sidebar {
+    width: 28rem;
+    background-color: #111;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+}
+
+.filter-title {
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.dropdown-label {
+    font-size: 1.3rem;
+    color: #ccc;
+}
+
+.dropdown-toggle,
+.filter-item select {
+    background-color: #2c2c2c;
+    color: white;
+    padding: 0.8rem 1rem;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    appearance: none;
+}
+
+.dropdown-toggle i {
+    float: right;
+    margin-top: 0.2rem;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #1b1b1b;
+    border: 1px solid #444;
+    border-radius: 0.5rem;
+    margin-top: 0.3rem;
+    padding: 1rem;
+    width: 100%;
+    z-index: 100;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-menu label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: white;
+    font-size: 1.3rem;
+}
+
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+.filter-btn {
+    margin-top: 2rem;
+    width: 100%;
+    background-color: #790e79;
+    color: white;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.filter-btn i {
+    font-size: 1.8rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .contact-container {
@@ -1565,5 +1841,25 @@ textarea.contact-inputs {
     .contact-left, .contact-right {
         width: 100%;
         max-width: 100%;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 760px) {
+    .recommendations-grid {
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+
+    .recently-updated-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .recommendations-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .recently-updated-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     }
 }

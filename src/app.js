@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const userRouter = require("./routers/User.router");
 const animeRouter = require("./routers/Anime.router");
+const genreRouter = require("./routers/Genre.router");
 const messageRouter = require("./routers/Message.router");
 const messageLikeRouter = require("./routers/MessageLike.router");
 const messageReportRouter = require("./routers/MessageReport.router");
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/users", userRouter);
 app.use("/animes", animeRouter);
+app.use("/genres", genreRouter);
 app.use("/messages", messageRouter);
 app.use("/messagesLikes", messageLikeRouter);
 app.use("/messagesReport", messageReportRouter);

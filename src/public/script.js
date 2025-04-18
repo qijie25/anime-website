@@ -50,7 +50,12 @@ function generateRecommendations() {
 
         const genre = document.createElement("p");
         genre.classList.add("genre");
-        genre.textContent = `${anime.genre}`;
+        if (anime.genres && Array.isArray(anime.genres)) {
+          const genreNames = anime.genres.slice(0, 2);
+          genre.textContent = genreNames.join(", ");
+        } else {
+          genre.textContent = "Unknown";
+        }
         boxFooter.appendChild(genre);
 
         const releaseDate = document.createElement("p");
@@ -71,11 +76,6 @@ function generateRecommendations() {
       console.error("Error fetching anime recommendations:", error);
     });
 }
-
-
-// document.querySelector('.join-btn').addEventListener('click', () => {
-//     alert('Welcome to the AniTube community!');
-// });
 
 document.addEventListener('DOMContentLoaded', () => {
     generateRecommendations();
