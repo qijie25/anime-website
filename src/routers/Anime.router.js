@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllAnimes, getAnimeById, getAnimeByGenre, updateAnime } = require("../models/Anime.model");
+const { getAllAnimes, getAnimeById, getAnimeByGenre, updateAnime, getAnimeByQuery } = require("../models/Anime.model");
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
@@ -32,6 +32,13 @@ router.put('/:id', (req, res, next) => {
     updateAnime(parseInt(id), data)
     .then((anime) => res.status(200).json(anime))
     .catch(next);
-})
+});
+
+router.get('/search', (req, res, next) => {
+    const { query } = req.query;
+    getAnimeByQuery(query)
+    .then((animes) => res.status(200).json(animes))
+    .catch(next);
+});
 
 module.exports = router;

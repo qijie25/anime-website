@@ -9,6 +9,7 @@ const genreRouter = require("./routers/Genre.router");
 const messageRouter = require("./routers/Message.router");
 const messageLikeRouter = require("./routers/MessageLike.router");
 const messageReportRouter = require("./routers/MessageReport.router");
+const ratingRouter = require("./routers/Rating.router");
 
 const path = require("path");
 const app = express();
@@ -47,6 +48,7 @@ app.use("/genres", genreRouter);
 app.use("/messages", messageRouter);
 app.use("/messagesLikes", messageLikeRouter);
 app.use("/messagesReport", messageReportRouter);
+app.use("/ratings", ratingRouter);
 
 app.use((req, res, next) => {
   next(createError(404, `Unknown resource ${req.method} ${req.originalUrl}`));

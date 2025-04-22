@@ -13,6 +13,11 @@ module.exports.getAllAnimes = async function getAllAnimes() {
       created_at: "asc",
     },
     include: {
+      ratings: {
+        include: {
+          anime: true,
+        },
+      },
       genres: {
         include: {
           genre: true,
@@ -30,6 +35,11 @@ module.exports.getAnimeById = async function getAnimeById(id) {
       id: parseInt(id, 10),
     },
     include: {
+      ratings: {
+        include: {
+          anime: true,
+        },
+      },
       genres: {
         include: {
           genre: true,
@@ -86,3 +96,39 @@ module.exports.updateAnime = async function updateAnime(id, data) {
     data,
   });
 };
+
+module.exports.getAnimeByQuery = async function getAnimeByQuery(query) {
+  const animes = await prisma.anime.findMany({
+    where: {
+      OR: [
+        {
+          title: {
+            contains: query,
+            mode: "insensitive",
+          },
+        },
+        {
+          genres: {
+            some: {
+              genre: {
+                name: {
+                  contains: query,
+                  mode: "insensitive",
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
+    include: {
+      genres: {
+        include: {
+          genre: true,
+        },
+      },
+    },
+  });
+
+  return formatAnimeGenres(animes);
+}

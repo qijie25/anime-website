@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+    .rating-stars i {
+        font-size: 2rem;
+        color: gray;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .rating-stars i.highlighted {
+        color: gold;
+    }
+    </style>
+</head>
+<body>
+    <div class="rating-container">
+        <h3>Did you like this Anime?</h3>
+        <div class="rating-stars">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+        </div>
+    </div>
+    <div class="result-container">
+        <h3>Result</h3>
+        <p id="result"></p>
+    </div>
+    <br>
+    <br>
+    <a href="anime.html">Back to Anime</a>
+
+    <script src="rating.js"></script>
+</body>
+</html>

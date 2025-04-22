@@ -275,22 +275,40 @@ async function main() {
   await prisma.$executeRaw`ALTER SEQUENCE "Anime_id_seq" RESTART WITH 1`;
   await prisma.$executeRaw`ALTER SEQUENCE "Genre_id_seq" RESTART WITH 1`;
 
-  // Hash passwords and create persons
-  const hashedUsers = await Promise.all(
-    users.map(async (user) => ({
-      email: user.email,
-      username: user.username,
-      password: await bcrypt.hash(user.password, saltRounds),
-    }))
-  );
+  const adminUser = {
+    email: "dexter@anitube.com",
+    username: "Dexter",
+    password: "password123",
+  };
 
-  await prisma.user.createMany({
-    data: hashedUsers,
+  const allUsers = [...users, adminUser];
+
+  for (const user of allUsers) {
+    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+
+    await prisma.user.upsert({
+      where: { email: user.email },
+      update: {},
+      create: {
+        email: user.email,
+        username: user.username,
+        password: hashedPassword,
+      },
+    });
+  }
+
+  // Link Admin role to admin user
+  const admin = await prisma.user.findUnique({
+    where: { email: adminUser.email },
   });
 
-  const insertedUsers = await prisma.user.findMany();
-
-  console.log(insertedUsers);
+  await prisma.admin.upsert({
+    where: { user_id: admin.id },
+    update: {},
+    create: {
+      user_id: admin.id,
+    },
+  });
 
   await prisma.anime.createMany({
     data: anime,
