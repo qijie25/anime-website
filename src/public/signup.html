@@ -11,17 +11,28 @@
 
 <body class="register-page">
     <header class="header">
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="#">Anime</a>
-            <a href="community.html">Community</a>
-            <a href="about.html">About</a>
-            <a href="#">Contact</a>
-        </nav>
+        <div class="hamburger" id="hamburger">
+            <i class='bx bx-menu'></i>
+        </div>
+        <!-- Left section: Nav -->
+        <div class="nav-left">
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="anime.html">Anime</a>
+                <a href="community.html">Community</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+        <!-- Center: Search bar -->
         <form action="#" class="search-btn">
             <input type="text" placeholder="Search" class="search-input">
             <button type="submit" title="Search"><i class='bx bx-search'></i></button>
         </form>
+        <!-- Right: Notification, login/profile -->
+        <div class="nav-right">
+            <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+        </div>
     </header>
 
     <div class="container register">
@@ -86,6 +97,12 @@
     </div>
     <script src="register.js"></script>
     <script>
+        const hamburger = document.getElementById("hamburger");
+        const navbar = document.querySelector(".navbar");
+
+        hamburger.addEventListener("click", () => {
+            navbar.classList.toggle("show");
+        });
         document.getElementById("signupForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent form submission
 

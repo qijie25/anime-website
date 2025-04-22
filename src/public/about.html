@@ -9,18 +9,45 @@
 </head>
 <body class="about-page">
     <header class="header">
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="#">Anime</a>
-            <a href="community.html">Community</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-        </nav>
+        <div class="hamburger" id="hamburger">
+            <i class='bx bx-menu'></i>
+        </div>
+        <!-- Left section: Nav -->
+        <div class="nav-left">
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="anime.html">Anime</a>
+                <a href="community.html">Community</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+        <!-- Center: Search bar -->
         <form action="#" class="search-btn">
             <input type="text" placeholder="Search" class="search-input">
             <button type="submit" title="Search"><i class='bx bx-search'></i></button>
         </form>
-        <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+        <!-- Right: Notification, login/profile -->
+        <div class="nav-right">
+            <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+            <div id="user-notification" style="display: none;">
+                <a href="#" class="notification" id="notificationIcon">
+                    <i class='bx bxs-bell bx-tada-hover'></i>
+                </a>
+            </div>
+            <div id="user-profile" style="display: none;">
+                <a href="#" class="profile" id="profileIcon">
+                    <img src="assets/profile-icon(2).png" alt="Profile" id="profileImage">
+                </a>
+                <div class="profile-menu" id="profileMenu">
+                    <ul>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </header>
     <section class="about-container">
         <div class="about-content">

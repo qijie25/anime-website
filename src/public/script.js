@@ -33,9 +33,29 @@ function generateRecommendations() {
         favoriteButton.classList.add("bx", "bx-bookmark", "favorite-btn");
         boxContent.appendChild(favoriteButton);
 
+        const ratingWrapper = document.createElement("div");
+        ratingWrapper.classList.add("rating-wrapper");
         const ratingButton = document.createElement("i");
         ratingButton.classList.add("bx", "bx-star", "rating-btn");
-        boxContent.appendChild(ratingButton);
+        const ratingNum = document.createElement("span");
+        ratingNum.classList.add("rating-num");
+        ratingNum.textContent = anime.avgRating ? anime.avgRating.toFixed(1) : "0.0";
+
+        ratingButton.addEventListener("click", () => {
+          const userId = sessionStorage.getItem("id");
+          if (userId !== null) {
+            // Store animeId in sessionStorage
+            sessionStorage.setItem("selectedAnimeId", anime.id);
+            // Redirect to rating page
+            window.location.href = "rating.html";
+          } else {
+            alert("Please log in to rate an anime.");
+          }
+        });
+
+        ratingWrapper.appendChild(ratingButton);
+        ratingWrapper.appendChild(ratingNum);
+        boxContent.appendChild(ratingWrapper);
 
         const playButton = document.createElement("i");
         playButton.classList.add("bx", "bx-play-circle", "play-btn");
