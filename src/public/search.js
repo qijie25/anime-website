@@ -9,7 +9,9 @@ function generateRecentlyUpdated() {
       return response.json();
     })
     .then((recentlyUpdatedAnime) => {
-      const recentlyUpdatedGrid = document.getElementById("recently-updated-grid");
+      const recentlyUpdatedGrid = document.getElementById(
+        "recently-updated-grid"
+      );
       recentlyUpdatedGrid.innerHTML = ""; // Clear existing content
 
       recentlyUpdatedAnime.forEach((anime) => {
@@ -39,7 +41,9 @@ function generateRecentlyUpdated() {
         ratingButton.classList.add("bx", "bx-star", "rating-btn");
         const ratingNum = document.createElement("span");
         ratingNum.classList.add("rating-num");
-        ratingNum.textContent = anime.avgRating ? anime.avgRating.toFixed(1) : "0.0";
+        ratingNum.textContent = anime.avgRating
+          ? anime.avgRating.toFixed(1)
+          : "0.0";
 
         ratingButton.addEventListener("click", () => {
           const userId = sessionStorage.getItem("id");
@@ -162,7 +166,9 @@ function displayAnimeGrid(animes) {
     ratingButton.classList.add("bx", "bx-star", "rating-btn");
     const ratingNum = document.createElement("span");
     ratingNum.classList.add("rating-num");
-    ratingNum.textContent = anime.avgRating ? anime.avgRating.toFixed(1) : "0.0";
+    ratingNum.textContent = anime.avgRating
+      ? anime.avgRating.toFixed(1)
+      : "0.0";
     ratingButton.addEventListener("click", () => {
       const userId = sessionStorage.getItem("id");
       if (userId !== null) {
@@ -210,12 +216,29 @@ function displayAnimeGrid(animes) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get("query");
+
   const dropdownToggle = document.querySelector(".dropdown-toggle");
   const dropdown = document.querySelector(".dropdown");
   dropdownToggle.addEventListener("click", () => {
     dropdown.classList.toggle("open");
   });
   generateGenreOptions();
-  generateRecentlyUpdated();
+
+  try {
+    const res = await fetch(`${apiUrl}/animes/search?query=${encodeURIComponent(query)}`);
+    const animes = await res.json();
+
+    if (!Array.isArray(animes)) {
+      throw new Error("Invalid response: expected an array of animes");
+    }
+
+    document.querySelector("h2").textContent = `Search results for "${query}"`;
+
+    displayAnimeGrid(animes);
+  } catch (err) {
+    console.error("Failed to fetch search results:", err);
+  }
 });

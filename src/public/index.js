@@ -59,3 +59,15 @@ window.addEventListener("click", function (e) {
     navbar.classList.toggle("show");
   });
 
+  const searchForm = document.getElementById("search-form");
+  const searchInput = document.getElementById("search-input");
+
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const query = searchInput.value.trim();
+
+    if (query) {
+      // Redirect to search results page with query as a URL parameter
+      window.location.href = `/search.html?query=${encodeURIComponent(query)}`;
+    }
+  });

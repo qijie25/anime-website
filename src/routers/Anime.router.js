@@ -8,21 +8,28 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+router.get("/search", (req, res, next) => {
+  const { query } = req.query;
+  getAnimeByQuery(query)
+    .then((animes) => res.status(200).json(animes))
+    .catch(next);
+});
+
+router.get("/genre/:genre", (req, res, next) => {
+  const { genre } = req.params;
+  const genreLower = genre.toLowerCase();
+
+  getAnimeByGenre(genreLower)
+    .then((animes) => res.status(200).json(animes))
+    .catch(next);
+});
+
 router.get('/:id', (req, res, next) => {
     const { id } = req.params;
 
     getAnimeById(id)
      .then((animes) => res.status(200).json(animes))
      .catch(next);
-});
-
-router.get('/genre/:genre', (req, res, next) => {
-    const { genre } = req.params;
-    const genreLower = genre.toLowerCase();
-
-    getAnimeByGenre(genreLower)
-    .then((animes) => res.status(200).json(animes))
-    .catch(next);
 });
 
 router.put('/:id', (req, res, next) => {
@@ -34,11 +41,5 @@ router.put('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/search', (req, res, next) => {
-    const { query } = req.query;
-    getAnimeByQuery(query)
-    .then((animes) => res.status(200).json(animes))
-    .catch(next);
-});
 
 module.exports = router;

@@ -81,7 +81,7 @@ module.exports.getAnimeByGenre = async function getAnimeByGenre(genreName) {
     },
   });
 
-  return animes;
+  return formatAnimeGenres(animes);
 };
 
 module.exports.updateAnime = async function updateAnime(id, data) {
