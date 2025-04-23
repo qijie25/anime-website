@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       highlightStars(index);
 
       // Send rating to the server
-      fetch("http://localhost:3000/ratings", {
+      fetch("/ratings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,8 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch anime details and user's previous rating
   Promise.all([
-    fetch(`http://localhost:3000/animes/${animeId}`).then((res) => res.json()),
-    fetch(`http://localhost:3000/ratings/${userId}/${animeId}`).then((res) => res.json()),
+    fetch(`/animes/${animeId}`).then((res) => res.json()),
+    fetch(`/ratings/${userId}/${animeId}`).then((res) => res.json()),
   ])
     .then(([anime, rating]) => {
       if (rating && rating.score) {

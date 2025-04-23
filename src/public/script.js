@@ -1,7 +1,5 @@
-const apiUrl = "http://localhost:3000";
-
 function generateRecommendations() {
-  fetch(`${apiUrl}/animes`)
+  fetch(`/animes`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

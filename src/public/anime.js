@@ -1,7 +1,5 @@
-const apiUrl = "http://localhost:3000";
-
 function generateRecentlyUpdated() {
-  fetch(`${apiUrl}/animes`)
+  fetch(`/animes`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -124,7 +122,7 @@ document.querySelector(".filter-btn").addEventListener("click", () => {
   ).map((cb) => cb.value.toLowerCase());
 
   if (checkedGenres.length === 1) {
-    fetch(`${apiUrl}/animes/genre/${checkedGenres[0]}`)
+    fetch(`/animes/genre/${checkedGenres[0]}`)
       .then((res) => res.json())
       .then(displayAnimeGrid)
       .catch((err) => console.error("Failed to fetch anime by genre:", err));
