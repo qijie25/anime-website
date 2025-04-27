@@ -3,8 +3,8 @@ const router = express.Router();
 const { createMessage, getAllMessages, updateMessage, deleteMessage } = require("../models/Message.model");
 
 router.post('/', (req, res, next) => {
-    const { user_id, text } = req.body;
-    createMessage(user_id, text)
+    const { user_id, text, parent_id } = req.body;
+    createMessage(user_id, text, parent_id)
         .then((message) => res.status(201).json(message))
         .catch(next);
 });

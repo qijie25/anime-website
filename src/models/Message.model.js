@@ -1,12 +1,13 @@
 const prisma = require("./prismaClient");
 
-module.exports.createMessage = function createMessage(user_id, text) {
+module.exports.createMessage = function createMessage(user_id, text, parent_id = null) {
   const data = {
     text,
+    user: { connect: { id: user_id } },
   };
 
-  if (user_id) {
-    data.user = { connect: { id: user_id } };
+  if (parent_id) {
+    data.parent = { connect: { id: parent_id } };
   }
 
   return prisma.message.create({
@@ -16,33 +17,53 @@ module.exports.createMessage = function createMessage(user_id, text) {
 
 module.exports.getAllMessages = async function getAllMessages() {
   const messages = await prisma.message.findMany({
-    select: {
-      id: true,
-      text: true,
-      created_at: true,
-      user: { select: { id: true, username: true, email: true, profile_imgs: true } },
+    where: { parent_id: null },
+    include: {
+      user: {
+        select: { id: true, username: true, email: true, profile_imgs: true },
+      },
+      replies: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              username: true,
+              email: true,
+              profile_imgs: true,
+            },
+          },
+        },
+      },
     },
     orderBy: { created_at: "asc" },
   });
+  
+  // Get all message and reply IDs
+  const allMessageIds = messages.flatMap((message) => [
+    message.id,
+    ...message.replies.map((reply) => reply.id),
+  ]);
 
-    // Fetch likes for all comments
-    const messageIds = messages.map((message) => message.id);
-    const likes = await prisma.messageLike.groupBy({
-      by: ["message_id"],
-      where: { message_id: { in: messageIds } },
-      _count: { id: true },
-    });
+  const likes = await prisma.messageLike.groupBy({
+    by: ["message_id"],
+    where: { message_id: { in: allMessageIds } },
+    _count: { id: true },
+  });
 
-    // Attach like counts to comments
-    const likeCounts = likes.reduce((acc, like) => {
-      acc[like.message_id] = like._count.id;
-      return acc;
-    }, {});
+  const likeCounts = likes.reduce((acc, like) => {
+    acc[like.message_id] = like._count.id;
+    return acc;
+  }, {});
 
-    return messages.map((message) => ({
-      ...message,
-      likeCount: likeCounts[message.id] || 0, // Default to 0 if no likes
-    }));
+  // Attach like counts to both messages and replies
+  return messages.map((message) => ({
+    ...message,
+    likeCount: likeCounts[message.id] || 0,
+    replies: message.replies.map((reply) => ({
+      ...reply,
+      likeCount: likeCounts[reply.id] || 0,
+    })),
+  }));
 };
 
 module.exports.updateMessage = async function updateMessage(id, data, user_id) {
@@ -75,7 +96,17 @@ module.exports.deleteMessage = async function deleteMessage(id, user_id) {
     throw new Error("Unauthorized to delete this message");
   }
 
-  return prisma.message.delete({
-    where: { id },
+  return prisma.$transaction(async (tx) => {
+    // First delete replies (if any)
+    await tx.message.deleteMany({
+      where: { parent_id: id },
+    });
+
+    // Then delete the parent message
+    const deletedMessage = await tx.message.delete({
+      where: { id },
+    });
+
+    return deletedMessage;
   });
 };

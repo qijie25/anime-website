@@ -1,7 +1,6 @@
-const apiUrl = ".";
 const user_id = sessionStorage.getItem("id");
 
-function createMessageElement(message) {
+function createMessageElement(message, currentUserId) {
   const template = document.getElementById("message-template");
   const messageElement = template.content.cloneNode(true);
 
@@ -12,7 +11,9 @@ function createMessageElement(message) {
   }
 
   messageWrapper.setAttribute("data-message-id", message.id);
-  messageWrapper.querySelector(".message-username").textContent = message.user ? message.user.username : "Anonymous";
+  messageWrapper.querySelector(".message-username").textContent = message.user
+    ? message.user.username
+    : "Anonymous";
   messageWrapper.querySelector(".message").textContent = message.text || "";
 
   const likeCount = messageWrapper.querySelector(".like-count");
@@ -28,6 +29,33 @@ function createMessageElement(message) {
   });
 
   loadProfilePictures(message.user.id, messageWrapper);
+
+  // Container for replies
+  const replyContainer = messageWrapper.querySelector(".reply-container");
+  const replyToggleContainer = messageWrapper.querySelector(".reply-toggle-container");
+  const toggleText = messageWrapper.querySelector(".toggle-replies-text");
+
+  if (message.replies && message.replies.length > 0) {
+    replyToggleContainer.classList.remove("hidden");
+    toggleText.textContent = `View ${message.replies.length} repl${message.replies.length > 1 ? "ies" : "y"}`;
+
+    // Show/hide replies on toggle click
+    replyToggleContainer.addEventListener("click", () => {
+      replyContainer.classList.toggle("hidden");
+      const showing = !replyContainer.classList.contains("hidden");
+      toggleText.textContent = showing ? `Hide repl${message.replies.length > 1 ? "ies" : "y"}` : `View ${message.replies.length} repl${
+        message.replies.length > 1 ? "ies" : "y"
+      }`;
+    });
+  }
+
+  // If this message has replies, render them
+  if (message.replies && message.replies.length > 0) {
+    message.replies.forEach((reply) => {
+      const replyElement = createMessageElement(reply, currentUserId);
+      replyContainer.appendChild(replyElement);
+    });
+  }
 
   return messageElement;
 }
@@ -58,15 +86,17 @@ function fetchMessages() {
   fetch(`/messages`)
     .then((response) => response.json())
     .then((data) => {
-      const commentHistoryBox = document.getElementById("message-historybox");
-      commentHistoryBox.innerHTML = "";
+      const messageHistoryBox = document.getElementById("message-historybox");
+      messageHistoryBox.innerHTML = "";
       const { messages, user_id: currentUserId } = data;
-      messages.forEach((message) => {
-        if (message.text && message.text.trim() !== "") {
+
+      // Only render top-level messages
+      messages
+        .filter((m) => m.parent_id === null)
+        .forEach((message) => {
           const messageElement = createMessageElement(message, currentUserId);
-          commentHistoryBox.appendChild(messageElement);
-        }
-      });
+          messageHistoryBox.appendChild(messageElement);
+        });
     })
     .catch((error) => console.error("Error fetching messages:", error));
 }
@@ -83,9 +113,17 @@ function increaseLike(messageId, likeCountElement) {
       if (!response.ok) throw new Error("Failed to like the message");
       return response.json();
     })
+    .then(() => {
+      // After liking successfully, fetch the updated like count
+      return fetch(`/messagesLikes/${messageId}/like-count`);
+    })
+    .then((response) => {
+      if (!response.ok) throw new Error("Failed to fetch like count");
+      return response.json();
+    })
     .then((data) => {
-      likeCountElement.textContent = data.likeCount; // Update the like count
-      fetchMessages();
+      // Update only the specific like count without reloading all messages
+      likeCountElement.textContent = data.likeCount;
     })
     .catch((error) => {
       alert("You already liked this message");
@@ -95,42 +133,57 @@ function increaseLike(messageId, likeCountElement) {
 
 // Show options menu
 function showOptionsMenu(message, messageWrapper, currentUserId) {
-  const existingMenu = document.querySelector(".options-menu");
-  if (existingMenu) existingMenu.remove();
+  const optionMenu = messageWrapper
+    .closest(".menu-wrapper")
+    .querySelector(".option-menu");
+
+  if (!optionMenu) {
+    console.error("Option menu not found.");
+    return;
+  }
+
+  document.querySelectorAll(".option-menu").forEach((menu) => {
+    if (menu !== optionMenu) menu.style.display = "none";
+  });
+
+  // Clear existing options
+  optionMenu.innerHTML = "";
 
   // Check if the current user is the owner
   const isOwner = message.user.id === +currentUserId;
 
-  const optionsMenu = document.createElement("div");
-  optionsMenu.classList.add("options-menu");
-
   if (isOwner) {
-    optionsMenu.innerHTML = `
+    optionMenu.innerHTML = `
       <button type="button" class="update-btn">Update</button>
       <button type="button" class="delete-btn">Delete</button>
     `;
-  }
 
-  if (!isOwner) {
-    optionsMenu.innerHTML += `
+    optionMenu.querySelector(".update-btn").addEventListener("click", () => updateMessage(message.id));
+    optionMenu.querySelector(".delete-btn").addEventListener("click", () => deleteMessage(message.id));
+  } else {
+    optionMenu.innerHTML = `
       <button type="button" class="report-btn">Report</button>
+      <button type="button" class="reply-btn">Reply</button>
     `;
-    optionsMenu.querySelector(".report-btn").addEventListener("click", () => {
-      const description = prompt("Please provide a reason for reporting this message:");
+
+    optionMenu.querySelector(".report-btn").addEventListener("click", () => {
+      const description = prompt(
+        "Please provide a reason for reporting this message:"
+      );
       if (description && description.trim() !== "") {
         reportMessage(message.id, description);
       } else {
         alert("Report description cannot be empty.");
       }
     });
+
+    optionMenu.querySelector(".reply-btn").addEventListener("click", () => {
+      openReplyModal(message.id);
+    });
   }
 
-  messageWrapper.appendChild(optionsMenu);
-
-  if (isOwner) {
-    optionsMenu.querySelector(".update-btn").addEventListener("click", () => updateMessage(message.id));
-    optionsMenu.querySelector(".delete-btn").addEventListener("click", () => deleteMessage(message.id));
-  }
+  // Show the menu
+  optionMenu.style.display = "flex";
 }
 
 // Update message
@@ -195,6 +248,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("messageForm").addEventListener("submit", (event) => {
     event.preventDefault();
     const text = document.getElementById("message").value.trim();
+    const messageHistoryBox = document.getElementById("message-historybox");
+    messageHistoryBox.scrollTop = messageHistoryBox.scrollHeight;
 
     if (!text) {
       alert("Message cannot be empty");
@@ -220,6 +275,54 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   fetchMessages();
+});
+
+let currentReplyParentId = null;
+
+function openReplyModal(parentId) {
+  currentReplyParentId = parentId;
+  document.getElementById("replyModal").style.display = "block";
+}
+
+const modal = document.getElementById("replyModal");
+const closeBtn = document.querySelector(".close-btn");
+closeBtn.onclick = () => {
+  modal.style.display = "none";
+};
+
+window.onclick = (event) => {
+    const isClickInsideOptionsMenu = event.target.closest(".option-menu");
+    const isClickOnOptionsIcon = event.target.closest(".bx-dots-vertical-rounded");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+  if (!isClickInsideOptionsMenu && !isClickOnOptionsIcon) {
+    document.querySelectorAll(".option-menu").forEach((menu) => {
+      menu.style.display = "none";
+    });
+  }
+}
+
+document.getElementById("submitReply").addEventListener("click", () => {
+  const replyText = document.getElementById("replyText").value.trim();
+  if (!replyText) return alert("Reply cannot be empty.");
+
+  fetch("/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: +user_id,
+      text: replyText,
+      parent_id: currentReplyParentId,
+    }),
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Reply failed");
+      document.getElementById("replyText").value = "";
+      document.getElementById("replyModal").style.display = "none";
+      fetchMessages();
+    })
+    .catch((err) => console.error("Reply error:", err));
 });
 
 const accordions = document.querySelectorAll(".accordion");

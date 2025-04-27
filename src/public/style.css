@@ -1295,14 +1295,14 @@ blockquote p::after {
     margin-top: 2rem;
     background-color: rgba(45, 45, 45, 0.7);
     border-radius: 2rem;
-    padding: 3rem 2rem;
+    padding: 3rem 2rem 2rem;
 }
 
 .message-box {
     width: 100%;
     min-width: 112rem;
     height: auto;
-    min-height: 92rem;
+    min-height: 80rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1319,98 +1319,121 @@ blockquote p::after {
     justify-content: space-between;
     background-color: transparent;
     align-items: center;
-    margin: 0 0.5rem 0.5rem;
+    margin: 2rem 0.5rem 0.3rem;
 }
 
 .message-textbox input {
     width: 88%;
-    height: 5rem;
+    height: 4.8rem;
     border: none;
     outline: none;
-    font-size: 1.65rem;
+    font-size: 1.4rem;
     padding: 0 1rem;
     border-radius: 0.5rem;
-    margin: 0 2rem 0 0.8rem;
+    margin: 0 1.4rem 0 0.6rem;
 }
 
 .message-textbox input:focus {
-    border: 4px solid #708238;
+    border: 3px solid #708238;
 }
 
 .message-textbox button {
-    width: calc(10% - 1rem);
-    height: 5rem;
+    width: calc(10% - 2rem);
+    height: 4.8rem;
     border: none;
     outline: none;
     background-color: #f39c12;
     color: #000;
-    font-size: 1.6rem;
-    font-weight: 500;
+    font-size: 1.4rem;
+    font-weight: 600;
     border-radius: 0.5rem;
     cursor: pointer;
-    margin-right: 2rem;
+    margin-right: 2.6rem;
 }
 
 .message-historybox {
-    min-width: 98rem;
-    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    height: 70rem;
     background: transparent;
     border: none;
     outline: none;
     color: white;
-    font-size: 2rem;
+    font-size: 1.6rem;
     padding-left: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-start;
     margin: 0 2rem 0 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.menu-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .message-wrapper {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 1rem;
+    gap: 1.2rem;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .profile-icon {
-    margin-right: 1rem;
-    width: 3.6rem;
-    height: 3.6rem;
+    margin-right: 0.3rem;
+    width: 3.4rem;
+    height: 3.4rem;
     border-radius: 50%;
     color: #fff;
 }
 
 .message-container {
     position: relative;
-    width: auto;
-    min-width: 38rem;
-    max-width: 80%;
+    width: fit-content;
+    min-width: 32rem;
+    max-width: 100%;
     min-height: 7.6rem;
-    padding: 1rem 3rem 1rem 1rem;
-    background-color: rgba(68, 65, 65, 0.8);
+    padding: 1.5rem 2rem 1.5rem 1.5rem;
+    background-color: #2d2d2d;
     border-radius: 1rem;
-    margin-bottom: 1.2rem;
-    margin-left: 1rem;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.3s;
+}
+
+.message-container:hover {
+    background-color: #3a3a3a;
 }
 
 .message-username {
     color: #fff;
-    font-size: 2rem !important;
-    font-weight: 500;
-    margin: 0.2rem 0 1.8rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0.2rem 0 1.2rem 1rem;
 }
 
 .message {
     color: #fff;
-    font-size: 1.65rem;
+    font-size: 1.3rem;
     margin: 0 0 0 1rem;
 }
 
 .icon-wrapper {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    font-size: 1.8rem;
 }
       
 .bx {
@@ -1424,14 +1447,161 @@ blockquote p::after {
 }
       
 .like-wrapper .bx-like {
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: #f39c12;
     margin-right: 0.5rem;
+    margin-left: 0.8rem;
 }
       
 .like-count {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     color: white;
+}
+
+.reply-container {
+    margin-left: 3rem;
+    padding-left: 1.6rem;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    background-color: transparent;
+    border-radius: 0.8rem;
+}
+
+.submit-reply-btn {
+    padding: 0.8rem 2rem;
+    background-color: #5d85d4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+}
+
+.reply-toggle-container {
+  margin: 0.8rem 0 0.6rem 1rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: #aaa;
+}
+
+.reply-toggle-container:hover {
+  color: #f39c12;
+}
+
+.reply-container.hidden,
+.reply-toggle-container.hidden {
+  display: none;
+}
+
+.option-menu {
+    position: absolute;
+    min-width: 10rem;
+    top: 1rem;
+    right: 0;
+    background-color: #fff;
+    color: #000;
+    border-radius: 0.8rem;
+    padding: 0.6rem 0.8rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    gap: 0.3rem;
+    z-index: 500;
+    font-size: 1.2rem;
+    display: none;
+}
+
+.option-menu button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.option-menu button:hover {
+    background-color: #eee;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background-color: #2f2f2f;
+    margin: 10% auto;
+    padding: 2rem;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    color: white;
+}
+
+.modal-content textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-size: 1.5rem;
+    background-color: #444;
+    color: white;
+    resize: none;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: white;
+}
+
+/* scrollbar for message-historybox */
+.message-historybox::-webkit-scrollbar {
+    width: 0px;
+    transition: width 0.3s ease;
+}
+
+.message-historybox:hover::-webkit-scrollbar {
+    width: 14px;
+}
+
+.message-historybox::-webkit-scrollbar-track {
+    background: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.message-historybox::-webkit-scrollbar-track:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.message-historybox::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    background-clip: padding-box;
+}
+
+.message-historybox::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
 }
 
 .events-section {
