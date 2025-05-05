@@ -12,6 +12,9 @@ module.exports.createMessage = function createMessage(user_id, text, parent_id =
 
   return prisma.message.create({
     data,
+    include: {
+      user: true,
+    },
   });
 };
 

@@ -10,6 +10,7 @@ const messageRouter = require("./routers/Message.router");
 const messageLikeRouter = require("./routers/MessageLike.router");
 const messageReportRouter = require("./routers/MessageReport.router");
 const ratingRouter = require("./routers/Rating.router");
+const adminRouter = require("./routers/Admin.router");
 
 const path = require("path");
 const app = express();
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/admin-assets", express.static(path.join(__dirname, "protected")));
 app.use("/users", userRouter);
 app.use("/animes", animeRouter);
 app.use("/genres", genreRouter);
@@ -49,6 +51,7 @@ app.use("/messages", messageRouter);
 app.use("/messagesLikes", messageLikeRouter);
 app.use("/messagesReport", messageReportRouter);
 app.use("/ratings", ratingRouter);
+app.use("/admin", adminRouter);
 
 app.use((req, res, next) => {
   next(createError(404, `Unknown resource ${req.method} ${req.originalUrl}`));

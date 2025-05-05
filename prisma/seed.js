@@ -266,11 +266,15 @@ const animeGenresMap = {
 
 async function main() {
   await prisma.message.deleteMany();
+  await prisma.rating.deleteMany();
+  await prisma.admin.deleteMany();
   await prisma.user.deleteMany();
   await prisma.anime.deleteMany();
   await prisma.genre.deleteMany();
 
   await prisma.$executeRaw`ALTER SEQUENCE "Message_id_seq" RESTART WITH 1`;
+  await prisma.$executeRaw`ALTER SEQUENCE "Rating_id_seq" RESTART WITH 1`;
+  await prisma.$executeRaw`ALTER SEQUENCE "Admin_id_seq" RESTART WITH 1`;
   await prisma.$executeRaw`ALTER SEQUENCE "User_id_seq" RESTART WITH 1`;
   await prisma.$executeRaw`ALTER SEQUENCE "Anime_id_seq" RESTART WITH 1`;
   await prisma.$executeRaw`ALTER SEQUENCE "Genre_id_seq" RESTART WITH 1`;

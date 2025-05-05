@@ -1,19 +1,24 @@
 const user_id = sessionStorage.getItem("id");
+const socket = io();
+let currentReplyParentId = null;
+const displayedMessageIds = new Set(); // Track displayed messages
+
+if (!user_id) {
+  window.location.href = "/signin.html";
+}
 
 function createMessageElement(message, currentUserId) {
   const template = document.getElementById("message-template");
   const messageElement = template.content.cloneNode(true);
-
   const messageWrapper = messageElement.querySelector(".message-wrapper");
+
   if (!messageWrapper) {
     console.error("Message wrapper not found in template");
-    return;
+    return null;
   }
 
   messageWrapper.setAttribute("data-message-id", message.id);
-  messageWrapper.querySelector(".message-username").textContent = message.user
-    ? message.user.username
-    : "Anonymous";
+  messageWrapper.querySelector(".message-username").textContent = message.user?.username || "Anonymous";
   messageWrapper.querySelector(".message").textContent = message.text || "";
 
   const likeCount = messageWrapper.querySelector(".like-count");
@@ -28,51 +33,36 @@ function createMessageElement(message, currentUserId) {
     showOptionsMenu(message, messageWrapper, user_id);
   });
 
-  loadProfilePictures(message.user.id, messageWrapper);
+  loadProfilePictures(message.user?.id, messageWrapper);
 
-  // Container for replies
   const replyContainer = messageWrapper.querySelector(".reply-container");
   const replyToggleContainer = messageWrapper.querySelector(".reply-toggle-container");
   const toggleText = messageWrapper.querySelector(".toggle-replies-text");
 
-  if (message.replies && message.replies.length > 0) {
+  if (message.replies?.length > 0) {
     replyToggleContainer.classList.remove("hidden");
     toggleText.textContent = `View ${message.replies.length} repl${message.replies.length > 1 ? "ies" : "y"}`;
 
-    // Show/hide replies on toggle click
-    replyToggleContainer.addEventListener("click", () => {
-      replyContainer.classList.toggle("hidden");
-      const showing = !replyContainer.classList.contains("hidden");
-      toggleText.textContent = showing ? `Hide repl${message.replies.length > 1 ? "ies" : "y"}` : `View ${message.replies.length} repl${
-        message.replies.length > 1 ? "ies" : "y"
-      }`;
-    });
-  }
-
-  // If this message has replies, render them
-  if (message.replies && message.replies.length > 0) {
     message.replies.forEach((reply) => {
       const replyElement = createMessageElement(reply, currentUserId);
-      replyContainer.appendChild(replyElement);
+      if (replyElement) replyContainer.appendChild(replyElement);
     });
+
+    setReplyToggleBehavior(toggleText, replyContainer)
   }
 
   return messageElement;
 }
 
 async function loadProfilePictures(userId, messageWrapper) {
+  if (!userId) return;
   try {
     const response = await fetch(`/users/profile-pictures/${userId}`);
     const data = await response.json();
-
     const profilePicture = messageWrapper.querySelector(".profile-icon");
-    if (!profilePicture) {
-      console.error("Profile picture element not found in message wrapper");
-      return;
-    }
 
-    if (data.pictures && data.pictures.length > 0) {
-      profilePicture.src = data.pictures[data.pictures.length - 1]; // Show latest picture
+    if (data.pictures?.length > 0) {
+      profilePicture.src = data.pictures[data.pictures.length - 1];
     } else {
       profilePicture.src = "assets/profile-icon.png";
     }
@@ -88,69 +78,161 @@ function fetchMessages() {
     .then((data) => {
       const messageHistoryBox = document.getElementById("message-historybox");
       messageHistoryBox.innerHTML = "";
+      displayedMessageIds.clear(); // Reset displayed messages
+
       const { messages, user_id: currentUserId } = data;
 
-      // Only render top-level messages
       messages
         .filter((m) => m.parent_id === null)
         .forEach((message) => {
           const messageElement = createMessageElement(message, currentUserId);
-          messageHistoryBox.appendChild(messageElement);
+          if (messageElement) {
+            messageHistoryBox.appendChild(messageElement);
+            displayedMessageIds.add(message.id);
+          }
         });
     })
     .catch((error) => console.error("Error fetching messages:", error));
 }
 
+function sendMessageToServer(text) {
+  if (!user_id) {
+    alert("Please login to use this feature.");
+    return;
+  }
+
+  const messageData = {
+    user_id: +user_id,
+    text: text,
+    parent_id: null,
+  };
+
+  socket.emit("newMessage", messageData, (savedMessage) => {
+    displayNewMessage(savedMessage);
+  });
+}
+
+// Display a single new message dynamically (with duplicate protection)
+function displayNewMessage(messageData) {
+  if (displayedMessageIds.has(messageData.id)) {
+    console.log("Duplicate message ignored:", messageData.id);
+    return;
+  }
+
+  const messageHistoryBox = document.getElementById("message-historybox");
+  const { user_id: currentUserId } = window;
+
+  const messageElement = createMessageElement(messageData, currentUserId);
+  if (messageElement) {
+    messageHistoryBox.appendChild(messageElement);
+    displayedMessageIds.add(messageData.id);
+
+    // Smooth scroll to bottom
+    messageHistoryBox.scrollTo({
+      top: messageHistoryBox.scrollHeight,
+      behavior: "smooth",
+    });
+  }
+}
+
+// Receive new message from socket
+socket.on("newMessage", (messageData) => {
+  console.log("Received new message via socket:", messageData);
+  displayNewMessage(messageData);
+});
+
+// Like updates
+socket.on("likeUpdated", ({ messageId, likeCount }) => {
+  const msgEl = document.querySelector(`[data-message-id='${messageId}']`);
+  if (msgEl) {
+    const likeEl = msgEl.querySelector(".like-count");
+    if (likeEl) likeEl.textContent = likeCount;
+  }
+});
+
+// Message updates
+socket.on("messageUpdated", (updatedMessage) => {
+  const msgEl = document.querySelector(`[data-message-id='${updatedMessage.id}']`);
+  if (msgEl) {
+    msgEl.querySelector(".message").textContent = updatedMessage.text;
+  }
+});
+
+// Message deletions
+socket.on("messageDeleted", (messageId) => {
+  const msgEl = document.querySelector(`[data-message-id='${messageId}']`);
+  if (msgEl) msgEl.remove();
+  displayedMessageIds.delete(messageId);
+});
+
+// Reply added
+socket.on("replyAdded", (replyMessage) => {
+  const parent = document.querySelector(
+    `[data-message-id='${replyMessage.parent_id}']`
+  );
+  if (parent) {
+    const replyContainer = parent.querySelector(".reply-container");
+    const replyToggleContainer = parent.querySelector(".reply-toggle-container");
+    const toggleText = parent.querySelector(".toggle-replies-text");
+
+    if (replyContainer && replyToggleContainer && toggleText) {
+      const replyElement = createMessageElement(replyMessage, +user_id);
+      replyContainer.appendChild(replyElement);
+
+      replyContainer.classList.remove("hidden");
+      replyToggleContainer.classList.remove("hidden");
+
+      const replyCount = replyContainer.children.length;
+      toggleText.textContent = `Hide repl${replyCount > 1 ? "ies" : "y"}`;
+
+      // Only bind toggle behavior if it doesn't already have a listener
+      if (!toggleText.hasAttribute("data-toggle-bound")) {
+        setReplyToggleBehavior(toggleText, replyContainer);
+        toggleText.setAttribute("data-toggle-bound", "true");
+      }
+    }
+  }
+});
+
+// Increase like
 function increaseLike(messageId, likeCountElement) {
+  if (!user_id) {
+    alert("Please login to use this feature.");
+    return;
+  }
   fetch(`/messagesLikes/${messageId}/like`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user_id: +user_id }),
   })
     .then((response) => {
       if (!response.ok) throw new Error("Failed to like the message");
       return response.json();
     })
-    .then(() => {
-      // After liking successfully, fetch the updated like count
-      return fetch(`/messagesLikes/${messageId}/like-count`);
-    })
-    .then((response) => {
-      if (!response.ok) throw new Error("Failed to fetch like count");
-      return response.json();
-    })
+    .then(() => fetch(`/messagesLikes/${messageId}/like-count`))
+    .then((response) => response.json())
     .then((data) => {
-      // Update only the specific like count without reloading all messages
       likeCountElement.textContent = data.likeCount;
+      socket.emit("likeMessage", { messageId, likeCount: data.likeCount });
     })
     .catch((error) => {
-      alert("You already liked this message");
+      alert("You already liked this message.");
       console.error("Error increasing like count:", error);
     });
 }
 
 // Show options menu
 function showOptionsMenu(message, messageWrapper, currentUserId) {
-  const optionMenu = messageWrapper
-    .closest(".menu-wrapper")
-    .querySelector(".option-menu");
+  const optionMenu = messageWrapper.closest(".menu-wrapper")?.querySelector(".option-menu");
 
-  if (!optionMenu) {
-    console.error("Option menu not found.");
-    return;
-  }
+  if (!optionMenu) return console.error("Option menu not found");
 
   document.querySelectorAll(".option-menu").forEach((menu) => {
     if (menu !== optionMenu) menu.style.display = "none";
   });
 
-  // Clear existing options
   optionMenu.innerHTML = "";
-
-  // Check if the current user is the owner
-  const isOwner = message.user.id === +currentUserId;
+  const isOwner = message.user?.id === +currentUserId;
 
   if (isOwner) {
     optionMenu.innerHTML = `
@@ -170,7 +252,7 @@ function showOptionsMenu(message, messageWrapper, currentUserId) {
       const description = prompt(
         "Please provide a reason for reporting this message:"
       );
-      if (description && description.trim() !== "") {
+      if (description?.trim()) {
         reportMessage(message.id, description);
       } else {
         alert("Report description cannot be empty.");
@@ -182,43 +264,61 @@ function showOptionsMenu(message, messageWrapper, currentUserId) {
     });
   }
 
-  // Show the menu
   optionMenu.style.display = "flex";
 }
 
-// Update message
-function updateMessage(messageId) {
-  const newMessageText = prompt("Enter the new message text:");
-  if (!newMessageText || newMessageText.trim() === "") {
-    alert("Comment text cannot be empty.");
-    return;
-  }
-  if (newMessageText) {
-    fetch(`/messages/${messageId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text: newMessageText }),
-    })
-      .then(() => {
-        alert("Message updated successfully");
-        fetchMessages();
-      })
-      .catch((error) => console.error("Error updating message:", error));
-  }
+function setReplyToggleBehavior(toggleText, replyContainer) {
+  const updateToggleText = () => {
+    const replyCount = replyContainer.children.length;
+    const showing = !replyContainer.classList.contains("hidden");
+    toggleText.textContent = showing ? `Hide repl${replyCount > 1 ? "ies" : "y"}` : `View ${replyCount} repl${replyCount > 1 ? "ies" : "y"}`;
+  };
+
+  toggleText.addEventListener("click", () => {
+    replyContainer.classList.toggle("hidden");
+    updateToggleText();
+  });
+
+  updateToggleText();
 }
 
-// Delete message
-function deleteMessage(id) {
-  fetch(`/messages/${id}`, { method: "DELETE" })
+// Update, Delete, Report message
+function updateMessage(messageId) {
+  if (!user_id) {
+    alert("Please login to use this feature.");
+    return;
+  }
+  const newMessageText = prompt("Enter the new message text:");
+  if (!newMessageText?.trim()) return alert("Message text cannot be empty.");
+
+  fetch(`/messages/${messageId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: newMessageText }),
+  })
+    .then(() => {
+      const updatedMessage = { id: messageId, text: newMessageText };
+      socket.emit("updateMessage", updatedMessage);
+      alert("Message updated successfully.");
+      fetchMessages();
+    })
+    .catch((error) => console.error("Error updating message:", error));
+}
+
+function deleteMessage(messageId) {
+  if (!user_id) {
+    alert("Please login to use this feature.");
+    return;
+  }
+  fetch(`/messages/${messageId}`, { method: "DELETE" })
     .then((response) => {
       if (response.ok) {
-        const messageElement = document.querySelector(`[data-message-id='${id}']`);
-        messageElement.remove();
-        console.log("Message deleted successfully");
+        document.querySelector(`[data-message-id='${messageId}']`)?.remove();
+        displayedMessageIds.delete(messageId);
+        socket.emit("deleteMessage", messageId);
+        console.log("Message deleted successfully.");
       } else {
-        console.error("Failed to delete the message");
+        console.error("Failed to delete the message.");
       }
     })
     .catch((error) => console.error("Error deleting message:", error));
@@ -230,10 +330,7 @@ function reportMessage(messageId, description) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user_id: +user_id, description }),
   })
-    .then((response) => {
-      if (!response.ok) throw new Error("Failed to report the message");
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
       alert("Message reported successfully!");
       console.log(`Total reports for this message: ${data.reportCount}`);
@@ -244,66 +341,34 @@ function reportMessage(messageId, description) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("messageForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const text = document.getElementById("message").value.trim();
-    const messageHistoryBox = document.getElementById("message-historybox");
-    messageHistoryBox.scrollTop = messageHistoryBox.scrollHeight;
-
-    if (!text) {
-      alert("Message cannot be empty");
-      return;
-    }
-
-    fetch("/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id: +user_id,
-        text,
-      }),
-    })
-      .then(() => {
-        console.log("Message added successfully");
-        document.getElementById("message").value = "";
-        fetchMessages();
-      })
-      .catch((error) => console.error("Error adding message:", error));
-  });
-
-  fetchMessages();
-});
-
-let currentReplyParentId = null;
-
+// Modal handling
 function openReplyModal(parentId) {
   currentReplyParentId = parentId;
   document.getElementById("replyModal").style.display = "block";
 }
 
-const modal = document.getElementById("replyModal");
-const closeBtn = document.querySelector(".close-btn");
-closeBtn.onclick = () => {
-  modal.style.display = "none";
+document.querySelector(".close-btn").onclick = () => {
+  document.getElementById("replyModal").style.display = "none";
 };
 
 window.onclick = (event) => {
-    const isClickInsideOptionsMenu = event.target.closest(".option-menu");
-    const isClickOnOptionsIcon = event.target.closest(".bx-dots-vertical-rounded");
-  if (event.target === modal) {
-    modal.style.display = "none";
+  if (event.target === document.getElementById("replyModal")) {
+    document.getElementById("replyModal").style.display = "none";
   }
-  if (!isClickInsideOptionsMenu && !isClickOnOptionsIcon) {
-    document.querySelectorAll(".option-menu").forEach((menu) => {
-      menu.style.display = "none";
-    });
+
+  if (
+    !event.target.closest(".option-menu") &&
+    !event.target.closest(".bx-dots-vertical-rounded")
+  ) {
+    document.querySelectorAll(".option-menu").forEach((menu) => (menu.style.display = "none"));
   }
-}
+};
 
 document.getElementById("submitReply").addEventListener("click", () => {
+  if (!user_id) {
+    alert("Please login to use this feature.");
+    return;
+  }
   const replyText = document.getElementById("replyText").value.trim();
   if (!replyText) return alert("Reply cannot be empty.");
 
@@ -317,12 +382,27 @@ document.getElementById("submitReply").addEventListener("click", () => {
     }),
   })
     .then((res) => {
-      if (!res.ok) throw new Error("Reply failed");
+      if (!res.ok) throw new Error("Reply failed.");
+      return res.json();
+    })
+    .then((replyMessage) => {
+      socket.emit("addReply", replyMessage);
       document.getElementById("replyText").value = "";
       document.getElementById("replyModal").style.display = "none";
-      fetchMessages();
     })
     .catch((err) => console.error("Reply error:", err));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("messageForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const text = document.getElementById("message").value.trim();
+    if (!text) return alert("Message cannot be empty.");
+    sendMessageToServer(text);
+    document.getElementById("message").value = "";
+  });
+
+  fetchMessages();
 });
 
 const accordions = document.querySelectorAll(".accordion");

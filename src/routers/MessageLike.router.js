@@ -2,7 +2,15 @@ const express = require("express");
 const router = express.Router();
 const { likeMessage, getLikeCountByMessageId } = require("../models/MessageLike.model");
 
-router.post("/:messageId/like", async (req, res, next) => {
+function checkSession(req, res, next) {
+  const user_id = req.session?.user_id;
+  if (!user_id) {
+    return res.status(401).json({ error: "Unauthorized. Please login." });
+  }
+  req.user_id = user_id;
+  next();
+}
+router.post("/:messageId/like", checkSession, async (req, res, next) => {
   const { messageId } = req.params;
   const { user_id } = req.body;
 

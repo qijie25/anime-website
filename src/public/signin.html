@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store" />
     <title>Sign-in</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -107,9 +108,16 @@
                                 sessionStorage.setItem('username', data.user.username);
                                 sessionStorage.setItem('email', data.user.email);
                                 sessionStorage.setItem('id', data.user.id);
+                                sessionStorage.setItem('isAdmin', data.user.isAdmin);
 
                                 sessionStorage.setItem('loginStatus', "success");
-                                window.location.href = "/index.html";
+
+                                // Redirect to the appropriate page based on admin status
+                                if (data.user.isAdmin) {
+                                    window.location.href = "/admin";
+                                } else {
+                                    window.location.href = "/index.html";
+                                }
                             });
                         } else {
                             // If the response is not OK, parse the error message

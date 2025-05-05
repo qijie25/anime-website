@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { createMessage, getAllMessages, updateMessage, deleteMessage } = require("../models/Message.model");
 
-router.post('/', (req, res, next) => {
+router.post('/', checkSession, (req, res, next) => {
     const { user_id, text, parent_id } = req.body;
     createMessage(user_id, text, parent_id)
         .then((message) => res.status(201).json(message))
@@ -20,7 +20,7 @@ router.get("/", (req, res, next) => {
 function checkSession(req, res, next) {
   const user_id = req.session?.user_id;
   if (!user_id) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: "Unauthorized. Please login." });
   }
   req.user_id = user_id;
   next();
