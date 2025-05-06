@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <title>Edit Anime</title>
+</head>
+<body>
+    <form id="edit-anime-form" enctype="multipart/form-data">
+        <input type="text" name="title" required />
+        <textarea name="description" rows="10"></textarea>
+        <input type="text" name="studios" />
+        <input type="text" name="type" />
+        <input type="datetime-local" name="date_aired" />
+        <input type="text" name="status" readonly />
+        <select id="animeGenre" name="genres" multiple size="5">
+            <!-- Options will be populated dynamically -->
+        </select>
+        <input type="file" name="image" accept="image/*" />
+        <input type="submit" value="Update Anime" />
+    </form>
+
+    <script src="/admin-assets/editAnime.js"></script>
+</body>
+</html>

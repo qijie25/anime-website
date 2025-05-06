@@ -3,42 +3,42 @@ const { login, register, updateProfile, verifyCurrentPassword, updateProfilePict
 const { generateToken } = require("../middleware/jwtMiddleware");
 const upload = require("../middleware/uploadMiddleware");
 const bcrypt = require('bcrypt');
+const prisma = require("../models/prismaClient");
 const router = express.Router();
 
 router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await login(email, password);
-
-    if (!user) {
-      throw new Error("Invalid credentials");
-    }
-
-    if (!req.session) {
-      throw new Error("Session is not initialized");
-    }
-
-    console.log("User:", user);
+    if (!user) throw new Error("Invalid credentials");
 
     req.session.user_id = user.id;
 
+    const isAdmin = await prisma.admin.findUnique({
+      where: { user_id: user.id },
+    });
+
+    req.session.user = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      isAdmin: !!isAdmin,
+    };
+
+    // Populate res.locals for token generation
     res.locals.id = user.id;
     res.locals.username = user.username;
     res.locals.email = user.email;
 
     generateToken(req, res, () => {
-      res.status(200).json({
+      return res.status(200).json({
         message: "Login successful",
         token: res.locals.token,
-        user: {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-        },
+        user: req.session.user
       });
     });
   } catch (err) {
-    res.status(401).json({ message: err.message || "An error occurred during login" });
+    return res.status(401).json({ message: err.message || "An error occurred during login" });
   }
 });
 

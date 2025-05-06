@@ -19,4 +19,14 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
+const animeStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "anime_images",
+    allowed_formats: ["jpg", "jpeg", "png"],
+  },
+});
+const animeUpload = multer({ storage: animeStorage });
+
 module.exports = upload;
+module.exports = animeUpload;

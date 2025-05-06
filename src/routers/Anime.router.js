@@ -1,5 +1,6 @@
 const express = require('express');
-const { getAllAnimes, getAnimeById, getAnimeByGenre, updateAnime, getAnimeByQuery } = require("../models/Anime.model");
+const { getAllAnimes, getAnimeById, getAnimeByGenre, updateAnime, getAnimeByQuery, createAnime, deleteAnime } = require("../models/Anime.model");
+const animeUpload = require("../middleware/uploadMiddleware");
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
@@ -32,14 +33,48 @@ router.get('/:id', (req, res, next) => {
      .catch(next);
 });
 
-router.put('/:id', (req, res, next) => {
-    const { id } = req.params;
-    const data = req.body;
+router.post("/", animeUpload.single("image"), async (req, res, next) => {
+  try {
+    const animeData = req.body;
+    const imageUrl = req.file?.path || null; // cloudinary URL
 
-    updateAnime(parseInt(id), data)
-    .then((anime) => res.status(200).json(anime))
-    .catch(next);
+    const newAnime = await createAnime(animeData, imageUrl);
+    res.status(201).json(newAnime);
+  } catch (error) {
+    next(error);
+  }
 });
 
+router.put('/:id', animeUpload.single("image"), async (req, res, next) => {
+  const { id } = req.params;
+  const data = req.body;
+  const file = req.file;
+  const dateAired = req.body.date_aired;
+  const parsedDate = dateAired ? new Date(dateAired) : null;
+
+  data.date_aired = parsedDate;
+
+  try {
+    if (file) {
+      data.image = file.path;
+    }
+
+    const updatedAnime = await updateAnime(parseInt(id), data);
+    res.status(200).json(updatedAnime);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const deletedAnime = await deleteAnime(parseInt(id));
+    res.status(200).json(deletedAnime);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

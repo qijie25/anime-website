@@ -91,9 +91,34 @@ module.exports.updateAnime = async function updateAnime(id, data) {
     throw new Error("Anime not found");
   }
 
+  let genresData;
+
+  if (data.genres) {
+    const genreNames = Array.isArray(data.genres) ? data.genres : [data.genres];
+    const genreRecords = await prisma.genre.findMany({
+      where: {
+        name: { in: genreNames },
+      },
+    });
+
+    genresData = {
+      set: genreRecords.map((genre) => ({
+        genreId_animeId: {
+          genreId: genre.id,
+          animeId: id,
+        },
+      })),
+    };
+
+    delete data.genres;
+  }
+
   return prisma.anime.update({
     where: {id},
-    data,
+    data: {
+      ...data,
+      ...(genresData && { genres: genresData }),
+    }
   });
 };
 
@@ -131,4 +156,53 @@ module.exports.getAnimeByQuery = async function getAnimeByQuery(query) {
   });
 
   return formatAnimeGenres(animes);
+}
+
+module.exports.createAnime = async function createAnime(data, imageUrl) {
+  const {
+    title,
+    description,
+    duration = 24,
+    type,
+    studios,
+    date_aired,
+    status,
+    genres = [],
+  } = data;
+
+  const createdAnime = await prisma.anime.create({
+    data: {
+      title,
+      description,
+      duration: Number(duration),
+      type,
+      studios,
+      date_aired: new Date(date_aired),
+      status,
+      img_url: imageUrl,
+      genres: {
+        create: genres.map((genreName) => ({
+          genre: {
+            connect: { name: genreName },
+          },
+        })),
+      },
+    },
+    include: {
+      genres: {
+        include: {
+          genre: true,
+        },
+      },
+    },
+  });
+
+  return {
+    ...createdAnime,
+    genres: createdAnime.genres.map((g) => g.genre.name),
+  };
+};
+
+module.exports.deleteAnime = async function deleteAnime(id) {
+  return prisma.anime.delete({where: {id}});
 }

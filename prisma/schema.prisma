@@ -18,7 +18,7 @@ model Anime {
   id              Int       @id @default(autoincrement())
   title           String
   description     String
-  duration        Int?
+  duration        Int?      @default(24)
   type            String
   studios         String
   date_aired      DateTime
@@ -61,7 +61,7 @@ model AnimeGenre {
   anime    Anime  @relation(fields: [animeId], references: [id], onDelete: Cascade)
   genre    Genre  @relation(fields: [genreId], references: [id], onDelete: Cascade)
 
-  @@unique([animeId, genreId])
+  @@unique([animeId, genreId], name: "genreId_animeId")
 }
 
 model Rating {

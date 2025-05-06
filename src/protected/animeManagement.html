@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <title>Anime Management</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="/admin-assets/adminStyle.css" rel="stylesheet">
+</head>
+<body class="admin-page">
+    <section class="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-face-mask'></i>
+            <span class="sidebar-header">AniTube</span>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="/admin">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="sidebar-text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/anime-management">
+                    <i class='bx bxs-videos'></i>
+                    <span class="sidebar-text">Anime</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-user'></i>
+                    <span class="sidebar-text">User</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="sidebar-text">Message</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu bottom">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog bx-spin-hover'></i>
+                    <span class="sidebar-text">Settings</span>
+                </a>
+            </li>
+            <li id="side-logout">
+                <a href="#">
+                    <i class='bx bx-log-out bx-burst-hover'></i>
+                    <span class="sidebar-text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <div class="dashboard-content">
+        <nav class="dashboard-nav">
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-button"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+            <div id="user-notification" style="display: none;">
+                <a href="#" class="notification" id="notificationIcon">
+                    <i class='bx bxs-bell bx-tada-hover'></i>
+                </a>
+            </div>
+            <div id="user-profile" style="display: none;">
+                <a href="#" class="profile" id="profileIcon">
+                    <img src="/assets/profile-icon(2).png" alt="Profile" id="profileImage">
+                </a>
+                <div class="profile-menu" id="profileMenu">
+                    <ul>
+                        <li><a href="/profile.html">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <main>
+            <div class="content-title">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li><a class="active" href="#">Anime</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-add-anime" id="btn-add-anime">
+                    <i class='bx bx-plus'></i>
+                    <span class="text">Add Anime</span>
+                </a>
+            </div>
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Manage Anime</h3>
+                        <div class="form-input">
+                            <input type="search" placeholder="Search">
+                            <button type="submit" class="search-button"><i class='bx bx-search'></i></button>
+                        </div>
+                        <i class='bx bx-filter'></i>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Genre</th>
+                                <th>Rating</th>
+                                <th>Studio</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="anime-table-body">
+                            <!-- Table rows with data will be added here using JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <template id="anime-table-template">
+                <tr>
+                    <td class="td-anime-img"><img src="" alt=""></td>
+                    <td class="td-anime-title"></td>
+                    <td class="td-anime-genre"></td>
+                    <td class="td-anime-rating"></td>
+                    <td class="td-anime-studio"></td>
+                    <td class="td-anime-status"></td>
+                    <td class="td-anime-actions">
+                        <a href="/admin/edit-anime?id="><i class='bx bx-edit'></i></a>
+                        <i class='bx bx-trash delete-icon'></i>
+                    </td>
+                </tr>
+            </template>
+        </main>
+    </div>
+    <div id="addAnimeModal" class="anime-modal">
+        <div class="modal-items">
+            <span class="close-btn">&times;</span>
+            <h3>Fill in the anime details</h3>
+            <input type="text" id="animeTitle" name="animeTitle" placeholder="Anime Title">
+            <textarea id="animeDescription" name="animeDescription" rows="10" placeholder="Anime Description..."></textarea>
+            <input type="text" id="animeType" name="animeType" placeholder="Anime Type">
+            <input type="text" id="animeStudio" name="animeStudio" placeholder="Anime Studio">
+            <input type="datetime-local" id="animeReleaseDate" name="animeReleaseDate">
+            <input type="text" id="animeStatus" name="animeStatus" placeholder="Anime Status">
+            <select id="animeGenre" name="genres" multiple size="5">
+                <!-- Options will be populated dynamically -->
+            </select>
+            <input type="file" id="animeImage" name="animeImage" accept="image/*">
+            <button id="submitAddAnime" class="submit-add-btn">Send</button>
+        </div>
+    </div>
+    <script src="/index.js"></script>
+    <script src="/admin-assets/animeManagement.js"></script>
+</body>
+</html>

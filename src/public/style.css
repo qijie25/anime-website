@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     font-size: 62.5%;
 }
@@ -186,7 +192,7 @@ html {
 
 .header .profile-menu li {
     padding: 1rem;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
 }
 
 .header .profile-menu li:hover {
@@ -247,12 +253,6 @@ html {
 
 
 /* Login & Register Page  */
-.register-page *,
-.login-page * {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
 .login-page, .register-page {
 	display: flex;
     flex-direction: column;
@@ -261,6 +261,7 @@ html {
 	background: url("./assets/ani-background.jpeg") no-repeat center center;
 	background-size: cover;
 	background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
     padding: 8rem 0 0 0;
     margin: 0;
@@ -508,13 +509,7 @@ html {
 
 
 /* Home Page */
-.home-page * {
-    box-sizing: border-box;
-}
-
 .home-page {
-    margin: 0;
-    padding: 0;
     background: #121212;
 }
 
@@ -927,6 +922,7 @@ blockquote p::after {
 .profile-body h2 {
     font-size: 2.6rem;
     font-weight: 700;
+    margin-top: 4rem;
 }
 
 .profile-container {
@@ -1031,14 +1027,8 @@ blockquote p::after {
 
 
 /* About Page */
-.about-page * {
-    box-sizing: border-box;
-}
-
 .about-page {
     font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
     height: 100%;
     background-color: #1b1b1b;
     color: #fff;
@@ -1217,13 +1207,7 @@ blockquote p::after {
 
 
 /* Community Page */
-.community-page * {
-    box-sizing: border-box;
-}
-
 .community-page {
-    margin: 0;
-    padding: 0;
     color: #fff;
     background-color: #1b1b1b;
     font-family: sans-serif;
@@ -1713,13 +1697,7 @@ blockquote p::after {
 }
 
 /* Contact Us Page */
-.contact-page * {
-    box-sizing: border-box;
-}
-
 .contact-page {
-    padding: 0;
-    margin: 0;
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #faf3e0;
@@ -1885,13 +1863,7 @@ textarea.contact-inputs {
 }
 
 /* Anime page */
-.anime-page * {
-    box-sizing: border-box;
-}
-
 .anime-page {
-    margin: 0;
-    padding: 0;
     background: #121212;
     overflow-x: hidden;
 }
@@ -2096,13 +2068,7 @@ textarea.contact-inputs {
 }
 
 /* Search Page */
-.search-page * {
-    box-sizing: border-box;
-}
-
 .search-page {
-    margin: 0;
-    padding: 0;
     font-family: "Poppins", sans-serif;
     background-color: #1b1b1b;
     color: white;
