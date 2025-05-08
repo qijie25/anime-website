@@ -1,5 +1,44 @@
+function createAnimeCard(anime) {
+  const template = document.getElementById("anime-card-template");
+  const clone = template.content.cloneNode(true);
+
+  const box = clone.querySelector(".recently-updated-box");
+  const img = clone.querySelector("img");
+  const ratingBtn = clone.querySelector(".rating-btn");
+  const ratingNum = clone.querySelector(".rating-num");
+  const title = clone.querySelector(".box-title");
+  const genreText = clone.querySelector(".genre");
+  const releaseDate = clone.querySelector(".release-date");
+
+  img.src = anime.img_url;
+  img.alt = anime.title;
+  ratingNum.textContent = anime.avgRating ? anime.avgRating.toFixed(1) : "0.0";
+  title.textContent = anime.title;
+
+  if (anime.genres && Array.isArray(anime.genres)) {
+    genreText.textContent = anime.genres.slice(0, 2).join(", ");
+  } else {
+    genreText.textContent = "Unknown";
+  }
+
+  const year = new Date(anime.date_aired).getFullYear();
+  releaseDate.textContent = `${year}`;
+
+  ratingBtn.addEventListener("click", () => {
+    const userId = sessionStorage.getItem("id");
+    if (userId !== null) {
+      sessionStorage.setItem("selectedAnimeId", anime.id);
+      window.location.href = "rating.html";
+    } else {
+      alert("Please log in to rate an anime.");
+    }
+  });
+
+  return clone;
+}
+
 function generateRecentlyUpdated() {
-  fetch(`/animes`)
+  fetch(`/animes/status/Currently%20Airing`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -11,92 +50,20 @@ function generateRecentlyUpdated() {
       recentlyUpdatedGrid.innerHTML = ""; // Clear existing content
 
       recentlyUpdatedAnime.forEach((anime) => {
-        const recentlyUpdatedBox = document.createElement("div");
-        recentlyUpdatedBox.classList.add("recently-updated-box");
-        const boxHead = document.createElement("div");
-        boxHead.classList.add("box-head");
-        const boxContent = document.createElement("div");
-        boxContent.classList.add("box-content");
-        const boxBody = document.createElement("div");
-        boxBody.classList.add("box-body");
-        const boxFooter = document.createElement("div");
-        boxFooter.classList.add("box-footer");
-
-        const img = document.createElement("img");
-        img.src = anime.img_url;
-        img.alt = anime.title;
-        boxHead.appendChild(img);
-
-        const favoriteButton = document.createElement("i");
-        favoriteButton.classList.add("bx", "bx-bookmark", "favorite-btn");
-        boxContent.appendChild(favoriteButton);
-
-        const ratingWrapper = document.createElement("div");
-        ratingWrapper.classList.add("rating-wrapper");
-        const ratingButton = document.createElement("i");
-        ratingButton.classList.add("bx", "bx-star", "rating-btn");
-        const ratingNum = document.createElement("span");
-        ratingNum.classList.add("rating-num");
-        ratingNum.textContent = anime.avgRating ? anime.avgRating.toFixed(1) : "0.0";
-
-        ratingButton.addEventListener("click", () => {
-          const userId = sessionStorage.getItem("id");
-          if (userId !== null) {
-            // Store animeId in sessionStorage
-            sessionStorage.setItem("selectedAnimeId", anime.id);
-            // Redirect to rating page
-            window.location.href = "rating.html";
-          } else {
-            alert("Please log in to rate an anime.");
-          }
-        });
-
-        ratingWrapper.appendChild(ratingButton);
-        ratingWrapper.appendChild(ratingNum);
-        boxContent.appendChild(ratingWrapper);
-
-        const playButton = document.createElement("i");
-        playButton.classList.add("bx", "bx-play-circle", "play-btn");
-        boxContent.appendChild(playButton);
-
-        boxHead.appendChild(boxContent);
-
-        const title = document.createElement("h3");
-        title.classList.add("box-title");
-        title.textContent = anime.title;
-        boxBody.appendChild(title);
-
-        const genre = document.createElement("p");
-        genre.classList.add("genre");
-        if (anime.genres && Array.isArray(anime.genres)) {
-          const genreNames = anime.genres.slice(0, 2);
-          genre.textContent = genreNames.join(", ");
-        } else {
-          genre.textContent = "Unknown";
-        }
-        boxFooter.appendChild(genre);
-
-        const releaseDate = document.createElement("p");
-        releaseDate.classList.add("release-date");
-        const date = new Date(anime.date_aired);
-        const year = date.getFullYear();
-        releaseDate.textContent = `${year}`;
-        boxFooter.appendChild(releaseDate);
-
-        boxBody.appendChild(boxFooter);
-
-        recentlyUpdatedBox.appendChild(boxHead);
-        recentlyUpdatedBox.appendChild(boxBody);
-        recentlyUpdatedGrid.appendChild(recentlyUpdatedBox);
+        const card = createAnimeCard(anime);
+        recentlyUpdatedGrid.appendChild(card);
       });
     })
     .catch((error) => {
-      console.error("Error fetching recently update anime:", error);
+      console.error("Error fetching recently updated anime:", error);
     });
 }
 
-function generateGenreOptions() {
+function generateGenreOptions(selectedGenres = []) {
   const genreOptions = document.getElementById("genre-options");
+  genreOptions.innerHTML = ""; // Clear existing options
+
+  const genreLabel = document.querySelector(".dropdown-toggle");
 
   // Fetch genres
   fetch("/genres")
@@ -108,28 +75,90 @@ function generateGenreOptions() {
         checkbox.type = "checkbox";
         checkbox.value = genre.name;
         checkbox.name = "genre";
+
+        if (selectedGenres.includes(genre.name.toLowerCase())) {
+          checkbox.checked = true;
+        }
+
+        checkbox.addEventListener("change", updateGenreLabel);
+
         label.appendChild(checkbox);
         label.append(` ${genre.name}`);
         genreOptions.appendChild(label);
       });
     })
     .catch((err) => console.error("Failed to load genres:", err));
+
+  function updateGenreLabel() {
+    const checked = Array.from(
+      document.querySelectorAll("input[name='genre']:checked")
+    ).map((cb) => cb.value);
+    genreLabel.textContent = checked.length > 0 ? checked.join(", ") : "All";
+  }
+}
+
+function generateYearOptions(selectedYears = []) {
+  const yearOptions = document.getElementById("year-options");
+  const yearLabel = document.getElementById("year-label");
+  yearOptions.innerHTML = ""; // Clear previous
+
+  const startYear = 2010;
+  const endYear = 2025;
+
+  for (let year = endYear; year >= startYear; year--) {
+    const label = document.createElement("label");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = year;
+    checkbox.name = "year";
+
+    if (selectedYears.includes(year.toString())) {
+      checkbox.checked = true;
+    }
+
+    checkbox.addEventListener("change", updateYearLabel);
+
+    label.appendChild(checkbox);
+    label.append(` ${year}`);
+    yearOptions.appendChild(label);
+  }
+
+  function updateYearLabel() {
+    const checked = Array.from(
+      document.querySelectorAll("input[name='year']:checked")
+    ).map((cb) => cb.value);
+    yearLabel.textContent = checked.length > 0 ? checked.join(", ") : "All";
+  }
 }
 
 document.querySelector(".filter-btn").addEventListener("click", () => {
   const checkedGenres = Array.from(
     document.querySelectorAll("input[name='genre']:checked")
-  ).map((cb) => cb.value.toLowerCase());
+  ).map((cb) => cb.value);
 
-  if (checkedGenres.length === 1) {
-    fetch(`/animes/genre/${checkedGenres[0]}`)
-      .then((res) => res.json())
-      .then(displayAnimeGrid)
-      .catch((err) => console.error("Failed to fetch anime by genre:", err));
-  } else {
-    // fallback: fetch all or show a message
-    alert("Please select only one genre for now.");
-  }
+  const checkedYears = Array.from(
+    document.querySelectorAll("input[name='year']:checked")
+  ).map((cb) => cb.value);
+
+  const type = document.getElementById("type").value;
+  const status = document.getElementById("status").value;
+
+  const params = new URLSearchParams();
+
+  // Add each genre as a separate query parameter
+  checkedGenres.forEach((genre) => params.append("genres", genre));
+  checkedYears.forEach((year) => params.append("year", year));
+  if (type) params.append("type", type);
+  if (status) params.append("status", status);
+
+  fetch(`/animes/filter?${params.toString()}`)
+    .then((res) => res.json())
+    .then((animes) => {
+      displayAnimeGrid(animes);
+      generateGenreOptions(checkedGenres.map((g) => g.toLowerCase())); // persist selection
+      generateYearOptions(checkedYears);
+    })
+    .catch((err) => console.error("Failed to fetch filtered anime:", err));
 });
 
 function displayAnimeGrid(animes) {
@@ -137,83 +166,40 @@ function displayAnimeGrid(animes) {
   grid.innerHTML = "";
 
   animes.forEach((anime) => {
-    const box = document.createElement("div");
-    box.classList.add("recently-updated-box");
-
-    const boxHead = document.createElement("div");
-    boxHead.classList.add("box-head");
-
-    const img = document.createElement("img");
-    img.src = anime.img_url;
-    img.alt = anime.title;
-    boxHead.appendChild(img);
-
-    const boxContent = document.createElement("div");
-    boxContent.classList.add("box-content");
-    const favoriteButton = document.createElement("i");
-    favoriteButton.classList.add("bx", "bx-bookmark", "favorite-btn");
-    boxContent.appendChild(favoriteButton);
-
-    const ratingWrapper = document.createElement("div");
-    ratingWrapper.classList.add("rating-wrapper");
-    const ratingButton = document.createElement("i");
-    ratingButton.classList.add("bx", "bx-star", "rating-btn");
-    const ratingNum = document.createElement("span");
-    ratingNum.classList.add("rating-num");
-    ratingNum.textContent = anime.avgRating ? anime.avgRating.toFixed(1) : "0.0";
-    ratingButton.addEventListener("click", () => {
-      const userId = sessionStorage.getItem("id");
-      if (userId !== null) {
-        // Store animeId in sessionStorage
-        sessionStorage.setItem("selectedAnimeId", anime.id);
-        // Redirect to rating page
-        window.location.href = "rating.html";
-      } else {
-        alert("Please log in to rate an anime.");
-      }
-    });
-
-    ratingWrapper.appendChild(ratingButton);
-    ratingWrapper.appendChild(ratingNum);
-    boxContent.appendChild(ratingWrapper);
-
-    const playButton = document.createElement("i");
-    playButton.classList.add("bx", "bx-play-circle", "play-btn");
-    boxContent.appendChild(playButton);
-
-    boxHead.appendChild(boxContent);
-
-    const boxBody = document.createElement("div");
-    boxBody.classList.add("box-body");
-
-    const title = document.createElement("h3");
-    title.classList.add("box-title");
-    title.textContent = anime.title;
-
-    const genre = document.createElement("p");
-    genre.classList.add("genre");
-    genre.textContent = (anime.genres || []).slice(0, 2).join(", ");
-
-    const releaseDate = document.createElement("p");
-    releaseDate.classList.add("release-date");
-    releaseDate.textContent = new Date(anime.date_aired).getFullYear();
-
-    const boxFooter = document.createElement("div");
-    boxFooter.classList.add("box-footer");
-    boxFooter.append(genre, releaseDate);
-
-    boxBody.append(title, boxFooter);
-    box.append(boxHead, boxBody);
-    grid.appendChild(box);
+    const card = createAnimeCard(anime);
+    grid.appendChild(card);
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const dropdownToggle = document.querySelector(".dropdown-toggle");
-  const dropdown = document.querySelector(".dropdown");
-  dropdownToggle.addEventListener("click", () => {
-    dropdown.classList.toggle("open");
+  // Allow multiple dropdowns to toggle independently
+  document.querySelectorAll(".dropdown-toggle").forEach((toggleBtn) => {
+    toggleBtn.addEventListener("click", function (e) {
+      // Find the closest parent .dropdown container
+      const dropdown = this.closest(".dropdown");
+
+      // Close all other open dropdowns
+      document.querySelectorAll(".dropdown.open").forEach((el) => {
+        if (el !== dropdown) {
+          el.classList.remove("open");
+        }
+      });
+
+      // Toggle the clicked one
+      dropdown.classList.toggle("open");
+
+      e.stopPropagation();
+    });
   });
+
+  // Close dropdowns if user clicks outside
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".dropdown.open").forEach((el) => {
+      el.classList.remove("open");
+    });
+  });
+  
   generateGenreOptions();
+  generateYearOptions();
   generateRecentlyUpdated();
 });

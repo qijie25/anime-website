@@ -58,6 +58,30 @@
                 </div>
             </div>
         </div>
+
+        <template id="anime-card-template">
+            <div class="recently-updated-box">
+                <div class="box-head">
+                    <img src="" alt="" />
+                    <div class="box-content">
+                        <i class="bx bx-bookmark favorite-btn"></i>
+                        <div class="rating-wrapper">
+                            <i class="bx bx-star rating-btn"></i>
+                            <span class="rating-num">0.0</span>
+                        </div>
+                        <i class="bx bx-play-circle play-btn"></i>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <h3 class="box-title"></h3>
+                    <div class="box-footer">
+                        <p class="genre"></p>
+                        <p class="release-date"></p>
+                    </div>
+                </div>
+            </div>
+        </template>
+
         <div class="anime-sidebar">
             <div class="filter-section">
                 <h3 class="filter-title">Quick Filter</h3>
@@ -71,21 +95,11 @@
                     </div>
     
                     <div class="filter-item">
-                        <label for="year" class="dropdown-label">Year</label>
-                        <select id="year" class="dropdown-toggle">
-                            <option value="">All</option>
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                            <option value="2021">2021</option>
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
-                            <option value="2014">2014</option>
-                        </select>
+                        <label for="year-dropdown" class="dropdown-label">Year</label>
+                        <div class="dropdown" id="year-dropdown">
+                            <button class="dropdown-toggle" id="year-label">All <i class='bx bx-chevron-down'></i></button>
+                            <div class="dropdown-menu" id="year-options"></div>
+                        </div>
                     </div>
     
                     <div class="filter-item">

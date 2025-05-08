@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllAnimes, getAnimeById, getAnimeByGenre, updateAnime, getAnimeByQuery, createAnime, deleteAnime } = require("../models/Anime.model");
+const { getAllAnimes, getAnimeById, getAnimeByGenre, updateAnime, getAnimeByQuery, createAnime, deleteAnime, getAnimeByStatus, getFilteredAnimes } = require("../models/Anime.model");
 const animeUpload = require("../middleware/uploadMiddleware");
 const router = express.Router();
 
@@ -23,6 +23,38 @@ router.get("/genre/:genre", (req, res, next) => {
   getAnimeByGenre(genreLower)
     .then((animes) => res.status(200).json(animes))
     .catch(next);
+});
+
+router.get("/status/:status", (req, res, next) => {
+  const { status } = req.params;
+  getAnimeByStatus(status)
+    .then((animes) => res.status(200).json(animes))
+    .catch(next);
+})
+
+router.get("/filter", async (req, res, next) => {
+  try {
+    const { genres, year, type, status } = req.query;
+    
+    let genreList = [];
+    if (Array.isArray(genres)) {
+      genreList = genres.map((g) => g.trim().toLowerCase());
+    } else if (typeof genres === "string") {
+      genreList = genres.split(",").map((g) => g.trim().toLowerCase());
+    }
+
+    let yearList = [];
+    if (Array.isArray(year)) {
+      yearList = year.map((y) => parseInt(y));
+    } else if (typeof year === "string") {
+      yearList = year.split(",").map((y) => parseInt(y));
+    }
+
+    const animes = await getFilteredAnimes({ genreList, yearList, type, status });
+    res.status(200).json(animes);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get('/:id', (req, res, next) => {

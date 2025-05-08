@@ -206,3 +206,71 @@ module.exports.createAnime = async function createAnime(data, imageUrl) {
 module.exports.deleteAnime = async function deleteAnime(id) {
   return prisma.anime.delete({where: {id}});
 }
+
+module.exports.getAnimeByStatus = async function getAnimeByStatus(status) {
+  const animes = await prisma.anime.findMany({
+    where: {
+      status: {
+        equals: status,
+        mode: "insensitive",
+      },
+    },
+    orderBy: {
+      date_aired: "desc",
+    },
+    include: {
+      genres: {
+        include: {
+          genre: true,
+        },
+      },
+    },
+  });
+
+  return formatAnimeGenres(animes);
+};
+
+module.exports.getFilteredAnimes = async function getFilteredAnimes(filters) {
+  const { genreList, yearList, type, status } = filters;
+
+  const where = {
+    ...(type && { type }),
+    ...(status && { status: { equals: status, mode: "insensitive" } }),
+    ...(yearList.length > 0 && {
+      OR: yearList.map((y) => ({
+        date_aired: {
+          gte: new Date(`${y}-01-01`),
+          lt: new Date(`${y + 1}-01-01`),
+        },
+      })),
+    }),
+    ...(genreList.length > 0 && {
+      genres: {
+        some: {
+          genre: {
+            name: {
+              in: genreList,
+              mode: "insensitive",
+            },
+          },
+        },
+      },
+    }),
+  };
+
+  const animes = await prisma.anime.findMany({
+    where,
+    orderBy: {
+      date_aired: "desc",
+    },
+    include: {
+      genres: {
+        include: {
+          genre: true,
+        },
+      },
+    },
+  });
+
+  return formatAnimeGenres(animes);
+};

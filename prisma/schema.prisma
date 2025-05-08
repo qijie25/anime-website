@@ -28,6 +28,7 @@ model Anime {
   season          Int        @default(1)
   avgRating       Float?     @default(0.0)
   totalRatings    Int?       @default(0)
+  date_finished   DateTime?
   created_at      DateTime   @default(now())
   updated_at      DateTime   @updatedAt
   episodes        Episode[]

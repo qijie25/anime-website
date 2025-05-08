@@ -225,6 +225,116 @@ const anime = [
     img_url: "./assets/your-lie-in-april.jpg",
     total_episodes: 22,
   },
+  {
+    title: "Devil May Cry",
+    description:
+      "When a mysterious villain threatens to open the gates of Hell, a devilishly handsome demon hunter could be the world's best hope for salvation.",
+    duration: 30,
+    type: "TV Series",
+    studios: "Netflix",
+    date_aired: "2025-04-03T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/devil-may-cry.jpg",
+  },
+  {
+    title: "Super Cube",
+    description:
+      "In an accident, an ordinary boy, Wang Xiaoxiu, obtains a space system called 'Superpower Cube' from a high-latitude cosmic civilization and gains extraordinary powers. When the school belle, Shen Yao, Wang Xiaoxiu’s longtime crush, confesses her love to him, the delinquent Sun Jun, who also has a crush on her, is provoked. Wang Xiaoxiu resolves the crisis with his wit and extraordinary powers, but it also brings more disasters as a result. Shen Yao is taken to the world of extraordinary beings by a mysterious person, and Wang Xiaoxiu embarks on a journey to rescue her. Fighting in the bizarre universe, he finds the meaning of fairness and justice on the path to becoming a peerless powerhouse.",
+    duration: 20,
+    type: "TV Series",
+    studios: "Big Firebird Culture",
+    date_aired: "2025-03-21T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/super-cube.jpg",
+  },
+  {
+    title: "The Beginning After the End",
+    description:
+      "The story follows the strongest king in history, Grey. Although he possesses unparalleled power, wealth, and fame, there is no one who stands by his side…and he trusts no one. One day, Grey suddenly meets his death and is reincarnated as a powerless infant named Arthur in a world of magic. Surrounded by a loving family and companions, Arthur starts to experience joys in this new life that he never knew in his previous one. However, during a journey, his family is attacked by bandits... Thus begins his second life, filled with love and adventure!",
+    duration: 24,
+    type: "TV Series",
+    studios: "Studio A-CAT",
+    date_aired: "2025-04-02T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/tbate.jpg",
+  },
+  {
+    title: "Lazarus",
+    description:
+      "The year is 2052—an era of unprecedented peace and prosperity prevails across the globe. The reason for this: mankind has been freed from sickness and pain. Nobel Prize winning neuroscientist Dr. Skinner has developed a miracle cure-all drug with no apparent drawbacks called Hapuna. Hapuna soon becomes ubiquitous... and essential. However, soon after Hapuna is officially introduced, Dr. Skinner vanishes. Three years later, the world has moved on. But Dr. Skinner has returned—this time, as a harbinger of doom. Skinner announces that Hapuna has a short half-life. Everyone who has taken it will die approximately three years later. Death is coming for this sinful world—and coming soon. As a response to this threat, a special task force of 5 agents is gathered from across the world to save humanity from Skinner’s plan. This group is called 'Lazarus.' Can they find Skinner and develop a vaccine before time runs out?",
+    duration: 24,
+    type: "TV Series",
+    studios: "MAPPA",
+    date_aired: "2025-04-06T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/lazarus.jpg",
+  },
+  {
+    title: "To Be Hero X",
+    description:
+      "This is a world where heroes are created by people's trust, and the hero who has received the most trust is known as - X. In this world, people's trust can be calculated by data, and these values will be reflected on everyone's wrist. As long as enough trust points are obtained, ordinary people can also have superpowers and become superheroes that save the world. However, the ever-changing trust value makes the hero's path full of unknowns...",
+    duration: 24,
+    type: "TV Series",
+    studios: "LAN Studio",
+    date_aired: "2025-04-06T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/to-be-hero-x.jpg",
+  },
+  {
+    title: "The Unaware Atelier Master",
+    description:
+      "One day, Kurt, a kind-hearted boy, is suddenly kicked out of the Hero's Party for being 'useless.' He finds that his aptitude for weapons, magic, and all other combat-related skills is the lowest rand, so he takes odd-jobs repairing the castle walls and digging for minerals, where his exceptional abilities are immediately revealed. He proves to be skillful in cooking, building, mining, crafting magical tools—in fact, his aptitude for every skill unrelated to combat had an SSS-ranking! Kurt, however, seems completely unaware to his talent and ends up saving people, the town, and even the country through his unaware actions!?",
+    duration: 24,
+    type: "TV Series",
+    studios: "EMT Squared",
+    date_aired: "2025-04-06T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/the-unaware-atelier.jpg",
+  },
+  {
+    title: "Food for the Soul",
+    description:
+      "An original animation about the daily life of five girls who just became university students. They love delicious food, want to have lots of fun with everyone, and study a little harder to enjoy university life to the fullest!",
+    duration: 24,
+    type: "TV Series",
+    studios: "P.A. Works",
+    date_aired: "2025-04-13T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/food-for-the-soul.jpg",
+  },
+  {
+    title: "Kowloon Generic Romance",
+    description:
+      "In the distant future, individuals who adore the old way of life live in Kowloon Walled City—a slum city that serves as a refuge for those who long for the Hong Kong of the past. Realtor Reiko Kujirai, however, craves for the new and exciting places in the area. In contrast, her only coworker, Hajime Kudou, enjoys the nostalgia the city invokes and is put off by anything modern that seeps past its walls. But despite their differing views and constant bickering on the most mundane of things, the two often find themselves enjoying each other's company. One day, a prank gone wrong leads Hajime to make an unexpected advance toward Reiko, after which he swiftly apologizes for. Baffled by his actions, Reiko starts investigating for possible explanations, only to discover a past that she has no memory of.",
+    duration: 24,
+    type: "TV Series",
+    studios: "Arvo Animation",
+    date_aired: "2025-04-05T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/kowloon-generic-romance.jpg",
+  },
+  {
+    title: "Teogonia",
+    description:
+      "It's a time of warfare where relentless battles continue between human and demi-human tribes like the Ash Monkeys (Macaque) and pig people (Ogres) invading human lands. Kai, a boy from the village of Rag, spends his days immersed in battle to protect his village. Amidst the harsh battles enforced by those possessing immense power known as 'guardian bearers,' and as his comrades fall one by one, Kai suddenly recalls memories he shouldn't have experienced—memories of a world with advanced technology and knowledge of people's lives beyond this world. And thus, although Kai was just a villager, he soon finds himself embroiled in great trials... A magnificent fantasy tale unfolds, chronicling the struggle and growth of a single boy in a harsh world.",
+    duration: 24,
+    type: "TV Series",
+    studios: "Asahi Production",
+    date_aired: "2025-04-12T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/teogonia.jpg",
+  },
+  {
+    title: "Your Forma",
+    description:
+      "In an alternate 2023, the Your Forma, a miraculous 'smart thread' technology initially developed to treat a massive outbreak of viral encephalitis, has become an integral part of daily life. But these convenient devices come with an invasive drawback—they record every sight, sound, and even emotion their users experience. For electronic investigator Echika Hieda, diving into peoples' memories via the Your Forma and hunting for evidence to solve the toughest crimes is all part of a day's work. The problem is, she's so good at what she does that her assistants literally fry their brains trying to keep up with her. After putting one too many aides in the hospital, the top brass finally furnish Echika with a partner on her level, a brilliant yet cheeky android named Harold Lucraft. Does this unlikely duo have what it takes to resolve their mutual suspicions and avert a deadly technological infection from sweeping across the globe before it's too late?",
+    duration: 24,
+    type: "TV Series",
+    studios: "Geno Studio",
+    date_aired: "2025-04-02T08:05:06Z",
+    status: "Currently Airing",
+    img_url: "./assets/your-forma.jpg",
+  },
 ];
 
 const genres = [
@@ -240,6 +350,12 @@ const genres = [
   { name: "Psychological" },
   { name: "Thriller" },
   { name: "Mystery" },
+  { name: "Slice of Life" },
+  { name: "Sports" },
+  { name: "Supernatural" },
+  { name: "Historical" },
+  { name: "Isekai"},
+  { name: "Super Power"},
 ];
 
 const animeGenresMap = {
@@ -262,7 +378,40 @@ const animeGenresMap = {
   "Vinland Saga": ["Action", "Adventure"],
   "One Punch Man": ["Action", "Comedy", "Sci-Fi"],
   "Gintama": ["Action", "Comedy", "Sci-Fi"],
+  "Devil May Cry": ["Action", "Fantasy", "Supernatural"],
+  "Super Cube": ["Action", "Adventure", "Fantasy"],
+  "The Beginning After the End": ["Action", "Adventure", "Fantasy"],
+  "Lazarus": ["Action", "Sci-Fi"],
+  "To Be Hero X": ["Action", "Super Power"],
+  "The Unaware Atelier Master": ["Action", "Adventure", "Fantasy"],
+  "Food for the Soul": ["Slice of Life"],
+  "Kowloon Generic Romance": ["Romance", "Slice of Life", "Mystery"],
+  "Teogonia": ["Action", "Adventure", "Fantasy"],
+  "Your Forma": ["Sci-Fi", "Mystery", "Drama"],
 };
+
+const animeRating = [
+  { animeId: 1, userId: 1, score: 6 },
+  { animeId: 2, userId: 2, score: 7 },
+  { animeId: 3, userId: 1, score: 8 },
+  { animeId: 4, userId: 2, score: 9 },
+  { animeId: 5, userId: 1, score: 7 },
+  { animeId: 6, userId: 2, score: 6 },
+  { animeId: 7, userId: 1, score: 7 },
+  { animeId: 8, userId: 2, score: 8 },
+  { animeId: 9, userId: 1, score: 9 },
+  { animeId: 10, userId: 2, score: 7 },
+  { animeId: 1, userId: 2, score: 7 },
+  { animeId: 2, userId: 1, score: 5 },
+  { animeId: 3, userId: 2, score: 4 },
+  { animeId: 4, userId: 1, score: 8 },
+  { animeId: 5, userId: 2, score: 6 },
+  { animeId: 6, userId: 1, score: 9 },
+  { animeId: 7, userId: 2, score: 5 },
+  { animeId: 8, userId: 1, score: 7 },
+  { animeId: 9, userId: 2, score: 2 },
+  { animeId: 10, userId: 1, score: 9 },
+];
 
 async function main() {
   await prisma.message.deleteMany();
@@ -316,11 +465,15 @@ async function main() {
 
   await prisma.anime.createMany({
     data: anime,
-  })
+  });
 
   await prisma.genre.createMany({
     data: genres,
-  })
+  });
+
+  await prisma.rating.createMany({
+    data: animeRating,
+  });
 
   const allGenres = await prisma.genre.findMany();
   const allAnimes = await prisma.anime.findMany();
@@ -338,6 +491,28 @@ async function main() {
     });
 
     await prisma.animeGenre.createMany({ data: genreLinks });
+  }
+
+  // Fetch grouped rating data: avg and count per animeId
+  const ratingStats = await prisma.rating.groupBy({
+    by: ["animeId"],
+    _avg: {
+      score: true,
+    },
+    _count: {
+      score: true,
+    },
+  });
+
+  // Update each anime with avgRating and totalRatings
+  for (const stat of ratingStats) {
+    await prisma.anime.update({
+      where: { id: stat.animeId },
+      data: {
+        avgRating: parseFloat(stat._avg.score.toFixed(1)),
+        totalRatings: stat._count.score,
+      },
+    });
   }
 
   console.log("Seed data inserted successfully");
