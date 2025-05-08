@@ -12,7 +12,6 @@ module.exports.likeMessage = async function likeMessage(messageId, user_id) {
       });
     });
 
-    console.log("Message liked successfully!");
   } catch (error) {
     if (error.code === "P2002") {
       // Unique constraint violation

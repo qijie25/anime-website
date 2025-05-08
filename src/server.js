@@ -16,8 +16,6 @@ const io = new Server(httpServer, {
 
 // Setup event listeners
 io.on("connection", (socket) => {
-  console.log("A user connected:", socket.id);
-
   socket.on("newMessage", async (messageData, callback) => {
     try {
       const newMessage = await createMessage(

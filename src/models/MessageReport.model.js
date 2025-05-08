@@ -25,7 +25,6 @@ module.exports.reportMessage = async function reportComment(messageId, user_id, 
       });
     });
 
-    console.log("Message reported successfully!");
   } catch (error) {
     if (error.code === "P2002") {
       throw new Error("User has already reported this comment.");
@@ -54,7 +53,6 @@ module.exports.getAllReports = function getAllReports() {
       },
     })
     .then((reports) => {
-      console.log("Fetched reports with details:", reports);
       return reports;
     });
 };

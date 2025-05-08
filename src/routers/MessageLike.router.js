@@ -19,7 +19,6 @@ router.post("/:messageId/like", checkSession, async (req, res, next) => {
     const likeCount = await getLikeCountByMessageId(parseInt(messageId, 10));
     res.status(200).json({ likeCount }); // Return the updated like count
   } catch (error) {
-    console.error("Error liking the message:", error);
     next(error);
   }
 });

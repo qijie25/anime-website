@@ -24,23 +24,22 @@ app.use(
     cookie: {
       secure: false,
       httpOnly: true,
-      maxAge: 30 * 60 * 1000,
-      expires: new Date(Date.now() + 30 * 60 * 1000 + 8 * 60 * 60 * 1000),
+      maxAge: 20 * 60 * 1000,
     },
   })
 );
 
-let lastLoggedTime = 0;
-const logInterval = 90000;
+// let lastLoggedTime = 0;
+// const logInterval = 900000;
 
-app.use((req, res, next) => {
-  const currentTime = Date.now();
-  if (currentTime - lastLoggedTime > logInterval) {
-    console.log("Session Data:", req.session);
-    lastLoggedTime = currentTime;
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   const currentTime = Date.now();
+//   if (currentTime - lastLoggedTime > logInterval) {
+//     console.log("Session Data:", req.session);
+//     lastLoggedTime = currentTime;
+//   }
+//   next();
+// });
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/admin-assets", express.static(path.join(__dirname, "protected")));
