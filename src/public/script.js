@@ -1,3 +1,21 @@
+const helpIcon = document.getElementById("helpIcon");
+const helpModal = document.querySelector(".help-modal");
+const closeBtn = document.querySelector(".close-btn");
+
+helpIcon.addEventListener("click", () => {
+  helpModal.style.display = "block";
+});
+
+closeBtn.addEventListener("click", () => {
+  helpModal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === helpModal) {
+    helpModal.style.display = "none";
+  }
+});
+
 function generateRecommendations() {
   fetch(`/animes`)
     .then((response) => {
@@ -7,7 +25,9 @@ function generateRecommendations() {
       return response.json();
     })
     .then((animeRecommendations) => {
-      const recommendationsGrid = document.getElementById("recommendations-grid");
+      const recommendationsGrid = document.getElementById(
+        "recommendations-grid"
+      );
       recommendationsGrid.innerHTML = ""; // Clear existing content
 
       animeRecommendations.forEach((anime) => {
@@ -37,7 +57,9 @@ function generateRecommendations() {
         ratingButton.classList.add("bx", "bx-star", "rating-btn");
         const ratingNum = document.createElement("span");
         ratingNum.classList.add("rating-num");
-        ratingNum.textContent = anime.avgRating ? anime.avgRating.toFixed(1) : "0.0";
+        ratingNum.textContent = anime.avgRating
+          ? anime.avgRating.toFixed(1)
+          : "0.0";
 
         ratingButton.addEventListener("click", () => {
           const userId = sessionStorage.getItem("id");
@@ -95,6 +117,6 @@ function generateRecommendations() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    generateRecommendations();
+document.addEventListener("DOMContentLoaded", () => {
+  generateRecommendations();
 });

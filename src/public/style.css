@@ -513,13 +513,74 @@ html {
     background: #121212;
 }
 
+.help-container {
+  position: relative;
+  text-align: right;
+  padding: 0.5rem 2rem 0;
+  margin-top: 10rem;
+  margin-bottom: -3.2rem;
+  z-index: 100;
+}
+
+.help-container i {
+  font-size: 2.4rem;
+  cursor: pointer;
+  color: #ddd;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  transition: color 0.3s;
+}
+
+.help-container i:hover {
+  color: #007bff;
+}
+
+.help-modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.help-modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.help-modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.help-modal-content p {
+    font-size: 1.5rem;
+}
+
+.help-modal-content .close-btn:hover {
+    color: #333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .hero-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5rem;
     background-color: #181818;
-    margin-top: 9rem;
 }
 
 .hero-left {
@@ -546,6 +607,7 @@ html {
 
 .hero-left button {
     padding: 1rem 2rem;
+    margin-top: 2rem;
     font-size: 1.6rem;
     background-color: #007bff;
     color: #fff;
@@ -575,7 +637,6 @@ html {
 
 .recommendation-container, .recently-updated-section {
     text-align: center;
-    box-sizing: unset !important;
 }
 
 .recommendation-container {
@@ -607,7 +668,6 @@ html {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10px;
     margin-bottom: 2rem;
-    box-sizing: unset !important;
 }
 
 .recently-updated-grid {
@@ -615,23 +675,23 @@ html {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 6px;
     margin-bottom: 2rem;
-    box-sizing: unset !important;
 }
 
 .recommendation-box, .recently-updated-box {
-    margin: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: unset !important;
 }
 
 .recommendation-box .box-head {
     position: relative;
     height: 32rem;
     border-radius: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
     overflow: hidden;
 }
 
@@ -639,7 +699,7 @@ html {
     position: relative;
     height: 24rem;
     border-radius: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
     overflow: hidden;
 }
 
@@ -651,17 +711,23 @@ html {
 .recommendation-box img {
     width: 100%;
     height: 32rem;
-    box-sizing: unset !important;
 }
 
 .recently-updated-box img {
     width: 100%;
     height: 26rem;
-    box-sizing: unset !important;
 }
 
 .recommendation-box:hover img, .recently-updated-box:hover img {
     transform: scale(1.05);
+}
+
+.recommendation-box .box-body, .recently-updated-box .box-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 0 1rem;
 }
 
 .recommendation-box .box-title, .recently-updated-box .box-title {
@@ -673,11 +739,11 @@ html {
 }
 
 .recommendation-box .box-title {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
 }
 
 .recently-updated-box .box-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .recommendation-box:hover .box-title, .recently-updated-box:hover .box-title {
@@ -691,11 +757,13 @@ html {
 }
 
 .recommendation-box .box-footer {
-    font-size: 1.4rem
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
 }
 
 .recently-updated-box .box-footer {
-    font-size: 1.2rem
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 }
 
 .recommendation-box .box-content, .recently-updated-box .box-content {
@@ -774,6 +842,10 @@ html {
 .recommendation-container button:hover {
     background-color: #e67e22;
     transform: scale(1.1);
+}
+
+.recommendation-container a {
+    text-decoration: none;
 }
 
 .quote-container {
@@ -1135,7 +1207,7 @@ blockquote p::after {
 
 .community-callout p {
     font-size: 1.6rem;
-    margin-bottom: 3rem;
+    margin: 2rem 4rem 3rem;
 }
 
 .join-btn {
