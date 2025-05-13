@@ -59,11 +59,17 @@ function generateRecentlyUpdated() {
     });
 }
 
+function updateGenreLabel() {
+  const genreLabel = document.getElementById("genre-label");
+  const checked = Array.from(
+    document.querySelectorAll("input[name='genre']:checked")
+  ).map((cb) => cb.value);
+  genreLabel.textContent = checked.length > 0 ? checked.join(", ") : "All";
+}
+
 function generateGenreOptions(selectedGenres = []) {
   const genreOptions = document.getElementById("genre-options");
   genreOptions.innerHTML = ""; // Clear existing options
-
-  const genreLabel = document.querySelector(".dropdown-toggle");
 
   // Fetch genres
   fetch("/genres")
@@ -86,20 +92,21 @@ function generateGenreOptions(selectedGenres = []) {
         label.append(` ${genre.name}`);
         genreOptions.appendChild(label);
       });
+      updateGenreLabel();
     })
     .catch((err) => console.error("Failed to load genres:", err));
+}
 
-  function updateGenreLabel() {
-    const checked = Array.from(
-      document.querySelectorAll("input[name='genre']:checked")
-    ).map((cb) => cb.value);
-    genreLabel.textContent = checked.length > 0 ? checked.join(", ") : "All";
-  }
+function updateYearLabel() {
+  const yearLabel = document.getElementById("year-label");
+  const checked = Array.from(
+    document.querySelectorAll("input[name='year']:checked")
+  ).map((cb) => cb.value);
+  yearLabel.textContent = checked.length > 0 ? checked.join(", ") : "All";
 }
 
 function generateYearOptions(selectedYears = []) {
   const yearOptions = document.getElementById("year-options");
-  const yearLabel = document.getElementById("year-label");
   yearOptions.innerHTML = ""; // Clear previous
 
   const startYear = 2010;
@@ -122,13 +129,7 @@ function generateYearOptions(selectedYears = []) {
     label.append(` ${year}`);
     yearOptions.appendChild(label);
   }
-
-  function updateYearLabel() {
-    const checked = Array.from(
-      document.querySelectorAll("input[name='year']:checked")
-    ).map((cb) => cb.value);
-    yearLabel.textContent = checked.length > 0 ? checked.join(", ") : "All";
-  }
+  updateYearLabel();
 }
 
 document.querySelector(".filter-btn").addEventListener("click", () => {
@@ -145,20 +146,13 @@ document.querySelector(".filter-btn").addEventListener("click", () => {
 
   const params = new URLSearchParams();
 
-  // Add each genre as a separate query parameter
   checkedGenres.forEach((genre) => params.append("genres", genre));
   checkedYears.forEach((year) => params.append("year", year));
   if (type) params.append("type", type);
   if (status) params.append("status", status);
 
-  fetch(`/animes/filter?${params.toString()}`)
-    .then((res) => res.json())
-    .then((animes) => {
-      displayAnimeGrid(animes);
-      generateGenreOptions(checkedGenres.map((g) => g.toLowerCase())); // persist selection
-      generateYearOptions(checkedYears);
-    })
-    .catch((err) => console.error("Failed to fetch filtered anime:", err));
+  // Redirect to filter.html with query parameters
+  window.location.href = `filter.html?${params.toString()}`;
 });
 
 function displayAnimeGrid(animes) {
@@ -198,8 +192,39 @@ document.addEventListener("DOMContentLoaded", () => {
       el.classList.remove("open");
     });
   });
-  
+
+  const url = new URL(window.location.href);
+  const isFilterPage = url.pathname.includes("filter.html");
+
   generateGenreOptions();
   generateYearOptions();
-  generateRecentlyUpdated();
+
+  if (isFilterPage) {
+    const params = url.searchParams;
+
+    fetch(`/animes/filter?${params.toString()}`)
+      .then((res) => res.json())
+      .then((animes) => {
+        displayAnimeGrid(animes);
+
+        const selectedGenres = params
+          .getAll("genres")
+          .map((g) => g.toLowerCase());
+        const selectedYears = params.getAll("year");
+
+        generateGenreOptions(selectedGenres);
+        generateYearOptions(selectedYears);
+
+        // Optionally pre-fill other dropdowns
+        if (params.get("type")) {
+          document.getElementById("type").value = params.get("type");
+        }
+        if (params.get("status")) {
+          document.getElementById("status").value = params.get("status");
+        }
+      })
+      .catch((err) => console.error("Failed to fetch filtered anime:", err));
+  } else {
+    generateRecentlyUpdated();
+  }
 });

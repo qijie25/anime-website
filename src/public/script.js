@@ -20,7 +20,7 @@ function createAnimeCard(anime) {
   const template = document.getElementById("anime-card-template");
   const clone = template.content.cloneNode(true);
 
-  const box = clone.querySelector(".recently-updated-box");
+  const box = clone.querySelector(".recommendation-box");
   const img = clone.querySelector("img");
   const ratingBtn = clone.querySelector(".rating-btn");
   const ratingNum = clone.querySelector(".rating-num");
@@ -56,7 +56,7 @@ function createAnimeCard(anime) {
 }
 
 function generateRecommendations() {
-  fetch(`/animes`)
+  fetch(`/animes/top-rated`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

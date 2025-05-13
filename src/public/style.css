@@ -20,7 +20,7 @@ html {
     left: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
+    z-index: 50;
 }
 
 .nav-left {
@@ -1957,7 +1957,7 @@ textarea.contact-inputs {
     width: 100%;
     height: 45rem;
     overflow: hidden;
-    z-index: 99;
+    z-index: 10;
     touch-action: pan-y;
 }
 
@@ -1966,7 +1966,7 @@ textarea.contact-inputs {
     height: 100%;
     display: flex;
     position: relative;
-    z-index: 10;
+    z-index: 5;
 }
 
 .swiper-slide {
@@ -1990,7 +1990,7 @@ textarea.contact-inputs {
     height: 100%;
     display: block;
     object-fit: cover;
-    z-index: 2;
+    z-index: 1;
     border-radius: 1rem;
 }
 
@@ -2002,7 +2002,7 @@ textarea.contact-inputs {
     left: auto;
     bottom: auto;
     text-align: right;
-    z-index: 10;
+    z-index: 5;
 }
 
 .swiper-pagination-bullet {
@@ -2023,7 +2023,7 @@ textarea.contact-inputs {
     color: white;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 20;
+    z-index: 10;
 }
 
 .swiper-button-next {
@@ -2043,7 +2043,7 @@ textarea.contact-inputs {
     padding: 0.5rem;
     font-size: 2rem;
     font-weight: bold;
-    z-index: 2;
+    z-index: 1;
 }
 
 .anime-sidebar {
@@ -2146,6 +2146,69 @@ textarea.contact-inputs {
     color: white;
     overflow-x: hidden;
 }
+
+.filter-page {
+    background: #121212;
+    overflow-x: hidden;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1e1e1e;
+    color: #fff;
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    display: none;
+  }
+  
+  .search-suggestions li {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+    transition: background 0.2s ease;
+  }
+  
+  .search-suggestions li:hover {
+    background-color: #333;
+  }
+  
+  .suggestion-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .suggestion-thumb {
+    width: 45px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .suggestion-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .suggestion-title {
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  
+  .suggestion-meta {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-top: 4px;
+  }
 
 
 /* Responsive Design */

@@ -122,29 +122,126 @@ module.exports.updateAnime = async function updateAnime(id, data) {
   });
 };
 
-module.exports.getAnimeByQuery = async function getAnimeByQuery(query) {
-  const animes = await prisma.anime.findMany({
+// module.exports.getAnimeByQuery = async function getAnimeByQuery({query, type, status, limit = null}) {
+//   if (!query || query.trim() === "") {
+//     return [];
+//   }
+
+//   const whereClause = {
+//     AND: [
+//       {
+//         OR: [
+//           {
+//             title: {
+//               contains: query,
+//               mode: "insensitive",
+//             },
+//           },
+//           {
+//             description: {
+//               contains: query,
+//               mode: "insensitive",
+//             },
+//           },
+//           {
+//             genres: {
+//               some: {
+//                 genre: {
+//                   name: {
+//                     contains: query,
+//                     mode: "insensitive",
+//                   },
+//                 },
+//               },
+//             },
+//           },
+//         ],
+//       },
+//       ...(type ? [{ type: { equals: type, mode: "insensitive" } }] : []),
+//       ...(status ? [{ status: { equals: status, mode: "insensitive" } }] : []),
+//     ],
+//   };
+
+//   const animes = await prisma.anime.findMany({
+//     where: whereClause,
+//     include: {
+//       genres: {
+//         include: {
+//           genre: true,
+//         },
+//       },
+//     },
+//   });
+
+//   // Custom relevance scoring
+//   const scoredAnimes = animes.map((anime) => {
+//     let score = 0;
+//     const q = query.toLowerCase();
+
+//     if (anime.title.toLowerCase() === q) score += 100; // exact match
+//     else if (anime.title.toLowerCase().includes(q)) score += 50;
+
+//     if (anime.description?.toLowerCase().includes(q)) score += 10;
+
+//     const genreMatch = anime.genres.some((g) =>
+//       g.genre.name.toLowerCase().includes(q)
+//     );
+//     if (genreMatch) score += 20;
+
+//     return { ...anime, relevanceScore: score };
+//   });
+
+//   scoredAnimes.sort((a, b) => b.relevanceScore - a.relevanceScore);
+
+//   const result = limit ? scoredAnimes.slice(0, limit) : scoredAnimes;
+//   return formatAnimeGenres(result);
+// };
+
+module.exports.getAnimeByQuery = async function getAnimeByQuery({query, type, status, limit = null}) {
+  if (!query || query.trim() === "") {
+    return [];
+  }
+
+  const queryText = query.trim();
+
+  // Prepare WHERE clauses for type and status filters
+  const conditions = [];
+  const values = [queryText];
+  let paramIndex = 2;
+
+  if (type) {
+    conditions.push(`"type" ILIKE $${paramIndex++}`);
+    values.push(type);
+  }
+
+  if (status) {
+    conditions.push(`"status" ILIKE $${paramIndex++}`);
+    values.push(status);
+  }
+
+  const whereClause = conditions.length > 0 ? `AND ${conditions.join(" AND ")}` : "";
+
+  // Run full-text search on search_vector
+  const rawAnimes = await prisma.$queryRawUnsafe(
+    `
+    SELECT "id", ts_rank("search_vector", plainto_tsquery('english', $1)) AS rank
+    FROM "Anime"
+    WHERE "search_vector" @@ plainto_tsquery('english', $1)
+    ${whereClause}
+    ORDER BY rank DESC
+    ${limit ? `LIMIT ${limit}` : ""}
+    `,
+    ...values
+  );
+
+  if (!rawAnimes.length) return [];
+
+  // Fetch full anime info with genres
+  const animeIds = rawAnimes.map((row) => row.id);
+
+  const fullAnimes = await prisma.anime.findMany({
     where: {
-      OR: [
-        {
-          title: {
-            contains: query,
-            mode: "insensitive",
-          },
-        },
-        {
-          genres: {
-            some: {
-              genre: {
-                name: {
-                  contains: query,
-                  mode: "insensitive",
-                },
-              },
-            },
-          },
-        },
-      ],
+      id: { in: animeIds },
     },
     include: {
       genres: {
@@ -155,8 +252,18 @@ module.exports.getAnimeByQuery = async function getAnimeByQuery(query) {
     },
   });
 
-  return formatAnimeGenres(animes);
-}
+  // Map rank scores back to results
+  const animeRankMap = new Map(rawAnimes.map((a) => [a.id, a.rank]));
+  const scoredResults = fullAnimes.map((anime) => ({
+    ...anime,
+    relevanceScore: animeRankMap.get(anime.id) || 0,
+  }));
+
+  // Sort again to guarantee order
+  scoredResults.sort((a, b) => b.relevanceScore - a.relevanceScore);
+
+  return formatAnimeGenres(scoredResults);
+};
 
 module.exports.createAnime = async function createAnime(data, imageUrl) {
   const {
@@ -258,10 +365,46 @@ module.exports.getFilteredAnimes = async function getFilteredAnimes(filters) {
     }),
   };
 
-  const animes = await prisma.anime.findMany({
+  const potentialAnimes = await prisma.anime.findMany({
     where,
+    include: {
+      genres: {
+        include: {
+          genre: true,
+        },
+      },
+    },
     orderBy: {
       date_aired: "desc",
+    },
+  });
+
+  // Filter to only include animes that contain ALL selected genres
+  const finalAnimes =
+    genreList.length > 0
+      ? potentialAnimes.filter((anime) => {
+          const animeGenres = anime.genres.map((ag) =>
+            ag.genre.name.toLowerCase()
+          );
+          return genreList.every((g) => animeGenres.includes(g));
+        })
+      : potentialAnimes;
+
+  return formatAnimeGenres(finalAnimes);
+};
+
+module.exports.getTopRatedAnimes = async function getTopRatedAnimes(
+  limit = 10
+) {
+  const animes = await prisma.anime.findMany({
+    orderBy: {
+      avgRating: "desc",
+    },
+    take: limit,
+    where: {
+      avgRating: {
+        not: null,
+      },
     },
     include: {
       genres: {

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllAnimes, getAnimeById, getAnimeByGenre, updateAnime, getAnimeByQuery, createAnime, deleteAnime, getAnimeByStatus, getFilteredAnimes } = require("../models/Anime.model");
+const { getAllAnimes, getAnimeById, getAnimeByGenre, updateAnime, getAnimeByQuery, createAnime, deleteAnime, getAnimeByStatus, getFilteredAnimes, getTopRatedAnimes } = require("../models/Anime.model");
 const animeUpload = require("../middleware/uploadMiddleware");
 const router = express.Router();
 
@@ -9,11 +9,23 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
-router.get("/search", (req, res, next) => {
-  const { query } = req.query;
-  getAnimeByQuery(query)
-    .then((animes) => res.status(200).json(animes))
-    .catch(next);
+router.get("/search", async(req, res, next) => {
+  try {
+    const { query, type, status, limit } = req.query;
+    const animes = await getAnimeByQuery({ query, type, status, limit: limit ? parseInt(limit) : null });
+    res.status(200).json(animes);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/top-rated", async (req, res, next) => {
+  try {
+    const animes = await getTopRatedAnimes(10);
+    res.status(200).json(animes);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get("/genre/:genre", (req, res, next) => {
@@ -30,7 +42,7 @@ router.get("/status/:status", (req, res, next) => {
   getAnimeByStatus(status)
     .then((animes) => res.status(200).json(animes))
     .catch(next);
-})
+});
 
 router.get("/filter", async (req, res, next) => {
   try {

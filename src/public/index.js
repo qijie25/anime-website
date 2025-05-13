@@ -71,3 +71,59 @@ window.addEventListener("click", function (e) {
       window.location.href = `/search.html?query=${encodeURIComponent(query)}`;
     }
   });
+
+  const searchSuggestions = document.getElementById("search-suggestions");
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim();
+
+    if (query.length < 2) {
+      searchSuggestions.style.display = "none";
+      return;
+    }
+
+    fetch(`/animes/search?query=${encodeURIComponent(query)}&limit=5`)
+      .then((res) => res.json())
+      .then((data) => {
+        searchSuggestions.innerHTML = "";
+
+        if (!data.length) {
+          searchSuggestions.style.display = "none";
+          return;
+        }
+
+        data.forEach((anime) => {
+          const year = new Date(anime.date_aired).getFullYear();
+          const li = document.createElement("li");
+
+          li.innerHTML = `
+            <div class="suggestion-card">
+              <img src="${anime.img_url}" alt="${anime.title}" class="suggestion-thumb" />
+              <div class="suggestion-info">
+                <p class="suggestion-title">${anime.title}</p>
+                <p class="suggestion-meta">${year} • ${anime.type}</p>
+              </div>
+            </div>
+          `;
+
+          li.addEventListener("click", () => {
+            window.location.href = `/anime/${anime.id}`; // update to your route format
+          });
+
+          searchSuggestions.appendChild(li);
+        });
+
+        searchSuggestions.style.display = "block";
+      })
+      .catch((err) => {
+        console.error("Search error:", err);
+        searchSuggestions.style.display = "none";
+      });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!searchForm.contains(e.target)) {
+      searchSuggestions.style.display = "none";
+    }
+  });
+
+
