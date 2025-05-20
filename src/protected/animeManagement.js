@@ -5,47 +5,50 @@ sideLogout.addEventListener("click", function () {
   window.location.href = "/signin.html";
 });
 
-async function fetchAndDisplayAnimes() {
+function renderAnimeTable(animes) {
   const tableBody = document.getElementById("anime-table-body");
   const template = document.getElementById("anime-table-template");
 
   tableBody.innerHTML = ""; // Clear existing table rows
 
+  animes.forEach((anime) => {
+    const clone = template.content.cloneNode(true);
+    const img = anime.img_url;
+    clone.querySelector("img").src = img.startsWith("http") ? img : "/" + img;
+    clone.querySelector(".td-anime-title").textContent = anime.title;
+    clone.querySelector(".td-anime-genre").textContent = anime.genres.join(", ");
+    clone.querySelector(".td-anime-rating").textContent = anime.avgRating?.toFixed(1) || "N/A";
+    clone.querySelector(".td-anime-studio").textContent = anime.studios;
+    clone.querySelector(".td-anime-status").textContent = anime.status;
+
+    const editLink = clone.querySelector(".td-anime-actions a");
+    const deleteLink = clone.querySelector(".delete-icon");
+    editLink.href = `/admin/edit-anime?id=${anime.id}`;
+    deleteLink.addEventListener("click", () => {
+      if (confirm(`Are you sure you want to delete "${anime.title}"?`)) {
+        deleteAnime(anime.id);
+      }
+    });
+
+    tableBody.appendChild(clone);
+  });
+}
+
+async function fetchAndDisplayAnimes() {
   try {
     const response = await fetch("/animes");
     if (!response.ok) throw new Error("Failed to fetch anime data");
 
     const animes = await response.json();
-
-    animes.forEach((anime) => {
-      const clone = template.content.cloneNode(true);
-      const img = anime.img_url
-      clone.querySelector("img").src = img.startsWith("http") ? img : "/" + img;
-      clone.querySelector(".td-anime-title").textContent = anime.title;
-      clone.querySelector(".td-anime-genre").textContent = anime.genres.join(", ");
-      clone.querySelector(".td-anime-rating").textContent = anime.avgRating?.toFixed(1) || "N/A";
-      clone.querySelector(".td-anime-studio").textContent = anime.studios;
-      clone.querySelector(".td-anime-status").textContent = anime.status;
-
-      const editLink = clone.querySelector(".td-anime-actions a");
-      const deleteLink = clone.querySelector(".delete-icon");
-      editLink.href = `/admin/edit-anime?id=${anime.id}`;
-      deleteLink.addEventListener("click", () => {
-        if (confirm(`Are you sure you want to delete "${anime.title}"?`)) {
-          deleteAnime(anime.id);
-        }
-      });
-
-      tableBody.appendChild(clone);
-    });
+    renderAnimeTable(animes);
   } catch (error) {
     console.error("Error loading animes:", error);
   }
 }
 
-const btnAddAdmin = document.getElementById("btn-add-anime");
+const btnAddAnime = document.getElementById("btn-add-anime");
 
-btnAddAdmin.addEventListener("click", () => {
+btnAddAnime.addEventListener("click", () => {
   openAddAnimeModal();
   loadGenres();
 });
@@ -131,6 +134,33 @@ document.getElementById("submitAddAnime").addEventListener("click", async () => 
     } catch (err) {
       console.error(err);
       alert("Error adding anime.");
+    }
+  });
+
+  const formInput = document.getElementById("form-input");
+  const searchBar = document.getElementById("search-bar");
+
+  formInput.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const query = searchBar.value.trim();
+
+    if (query) {
+      // Fetch and display filtered animes
+      try {
+        const res = await fetch(`/animes/search?query=${encodeURIComponent(query)}`);
+        const animes = await res.json();
+        renderAnimeTable(animes);
+      } catch (err) {
+        console.error("Failed to fetch search results:", err);
+      }
+    } else {
+      fetchAndDisplayAnimes();
+    }
+  });
+
+  searchBar.addEventListener("input", () => {
+    if (searchBar.value.trim() === "") {
+      fetchAndDisplayAnimes();
     }
   });
 
