@@ -1,7 +1,7 @@
 const app = require("./app");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-require("dotenv").config();
+// require("dotenv").config();
 const prisma = require("./models/prismaClient");
 const { createMessage } = require("./models/Message.model");
 

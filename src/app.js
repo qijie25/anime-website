@@ -1,7 +1,7 @@
 const express = require("express");
 const createError = require("http-errors");
 const session = require("express-session");
-require("dotenv").config();
+// require("dotenv").config();
 
 const userRouter = require("./routers/User.router");
 const animeRouter = require("./routers/Anime.router");
@@ -28,18 +28,6 @@ app.use(
     },
   })
 );
-
-// let lastLoggedTime = 0;
-// const logInterval = 900000;
-
-// app.use((req, res, next) => {
-//   const currentTime = Date.now();
-//   if (currentTime - lastLoggedTime > logInterval) {
-//     console.log("Session Data:", req.session);
-//     lastLoggedTime = currentTime;
-//   }
-//   next();
-// });
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/admin-assets", express.static(path.join(__dirname, "protected")));

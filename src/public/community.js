@@ -197,7 +197,7 @@ socket.on("replyAdded", (replyMessage) => {
 // Increase like
 function increaseLike(messageId, likeCountElement) {
   if (!user_id) {
-    alert("Please login to use this feature.");
+    alert("Please login like this message.");
     return;
   }
   fetch(`/messagesLikes/${messageId}/like`, {
@@ -285,7 +285,7 @@ function setReplyToggleBehavior(toggleText, replyContainer) {
 // Update, Delete, Report message
 function updateMessage(messageId) {
   if (!user_id) {
-    alert("Please login to use this feature.");
+    alert("Please login to update your message.");
     return;
   }
   const newMessageText = prompt("Enter the new message text:");
@@ -307,7 +307,7 @@ function updateMessage(messageId) {
 
 function deleteMessage(messageId) {
   if (!user_id) {
-    alert("Please login to use this feature.");
+    alert("Please login to delete your message.");
     return;
   }
   fetch(`/messages/${messageId}`, { method: "DELETE" })
@@ -366,7 +366,7 @@ window.onclick = (event) => {
 
 document.getElementById("submitReply").addEventListener("click", () => {
   if (!user_id) {
-    alert("Please login to use this feature.");
+    alert("Please login to send a message.");
     return;
   }
   const replyText = document.getElementById("replyText").value.trim();
@@ -376,7 +376,6 @@ document.getElementById("submitReply").addEventListener("click", () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      user_id: +user_id,
       text: replyText,
       parent_id: currentReplyParentId,
     }),

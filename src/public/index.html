@@ -15,6 +15,7 @@
         <div class="hamburger" id="hamburger">
             <i class='bx bx-menu'></i>
         </div>
+        <a href="index.html" class="logo">AniTube</a>
         <!-- Left section: Nav -->
         <div class="nav-left">
             <nav class="navbar">
@@ -127,8 +128,18 @@
             <p>Password: password123</p>
         </div>
     </div>
+
+    <div id="footer-placeholder"></div>
+    
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
+    
     <script src="index.js"></script>
-    <script src="footer.js"></script>
     <script src="script.js"></script>
 </body>
 

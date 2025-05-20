@@ -14,6 +14,7 @@
         <div class="hamburger" id="hamburger">
             <i class='bx bx-menu'></i>
         </div>
+        <a href="index.html" class="logo">AniTube</a>
         <!-- Left section: Nav -->
         <div class="nav-left">
             <nav class="navbar">
@@ -168,9 +169,16 @@
         </div>
     </div>
 
+    <div id="footer-placeholder"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
+        fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        });
         const swiper = new Swiper('.swiper', {
             loop: true,
             touchEventsTarget: 'container',
@@ -202,6 +210,5 @@
     </script>
     <script src="anime.js"></script>
     <script src="index.js"></script>
-    <script src="footer.js"></script>
 </body>
 </html>

@@ -106,7 +106,7 @@ window.addEventListener("click", function (e) {
           `;
 
           li.addEventListener("click", () => {
-            window.location.href = `/anime/${anime.id}`; // update to your route format
+            window.location.href = `watch.html?id=${anime.id}`;
           });
 
           searchSuggestions.appendChild(li);

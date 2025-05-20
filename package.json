@@ -18,9 +18,15 @@
     "prisma": "^6.4.1"
   },
   "prisma": {
-    "seed": "dotenv -e .env -- node prisma/seed.js"
+    "seed": "node prisma/seed.js"
   },
   "scripts": {
-    "start": "dotenv -e .env -- node ./src/server.js"
+    "start": "dotenv -e .env.development -- node ./src/server.js",
+    "start:prod": "dotenv -e .env.production -- node ./src/server.js",
+    "migration:dev": "dotenv -e .env.development -- npx prisma migrate dev",
+    "migration:reset": "dotenv -e .env.development -- npx prisma migrate reset",
+    "migration:deploy": "dotenv -e .env.production -- npx prisma migrate deploy",
+    "seed:dev": "dotenv -e .env.development -- node prisma/seed.js",
+    "seed:deploy": "dotenv -e .env.production -- node prisma/seed.js"
   }
 }

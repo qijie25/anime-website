@@ -1,6 +1,6 @@
 const prisma = require("./prismaClient");
 
-module.exports.createMessage = function createMessage(user_id, text, parent_id = null) {
+module.exports.createMessage = function createMessage(user_id, text, parent_id = null, anime_id = null) {
   const data = {
     text,
     user: { connect: { id: user_id } },
@@ -8,6 +8,10 @@ module.exports.createMessage = function createMessage(user_id, text, parent_id =
 
   if (parent_id) {
     data.parent = { connect: { id: parent_id } };
+  }
+
+  if (anime_id) {
+    data.anime = { connect: { id: anime_id } };
   }
 
   return prisma.message.create({
@@ -67,6 +71,24 @@ module.exports.getAllMessages = async function getAllMessages() {
       likeCount: likeCounts[reply.id] || 0,
     })),
   }));
+};
+
+module.exports.getLatestMessagesByAnimeId = async function getLatestMessagesByAnimeId(anime_id, limit = 3) {
+  const messages = await prisma.message.findMany({
+    where: {
+      parent_id: null,
+      anime_id: anime_id,
+    },
+    orderBy: { created_at: 'desc' },
+    take: limit,
+    include: {
+      user: {
+        select: { id: true, username: true, profile_imgs: true },
+      },
+    },
+  });
+
+  return messages;
 };
 
 module.exports.updateMessage = async function updateMessage(id, data, user_id) {

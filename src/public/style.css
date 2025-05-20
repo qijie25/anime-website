@@ -8,6 +8,25 @@ html {
     font-size: 62.5%;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
+}
+
+i {
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
 /* Header */
 .header {
     display: flex;
@@ -20,7 +39,16 @@ html {
     left: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     z-index: 50;
+}
+
+.logo {
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #ad46ff;
+    margin-right: 4rem;
 }
 
 .nav-left {
@@ -219,37 +247,72 @@ html {
 
 /* Footer */
 .anime-footer {
-    background-color: #1e1e2f;
-    color: #fff;
-    text-align: center;
-    padding: 2rem 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+    background: #1e1e2f;
+    padding: 4rem 0;
+    margin-top: 8rem;
+    color: #cbd5e0;
+    font-size: 1.4rem;
+  }
 
-.anime-footer .footer-content {
-    max-width: 80rem;
-    margin: 0 auto;
+  .footer-container {
+    max-width: 120rem;
     padding: 0 1.6rem;
-}
+    margin: 0 auto;
+  }
 
-.anime-footer .footer-content p {
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+  }
+
+  .footer-section h3 {
     font-size: 1.6rem;
-}
-
-.anime-footer .social-icons {
-    margin-top: 1rem;
-}
-
-.anime-footer .social-icons a {
-    margin: 0 0.8rem;
-    color: #fff;
-    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 1.6rem;
+    color: white;
+  }
+  
+  .footer-section p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 1.2rem;
+  }
+  
+  .footer-section a {
+    color: #cbd5e0;
+    text-decoration: none;
     transition: color 0.3s;
-}
+  }
+  
+  .footer-section a:hover {
+    color: #ffffff;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 1.6rem;
+    font-size: 1.8rem;
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid #4a5568;
+    margin-top: 6.4rem;
+    padding-top: 3rem;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #cbd5e0;
+  }
 
-.anime-footer .social-icons a:hover {
-    color: #ff4d6d;
-}
 
 
 /* Login & Register Page  */
@@ -2302,3 +2365,9 @@ textarea.contact-inputs {
         grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     }
 }
+
+@media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }

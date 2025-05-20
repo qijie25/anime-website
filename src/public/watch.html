@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Anime Online | AniTube</title>
+    <link href="watch.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="hamburger" id="hamburger">
+            <i class='bx bx-menu'></i>
+        </div>
+        <a href="index.html" class="logo">AniTube</a>
+        <!-- Left section: Nav -->
+        <div class="nav-left">
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="anime.html">Anime</a>
+                <a href="community.html">Community</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+        <!-- Center: Search bar -->
+        <form action="#" class="search-btn" id="search-form">
+            <input type="search" placeholder="Search" class="search-input" id="search-input">
+            <button type="submit" title="Search"><i class='bx bx-search'></i></button>
+        </form>
+        <ul id="search-suggestions" class="search-suggestions"></ul>
+        <!-- Right: Notification, login/profile -->
+        <div class="nav-right">
+            <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+            <div id="user-notification" style="display: none;">
+                <a href="#" class="notification" id="notificationIcon">
+                    <i class='bx bxs-bell bx-tada-hover'></i>
+                </a>
+            </div>
+            <div id="user-profile" style="display: none;">
+                <a href="#" class="profile" id="profileIcon">
+                    <img src="assets/profile-icon(2).png" alt="Profile" id="profileImage">
+                </a>
+                <div class="profile-menu" id="profileMenu">
+                    <ul>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="main-grid">
+            <!-- Left Column (Video Player) -->
+            <div class="video-section">
+                <!-- Video Player -->
+                <div class="video-wrapper">
+                    <div class="video-container">
+                        <div class="video-loading">
+                            <div class="loading-text">
+                                <i class="fas fa-play-circle loading-icon"></i>
+                                <p class="loading-message">Loading video player...</p>
+                                <div class="loading-bar-wrapper">
+                                    <div class="loading-bar animate-pulse"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="player-controls">
+                        <div class="player-controls-left">
+                            <button class="player-btn"><i class="fas fa-play"></i></button>
+                            <button class="player-btn"><i class="fas fa-pause"></i></button>
+                            <div class="time-display">00:00 / 24:10</div>
+                        </div>
+                        <div class="player-controls-right">
+                            <button class="player-btn"><i class="fas fa-volume-up"></i></button>
+                            <button class="player-btn"><i class="fas fa-expand"></i></button>
+                            <button class="player-btn"><i class="fas fa-cog"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anime Info -->
+                <div class="anime-info">
+                    <div class="anime-details">
+                        <div class="anime-img-container">
+                            <img src="" alt="" class="anime-img" id="anime-img">
+                        </div>
+                        <div class="anime-text">
+                            <h1 class="anime-title" id="anime-title"></h1>
+
+                            <div class="anime-grid">
+                                <div>
+                                    <p class="anime-label">Type:</p>
+                                    <p class="anime-value" id="anime-type"></p>
+                                </div>
+                                <div>
+                                    <p class="anime-label">Status:</p>
+                                    <p class="anime-value" id="anime-status"></p>
+                                </div>
+                                <div>
+                                    <p class="anime-label">Genre:</p>
+                                    <p class="anime-value" id="anime-genres"></p>
+                                </div>
+                                <div>
+                                    <p class="anime-label">Total Episodes:</p>
+                                    <p class="anime-value" id="anime-episodes"></p>
+                                </div>
+                                <div>
+                                    <p class="anime-label">Duration:</p>
+                                    <p class="anime-value" id="anime-duration"></p>
+                                </div>
+                                <div>
+                                    <p class="anime-label">Date aired:</p>
+                                    <p class="anime-value" id="anime-release-date"></p>
+                                </div>
+                                <div>
+                                    <p class="anime-label">Studios:</p>
+                                    <p class="anime-value" id="anime-studios"></p>
+                                </div>
+                                <div>
+                                    <p class="anime-label">Scores:</p>
+                                    <p class="anime-value" id="anime-scores"></p>
+                                </div>
+                            </div>
+
+                            <p class="anime-description" id="anime-description">
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Episode Selector -->
+                <div class="episode-container">
+                    <div class="episode-header">
+                        <h2>Episodes</h2>
+                        <div>
+                            <span>Server:</span>
+                            <select>
+                                <option>Vidstreaming</option>
+                                <option>MyCloud</option>
+                                <option>StreamSB</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="episode-list" id="episode-list">
+                        <!-- Episodes would be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column (Sidebar) -->
+            <div class="sidebar">
+                <!-- Related Anime -->
+                <div class="sidebar-section">
+                    <h2 class="sidebar-title">Related Anime</h2>
+                    <div class="recommended-list">
+                        <a href="#" class="recommendation" id="related">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Sword_Art_Online_II_Promotional_Poster.png/250px-Sword_Art_Online_II_Promotional_Poster.png" alt="SAO II"
+                                class="recommendation-img">
+                            <div>
+                                <h3 class="recommendation-title">Sword Art Online II</h3>
+                                <p class="recommendation-meta">TV · 2014</p>
+                            </div>
+                        </a>
+                        <a href="#" class="recommendation" id="related">
+                            <img src="https://m.media-amazon.com/images/M/MV5BYzdlYzllNzktYWI5YS00MjkwLWE3MzktZjllYjZiMWZiZWFiXkEyXkFqcGc@._V1_.jpg" alt="SAO III"
+                                class="recommendation-img">
+                            <div>
+                                <h3 class="recommendation-title">Sword Art Online: Alicization</h3>
+                                <p class="recommendation-meta">TV · 2018</p>
+                            </div>
+                        </a>
+                        <a href="#" class="recommendation" id="related">
+                            <img src="https://m.media-amazon.com/images/M/MV5BNDYxNmUyNDctMmQ5Zi00OTM0LWI1ZjktN2Y5MzliZjU5MmNhXkEyXkFqcGc@._V1_.jpg" alt="SAO Movie"
+                                class="recommendation-img">
+                            <div>
+                                <h3 class="recommendation-title">Sword Art Online: The Movie</h3>
+                                <p class="recommendation-meta">Movie · 2017</p>
+                            </div>
+                        </a>
+                        <a href="#" class="recommendation" id="related">
+                            <img src="https://m.media-amazon.com/images/M/MV5BY2ZhYmVlMjktODI5NC00ZmIyLTkzYWItYjE0NzFkMDcyYzEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Accel World"
+                                class="recommendation-img">
+                            <div>
+                                <h3 class="recommendation-title">Accel World</h3>
+                                <p class="recommendation-meta">TV · 2012</p>
+                            </div>
+                        </a>
+                        <a href="#" class="recommendation" id="related">
+                            <img src="https://m.media-amazon.com/images/M/MV5BOTk2MzEwZWItYTlhYS00ZjcwLTk5N2YtOWFkYmRlYTJkOWY4XkEyXkFqcGc@._V1_.jpg"
+                                alt="Log Horizon" class="recommendation-img">
+                            <div>
+                                <h3 class="recommendation-title">Log Horizon</h3>
+                                <p class="recommendation-meta">TV · 2013</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recommended -->
+                <div class="sidebar-section mt" id="recommended-container">
+                    <h2 class="sidebar-title">Recommended</h2>
+                    <div class="recommedation-list" id="recommended-list">
+                    </div>
+                </div>
+
+                <!-- Latest Comments -->
+                <div class="sidebar-section mt">
+                    <h2 class="sidebar-title">Latest Comments</h2>
+                    <div class="comment-list">
+                    </div>
+
+                    <div class="comment-box">
+                        <textarea placeholder="Add a comment..."></textarea>
+                        <button type="submit">Post Comment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <template id="recommendation-template">
+        <a href="" class="recommendation">
+            <img src="" alt="" class="recommendation-img">
+            <h3 class="recommendation-title"></h3>
+            <p class="recommendation-scores"></p>
+        </a>
+    </template>
+
+    <template id="comment-template">
+        <div class="comment">
+            <div class="comment-avatar">
+                <img src="" alt="">
+            </div>
+            <div class="comment-content">
+                <div class="comment-name"></div>
+                <p class="comment-text"></p>
+                <div class="comment-time"></div>
+            </div>
+        </div>
+    </template>
+
+    <div id="footer-placeholder"></div>
+    
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
+
+    <script src="watch.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

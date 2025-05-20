@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { createMessage, getAllMessages, updateMessage, deleteMessage } = require("../models/Message.model");
+const { createMessage, getAllMessages, getLatestMessagesByAnimeId, updateMessage, deleteMessage } = require("../models/Message.model");
 
 router.post('/', checkSession, (req, res, next) => {
-    const { user_id, text, parent_id } = req.body;
-    createMessage(user_id, text, parent_id)
+    const { text, parent_id, anime_id } = req.body;
+    const user_id = req.user_id;
+    createMessage(user_id, text, parent_id, anime_id)
         .then((message) => res.status(201).json(message))
         .catch(next);
 });
@@ -14,6 +15,17 @@ router.get("/", (req, res, next) => {
 
   getAllMessages()
     .then((messages) => res.status(200).json({ messages, user_id }))
+    .catch(next);
+});
+
+router.get("/latest/:anime_id", (req, res, next) => {
+  const anime_id = parseInt(req.params.anime_id);
+  if (isNaN(anime_id)) {
+    return res.status(400).json({ error: "Invalid anime_id" });
+  }
+
+  getLatestMessagesByAnimeId(anime_id)
+    .then((messages) => res.status(200).json(messages))
     .catch(next);
 });
 

@@ -13,6 +13,7 @@
         <div class="hamburger" id="hamburger">
             <i class='bx bx-menu'></i>
         </div>
+        <a href="index.html" class="logo">AniTube</a>
         <!-- Left section: Nav -->
         <div class="nav-left">
             <nav class="navbar">
@@ -136,8 +137,18 @@
             and breathe anime just like you. Let's make some otaku friends!</p>
         <button class="join-btn"><a href="community.html">Join Now!</a></button>
     </section>
+
+    <div id="footer-placeholder"></div>
+    
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
+    
     <script src="index.js"></script>
-    <script src="footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.2.3/dist/lenis.min.js"></script>

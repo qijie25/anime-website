@@ -34,6 +34,10 @@ function createAnimeCard(anime) {
     }
   });
 
+  box.addEventListener("click", () => {
+    window.location.href = `watch.html?id=${anime.id}`;
+  });
+
   return clone;
 }
 
