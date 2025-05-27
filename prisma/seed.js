@@ -19,6 +19,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/attack-on-titan.jpg",
     total_episodes: 25,
+    date_finished: "2013-09-29T08:05:06Z",
   },
   {
     title: "Bleach",
@@ -31,6 +32,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/bleach.jpg",
     total_episodes: 366,
+    date_finished: "2012-03-27T08:05:06Z",
   },
   {
     title: "One Piece",
@@ -55,6 +57,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/dr-stone.jpg",
     total_episodes: 24,
+    date_finished: "2019-12-13T08:05:06Z",
   },
   {
     title: "Naruto",
@@ -67,6 +70,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/naruto.jpg",
     total_episodes: 220,
+    date_finished: "2007-02-07T08:05:06Z",
   },
   {
     title: "Sword Art Online",
@@ -79,6 +83,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/sword-art-online.jpg",
     total_episodes: 25,
+    date_finished: "2012-12-23T08:05:06Z",
   },
   {
     title: "Bungo Stray Dogs",
@@ -91,6 +96,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/bungo-stray-dogs.jpg",
     total_episodes: 12,
+    date_finished: "2016-06-23T08:05:06Z",
   },
   {
     title: "Tokyo Ghoul",
@@ -103,6 +109,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/tokyo-ghoul.jpg",
     total_episodes: 12,
+    date_finished: "2014-09-19T08:05:06Z",
   },
   {
     title: "Vinland Saga",
@@ -115,6 +122,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/vinland-saga.jpg",
     total_episodes: 24,
+    date_finished: "2019-12-15T08:05:06Z",
   },
   {
     title: "One Punch Man",
@@ -127,6 +135,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/one-punch-man.jpg",
     total_episodes: 12,
+    date_finished: "2015-12-12T08:05:06Z",
   },
   {
     title: "Gintama",
@@ -139,6 +148,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/gintama.jpg",
     total_episodes: 201,
+    date_finished: "2010-03-25T08:05:06Z",
   },
   {
     title: "My Hero Academia",
@@ -152,6 +162,7 @@ const anime = [
     img_url: "./assets/my-hero-academia.jpg",
     total_episodes: 13,
     season: 2,
+    date_finished: "2016-06-23T08:05:06Z",
   },
   {
     title: "Jujutsu Kaisen",
@@ -164,6 +175,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/jujutsu-kaisen.jpg",
     total_episodes: 24,
+    date_finished: "2021-03-27T08:05:06Z",
   },
   {
     title: "Demon Slayer: Kimetsu no Yaiba",
@@ -176,6 +188,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/demon-slayer.jpg",
     total_episodes: 26,
+    date_finished: "2019-10-04T08:05:06Z",
   },
   {
     title: "Fullmetal Alchemist",
@@ -188,6 +201,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/fullmetal-alchemist.jpg",
     total_episodes: 51,
+    date_finished: "2004-10-02T08:05:06Z",
   },
   {
     title: "Hunter x Hunter",
@@ -200,6 +214,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/hunter-x-hunter.jpg",
     total_episodes: 100,
+    date_finished: "2014-09-24T08:05:06Z",
   },
   {
     title: "Steins;Gate",
@@ -212,6 +227,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/steins-gate.jpg",
     total_episodes: 24,
+    date_finished: "2011-09-14T08:05:06Z",
   },
   {
     title: "Your Lie in April",
@@ -224,6 +240,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/your-lie-in-april.jpg",
     total_episodes: 22,
+    date_finished: "2015-03-08T08:05:06Z",
   },
   {
     title: "Devil May Cry",
@@ -345,7 +362,8 @@ const anime = [
     date_aired: "2017-10-03T08:05:06Z",
     status: "Finished Airing",
     img_url: "./assets/black-clover.jpg",
-    total_episodes: 100,
+    total_episodes: 170,
+    date_finished: "2021-03-30T08:05:06Z",
   },
   {
     title: "Black Clover: Sword of the Wizard King",
@@ -380,6 +398,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/seven-deadly-sins.jpg",
     total_episodes: 24,
+    date_finished: "2015-03-29T08:05:06Z",
   },
   {
     title: "The Seven Deadly Sins: Prisoners of the Sky",
@@ -425,6 +444,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/blue-box.jpg",
     total_episodes: 25,
+    date_finished: "2025-03-20T08:05:06Z",
   },
   {
     title: "Amagami SS",
@@ -437,6 +457,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/amagami-ss.jpg",
     total_episodes: 25,
+    date_finished: "2010-12-24T08:05:06Z",
   },
   {
     title: "Citrus",
@@ -449,6 +470,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/citrus.jpg",
     total_episodes: 12,
+    date_finished: "2018-03-24T08:05:06Z",
   },
   {
     title: "Persona 5: The Animation",
@@ -461,6 +483,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/persona5.jpg",
     total_episodes: 26,
+    date_finished: "2018-09-24T08:05:06Z",
   },
   {
     title: "Angels of Death",
@@ -473,6 +496,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/angels-of-death.jpg",
     total_episodes: 16,
+    date_finished: "2018-09-26T08:05:06Z",
   },
   {
     title: "Komi Can't Communicate",
@@ -485,6 +509,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/komi-cant-communicate.jpg",
     total_episodes: 12,
+    date_finished: "2021-12-03T08:05:06Z",
   },
   {
     title: "Spare Me, Great Lord!",
@@ -497,6 +522,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/spare-me-great-lord.jpg",
     total_episodes: 12,
+    date_finished: "2022-02-11T08:05:06Z",
   },
   {
     title: "Spirit Chronicles",
@@ -509,6 +535,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/spirit-chronicles.jpg",
     total_episodes: 12,
+    date_finished: "2021-09-10T08:05:06Z",
   },
   {
     title: "Record of Ragnarok",
@@ -521,6 +548,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/record-of-ragnarok.jpg",
     total_episodes: 12,
+    date_finished: "2021-09-10T08:05:06Z",
   },
   {
     title: "Rascal Does Not Dream of Bunny Girl Senpai",
@@ -533,6 +561,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/rascal-does-not-dream-of-bunny-girl.jpg",
     total_episodes: 13,
+    date_finished: "2019-02-17T08:05:06Z",
   },
   {
     title: "Rascal Does Not Dream of a Dreaming Girl",
@@ -556,6 +585,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/another.jpg",
     total_episodes: 12,
+    date_finished: "2012-03-27T08:05:06Z",
   },
   {
     title: "Haikyu!!",
@@ -568,6 +598,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/haikyu.jpg",
     total_episodes: 25,
+    date_finished: "2014-09-26T08:05:06Z",
   },
   {
     title: "Barakamon",
@@ -580,6 +611,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/barakamon.jpg",
     total_episodes: 12,
+    date_finished: "2014-09-14T08:05:06Z",
   },
   {
     title: "No Game, No Life",
@@ -592,6 +624,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/no-game-no-life.jpg",
     total_episodes: 12,
+    date_finished: "2014-06-17T08:05:06Z",
   },
   {
     title: "Made in Abyss",
@@ -604,6 +637,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/made-in-abyss.jpg",
     total_episodes: 13,
+    date_finished: "2017-09-24T08:05:06Z",
   },
   {
     title: "Parasyte: The Maxim",
@@ -616,6 +650,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/parasyte.jpg",
     total_episodes: 24,
+    date_finished: "2014-03-27T08:05:06Z",
   },
   {
     title: "Mob Psycho 100",
@@ -628,6 +663,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/mob-psycho-100.jpg",
     total_episodes: 12,
+    date_finished: "2016-09-27T08:05:06Z",
   },
   {
     title: "Erased",
@@ -640,6 +676,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/erased.jpg",
     total_episodes: 12,
+    date_finished: "2016-09-27T08:05:06Z",
   },
   {
     title: "Yuri!!! On ICE",
@@ -652,6 +689,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/yuri-on-ice.jpg",
     total_episodes: 12,
+    date_finished: "2016-12-20T08:05:06Z",
   },
   {
     title: "March comes in like a lion",
@@ -664,6 +702,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/march-comes-in-like-a-lion.jpg",
     total_episodes: 12,
+    date_finished: "2016-12-20T08:05:06Z",
   },
   {
     title: "The Ancient Magus' Bride",
@@ -676,6 +715,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/the-ancient-magus-bride.jpg",
     total_episodes: 12,
+    date_finished: "2017-12-20T08:05:06Z",
   },
   {
     title: "Terror in Resonance",
@@ -688,6 +728,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/terror-in-resonance.jpg",
     total_episodes: 12,
+    date_finished: "2014-09-24T08:05:06Z",
   },
   {
     title: "Hyouka",
@@ -700,6 +741,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/hyouka.jpg",
     total_episodes: 22,
+    date_finished: "2012-10-12T08:05:06Z",
   },
   {
     title: "Yamada-Kun and the Seven Witches",
@@ -712,6 +754,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/yamada-kun-and-the-seven-witches.jpg",
     total_episodes: 12,
+    date_finished: "2015-06-26T08:05:06Z",
   },
   {
     title: "Ping Pong the Animation",
@@ -724,6 +767,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/ping-pong-the-animation.jpg",
     total_episodes: 12,
+    date_finished: "2014-06-26T08:05:06Z",
   },
   {
     title: "Classroom of the Elite",
@@ -736,6 +780,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/classroom-of-the-elite.jpg",
     total_episodes: 12,
+    date_finished: "2017-09-26T08:05:06Z",
   },
   {
     title: "Dusk Maiden of Amnesia",
@@ -748,6 +793,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/dusk-maiden-of-amnesia.jpg",
     total_episodes: 12,
+    date_finished: "2012-06-17T08:05:06Z",
   },
   {
     title: "Bakuman.",
@@ -759,6 +805,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/bakuman.jpg",
     total_episodes: 25,
+    date_finished: "2012-03-31T08:05:06Z",
   },
   {
     title: "Little Witch Academia",
@@ -770,6 +817,7 @@ const anime = [
     status: "Finished Airing",
     img_url: "./assets/little-witch-academia.jpg",
     total_episodes: 25,
+    date_finished: "2017-06-30T08:05:06Z",
   }
 ];
 
