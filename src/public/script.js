@@ -1,9 +1,41 @@
+const signupBtn = document.getElementById("signup-btn");
+const aboutBtn = document.getElementById("about-btn");
+
+if (loginStatus === "success" && userId) {
+  // User is logged in
+  signupBtn.style.display = "none";
+  aboutBtn.style.display = "block";
+} else {
+  // User is not logged in
+  signupBtn.style.display = "block";
+  aboutBtn.style.display = "none";
+}
+
+
 const helpIcon = document.getElementById("helpIcon");
 const helpModal = document.querySelector(".help-modal");
 const closeBtn = document.querySelector(".close-btn");
+const helpPages = document.querySelectorAll(".help-page");
+const prevBtn = document.querySelector(".prev-btn");
+const nextBtn = document.querySelector(".next-btn");
+
+let currentPage = 0;
+
+function showPage(index) {
+  helpPages.forEach((page, i) => {
+    page.classList.toggle("active", i === index);
+  });
+
+  // Disable prev/next when at the beginning or end
+  prevBtn.disabled = index === 0;
+  nextBtn.disabled = index === helpPages.length - 1;
+  prevBtn.style.background = index === 0 ? "#555" : "#007bff";
+  nextBtn.style.background = index === helpPages.length - 1 ? "#555" : "#007bff";
+}
 
 helpIcon.addEventListener("click", () => {
   helpModal.style.display = "block";
+  showPage(currentPage);
 });
 
 closeBtn.addEventListener("click", () => {
@@ -13,6 +45,20 @@ closeBtn.addEventListener("click", () => {
 window.addEventListener("click", (event) => {
   if (event.target === helpModal) {
     helpModal.style.display = "none";
+  }
+});
+
+prevBtn.addEventListener("click", () => {
+  if (currentPage > 0) {
+    currentPage--;
+    showPage(currentPage);
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  if (currentPage < helpPages.length - 1) {
+    currentPage++;
+    showPage(currentPage);
   }
 });
 
