@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((anime) => {
         document.getElementById("anime-img").src = anime.img_url;
         document.getElementById("anime-title").textContent = anime.title;
+        document.getElementById("anime-rating").textContent = `${anime.avgRating?.toFixed(1) ?? "0.0"} of ${anime.totalRatings}`;
         document.getElementById("anime-type").textContent = anime.type;
         document.getElementById("anime-status").textContent = anime.status;
         document.getElementById("anime-episodes").textContent = anime.total_episodes;
@@ -91,18 +92,61 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("anime-studios").textContent = anime.studios;
         document.getElementById("anime-scores").textContent = `${anime.avgRating?.toFixed(1) ?? "0.0"} ★`;
         document.getElementById("anime-description").textContent = anime.description;
+        const ratingStars = document.querySelector(".rating-stars");
+        ratingStars.addEventListener("click", (e) => {
+          const userId = sessionStorage.getItem("id");
+          if (userId !== null) {
+            sessionStorage.setItem("selectedAnimeId", anime.id);
+            window.location.href = "rating.html";
+          } else {
+            alert("Please log in to rate an anime.");
+          }
+        });
         const episodeList = document.getElementById("episode-list");
-        episodeList.innerHTML = ""; // Clear existing content
+        const pagination = document.getElementById("episode-pagination");
 
-        for (let i = 1; i <= anime.total_episodes; i++) {
-          const episodeItem = document.createElement("a");
-          episodeItem.textContent = i;
-          episodeItem.href = "#";
+        const EPISODES_PER_PAGE = 100;
+        const totalPages = Math.ceil(anime.total_episodes / EPISODES_PER_PAGE);
+        let currentPage = 1;
 
-          episodeItem.className = "episode-item";
+        function renderEpisodes(page) {
+          episodeList.innerHTML = "";
+          const start = (page - 1) * EPISODES_PER_PAGE + 1;
+          const end = Math.min(start + EPISODES_PER_PAGE - 1, anime.total_episodes);
 
-          episodeList.appendChild(episodeItem);
+          for (let i = start; i <= end; i++) {
+            const episodeItem = document.createElement("a");
+            episodeItem.textContent = i.toString().padStart(3, "0");
+            episodeItem.href = "#";
+            episodeItem.className = "episode-item";
+            episodeList.appendChild(episodeItem);
+          }
         }
+
+        function renderPagination() {
+          pagination.innerHTML = "";
+
+          if (anime.total_episodes <= EPISODES_PER_PAGE) return;
+
+          for (let i = 1; i <= totalPages; i++) {
+            const start = (i - 1) * EPISODES_PER_PAGE + 1;
+            const end = Math.min(i * EPISODES_PER_PAGE, anime.total_episodes);
+            const btn = document.createElement("button");
+            btn.textContent = `${start.toString().padStart(3, "0")}–${end.toString().padStart(3, "0")}`;
+            btn.classList.toggle("active", i === currentPage);
+
+            btn.addEventListener("click", () => {
+              currentPage = i;
+              renderEpisodes(currentPage);
+              renderPagination(); // re-render to update active class
+            });
+
+            pagination.appendChild(btn);
+          }
+        }
+
+        renderEpisodes(currentPage);
+        renderPagination();
     })
     .catch((err) => console.error("Failed to load anime:", err));
 

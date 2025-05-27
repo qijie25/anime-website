@@ -268,7 +268,7 @@ button {
 
   .footer-section h3 {
     font-size: 1.6rem;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 1.6rem;
     color: white;
   }
@@ -600,7 +600,7 @@ button {
 .help-modal {
   display: none;
   position: fixed;
-  z-index: 10;
+  z-index: 20;
   left: 0;
   top: 0;
   width: 100%;
@@ -611,7 +611,7 @@ button {
 
 .help-modal-content {
   background-color: #fff;
-  margin: 10% auto;
+  margin: 15% auto;
   padding: 2rem;
   border-radius: 10px;
   width: 80%;
@@ -629,9 +629,50 @@ button {
     font-size: 1.5rem;
 }
 
+.help-modal-content ul {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+}
+
+.help-modal-content li {
+    list-style: lower-roman;
+    margin-bottom: 0.5rem;
+}
+
 .help-modal-content .close-btn:hover {
     color: #333;
 }
+
+.help-model-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem auto 2rem;
+}
+
+.help-modal-controls button {
+    padding: 0.6rem 1.2rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 2rem 1rem 0 0;
+    transition: background-color 0.3s;
+  }
+  
+  .help-modal-controls button:hover {
+    background-color: #0056b3;
+  }
+  
+  .help-page {
+    display: none;
+  }
+  
+  .help-page.active {
+    display: block;
+  }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
@@ -693,6 +734,10 @@ button {
     text-decoration: underline;
 }
 
+.hero-left .about-btn {
+    display: none;
+}
+
 .hero-right img {
     width: 100%;
     border-radius: 1rem;
@@ -714,14 +759,14 @@ button {
 
 .recommendation-container h2 {
     font-size: 2.5rem;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 1.5rem;
     color: #ccc;
 }
 
 .recently-updated-section h2 {
     font-size: 2.5rem;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 1.5rem;
     color: #ccc;
 }
@@ -796,7 +841,7 @@ button {
 .recommendation-box .box-title, .recently-updated-box .box-title {
     margin-top: 1rem;
     color: #bbb;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 0.5rem;
     z-index: 2;
 }
@@ -1118,7 +1163,7 @@ blockquote p::after {
 
 .not-verified {
     color: #f39c12;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .verification-status a {
@@ -1318,14 +1363,15 @@ blockquote p::after {
 
 .team-section h2 {
     font-size: 3.2rem;
+    margin-bottom: 2rem;
 }
 
 .team-section h3 {
-    font-size: 2.4rem;
+    font-size: 2.0rem;
 }
 
 .team-section p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 
 .team-members {
@@ -1336,7 +1382,7 @@ blockquote p::after {
 }
 
 .team-member img {
-    width: 15rem;
+    width: 12rem;
     border-radius: 50%;
 }
 
@@ -1682,7 +1728,7 @@ blockquote p::after {
     color: #aaa;
     float: right;
     font-size: 2.5rem;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
 }
 
@@ -2104,15 +2150,27 @@ textarea.contact-inputs {
     margin: 0;
     padding: 0.5rem;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 700;
     z-index: 1;
 }
 
 .anime-sidebar {
     width: 28rem;
-    background-color: #111;
-    padding: 2rem 1rem;
+    background-color: transparent;
+    padding: 0 0 1rem;
     border-radius: 1rem;
+    color: #f3f3f3;
+}
+
+.sidebar-section {
+    background-color: #232527;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.3);
+    padding: 1.6rem;
+}
+
+.mt {
+    margin-top: 2.4rem;
 }
 
 .filter-title {
@@ -2201,6 +2259,53 @@ textarea.contact-inputs {
     font-size: 1.8rem;
 }
 
+.sidebar-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+  
+.recommendation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.recommendation {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0.8rem;
+    border-radius: 0.6rem;
+    transition: background-color 0.2s ease;
+}
+
+.recommendation:hover {
+    background-color: #4a5568;
+}
+
+.recommendation-img {
+    width: 4.8rem;
+    height: 6.4rem;
+    border-radius: 0.4rem;
+    object-fit: cover;
+}
+
+.recommendation-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.recommendation-meta {
+    font-size: 1rem;
+    color: #a0aec0;
+}
+
+.recommendation-scores {
+    font-size: 1.2rem;
+    color: #a0aec0;
+}
+
 /* Search Page */
 .search-page {
     font-family: "Poppins", sans-serif;
@@ -2261,7 +2366,7 @@ textarea.contact-inputs {
   }
   
   .suggestion-title {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1.4rem;
     margin: 0;
   }

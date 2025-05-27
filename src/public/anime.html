@@ -125,7 +125,7 @@
         </template>
 
         <div class="anime-sidebar">
-            <div class="filter-section">
+            <div class="sidebar-section">
                 <h3 class="filter-title">Quick Filter</h3>
                 <div class="filter-grid">
                     <div class="filter-item">
@@ -166,8 +166,21 @@
             
                 <button type="submit" class="filter-btn"><i class='bx bx-filter'></i> Filter</button>
             </div>
+            <div class="sidebar-section mt" id="recommended-container">
+                <h2 class="sidebar-title">Recommended</h2>
+                <div class="recommedation-list" id="recommended-list">
+                </div>
+            </div>
         </div>
     </div>
+
+    <template id="recommendation-template">
+        <a href="" class="recommendation">
+            <img src="" alt="" class="recommendation-img">
+            <h3 class="recommendation-title"></h3>
+            <p class="recommendation-scores"></p>
+        </a>
+    </template>
 
     <div id="footer-placeholder"></div>
 

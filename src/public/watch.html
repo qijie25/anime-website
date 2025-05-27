@@ -94,8 +94,23 @@
                             <img src="" alt="" class="anime-img" id="anime-img">
                         </div>
                         <div class="anime-text">
-                            <h1 class="anime-title" id="anime-title"></h1>
-
+                            <div class="top-bar">
+                                <div class="top-left">
+                                    <h1 class="anime-title" id="anime-title"></h1>
+                                </div>
+                                <div class="top-right">
+                                    <div class="rating-stars-wrapper">
+                                        <div class="rating-stars">
+                                            <i class="bx bxs-star"></i>
+                                            <i class="bx bxs-star"></i>
+                                            <i class="bx bxs-star"></i>
+                                            <i class="bx bxs-star"></i>
+                                            <i class="bx bxs-star"></i>
+                                        </div>
+                                        <p class="anime-rating" id="anime-rating"></p>
+                                    </div>                          
+                                </div>
+                            </div>
                             <div class="anime-grid">
                                 <div>
                                     <p class="anime-label">Type:</p>
@@ -141,7 +156,7 @@
                 <!-- Episode Selector -->
                 <div class="episode-container">
                     <div class="episode-header">
-                        <h2>Episodes</h2>
+                        <h3>Episodes</h3>
                         <div>
                             <span>Server:</span>
                             <select>
@@ -154,6 +169,9 @@
 
                     <div class="episode-list" id="episode-list">
                         <!-- Episodes would be loaded here -->
+                    </div>
+                    <div class="episode-pagination" id="episode-pagination">
+                        <!-- Page buttons like 001–100 will load here -->                
                     </div>
                 </div>
             </div>

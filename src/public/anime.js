@@ -169,6 +169,28 @@ function displayAnimeGrid(animes) {
   });
 }
 
+function loadRecommendedAnimes() {
+  fetch(`/animes/top-rated`)
+    .then((res) => res.json())
+    .then((animes) => {
+      const recommendedList = document.getElementById("recommended-list");
+      const template = document.getElementById("recommendation-template");
+      recommendedList.innerHTML = "";
+      animes.forEach((anime) => {
+        const clone = template.content.cloneNode(true);
+        const recommendedItem = clone.querySelector(".recommendation");
+        const img = clone.querySelector(".recommendation-img");
+        img.src = anime.img_url;
+        const title = clone.querySelector(".recommendation-title");
+        title.textContent = anime.title;
+        const scores = clone.querySelector(".recommendation-scores");
+        scores.textContent = `${anime.avgRating?.toFixed(1) ?? "0.0"} ★`;
+        recommendedItem.href = `/watch.html?id=${anime.id}`;
+        recommendedList.appendChild(clone);
+      });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Allow multiple dropdowns to toggle independently
   document.querySelectorAll(".dropdown-toggle").forEach((toggleBtn) => {
@@ -231,4 +253,5 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     generateRecentlyUpdated();
   }
+  loadRecommendedAnimes();
 });
