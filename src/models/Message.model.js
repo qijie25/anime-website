@@ -1,6 +1,11 @@
-const prisma = require("./prismaClient");
+const prisma = require('./prismaClient');
 
-module.exports.createMessage = function createMessage(user_id, text, parent_id = null, anime_id = null) {
+module.exports.createMessage = function createMessage(
+  user_id,
+  text,
+  parent_id = null,
+  anime_id = null,
+) {
   const data = {
     text,
     user: { connect: { id: user_id } },
@@ -42,9 +47,9 @@ module.exports.getAllMessages = async function getAllMessages() {
         },
       },
     },
-    orderBy: { created_at: "asc" },
+    orderBy: { created_at: 'asc' },
   });
-  
+
   // Get all message and reply IDs
   const allMessageIds = messages.flatMap((message) => [
     message.id,
@@ -52,7 +57,7 @@ module.exports.getAllMessages = async function getAllMessages() {
   ]);
 
   const likes = await prisma.messageLike.groupBy({
-    by: ["message_id"],
+    by: ['message_id'],
     where: { message_id: { in: allMessageIds } },
     _count: { id: true },
   });
@@ -73,11 +78,14 @@ module.exports.getAllMessages = async function getAllMessages() {
   }));
 };
 
-module.exports.getLatestMessagesByAnimeId = async function getLatestMessagesByAnimeId(anime_id, limit = 3) {
+module.exports.getLatestMessagesByAnimeId = async function getLatestMessagesByAnimeId(
+  anime_id,
+  limit = 3,
+) {
   const messages = await prisma.message.findMany({
     where: {
       parent_id: null,
-      anime_id: anime_id,
+      anime_id,
     },
     orderBy: { created_at: 'desc' },
     take: limit,
@@ -95,12 +103,12 @@ module.exports.updateMessage = async function updateMessage(id, data, user_id) {
   const message = await prisma.message.findUnique({ where: { id } });
 
   if (!message) {
-    throw new Error("Message not found");
+    throw new Error('Message not found');
   }
 
   // Check ownership rights
   if (user_id && message.user_id !== user_id) {
-    throw new Error("Unauthorized to update this message");
+    throw new Error('Unauthorized to update this message');
   }
 
   return prisma.message.update({
@@ -113,12 +121,12 @@ module.exports.deleteMessage = async function deleteMessage(id, user_id) {
   const message = await prisma.message.findUnique({ where: { id } });
 
   if (!message) {
-    throw new Error("Message not found");
+    throw new Error('Message not found');
   }
 
   // Check ownership rights
   if (user_id && message.user_id !== user_id) {
-    throw new Error("Unauthorized to delete this message");
+    throw new Error('Unauthorized to delete this message');
   }
 
   return prisma.$transaction(async (tx) => {

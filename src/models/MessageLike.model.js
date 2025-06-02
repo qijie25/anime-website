@@ -1,4 +1,4 @@
-const prisma = require("./prismaClient");
+const prisma = require('./prismaClient');
 
 module.exports.likeMessage = async function likeMessage(messageId, user_id) {
   try {
@@ -7,17 +7,15 @@ module.exports.likeMessage = async function likeMessage(messageId, user_id) {
       await tx.messageLike.create({
         data: {
           message_id: messageId,
-          user_id: user_id,
+          user_id,
         },
       });
     });
-
   } catch (error) {
-    if (error.code === "P2002") {
+    if (error.code === 'P2002') {
       // Unique constraint violation
-      throw new Error("User has already liked this message.");
+      throw new Error('User has already liked this message.');
     } else {
-      console.error("Error liking the message:", error);
       throw error;
     }
   }

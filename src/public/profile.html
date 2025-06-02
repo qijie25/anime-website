@@ -1,93 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Cache-Control" content="no-store" />
     <title>Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <style>
-        h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
+      h2 {
+        margin-bottom: 20px;
+        text-align: center;
+      }
 
-        label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            text-transform: capitalize;
-        }
+      label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px;
+        text-transform: capitalize;
+      }
 
-        input {
-            width: 96%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #333;
-            border-radius: 5px;
-            background-color: #242424;
-            color: #fff;
-        }
+      input {
+        width: 96%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #333;
+        border-radius: 5px;
+        background-color: #242424;
+        color: #fff;
+      }
     </style>
-</head>
+  </head>
 
-<body class="profile-body">
+  <body class="profile-body">
     <div class="profile-header">
-        <div class="greeting">
-            <h3>Hi, <span id="username">example</span></h3>
-        </div>
-        <nav class="profile-nav">
-            <a href="#">Profile</a>
-            <a href="#">Favorite</a>
-            <a href="#">Rating</a>
-            <a href="#">Notification</a>
-            <a href="#">Settings</a>
-        </nav>
+      <div class="greeting">
+        <h3>
+          Hi,
+          <span id="username">example</span>
+        </h3>
+      </div>
+      <nav class="profile-nav">
+        <a href="#">Profile</a>
+        <a href="#">Favorite</a>
+        <a href="#">Rating</a>
+        <a href="#">Notification</a>
+        <a href="#">Settings</a>
+      </nav>
     </div>
     <h2>Edit Profile</h2>
     <div class="profile-container">
-        <div class="profile-image-section">
-            <img id="profile-image" src="assets/profile-icon.png" alt="Profile Img" class="profile-image">
-            <input type="file" id="profile-picture-upload" class="profile-picture-upload" accept="image/*">
-            <button class="upload-image-btn">Upload Image</button>
-        </div>
-        <div class="form-section">
-            <form id="profile-form">
-                <!-- Email Address -->
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" readonly>
-            
-                <!-- Verification Status -->
-                <div class="verification-status">
-                    <span class="not-verified">Not Verified</span>
-                    <p>Your account has not been verified. <a href="#">Click here</a> to resend verification request.</p>
-                </div>
-            
-                <!-- Name -->
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name">
-            
-                <!-- Password Change -->
-                <div class="password-change">
-                    <button type="button" id="toggle-password">Change password</button>
-                    <div id="password-fields" class="hidden">
-                        <label for="current-password">Current Password</label>
-                        <input type="password" id="current-password" name="current-password">
-            
-                        <label for="new-password">New Password</label>
-                        <input type="password" id="new-password" name="new-password">
-            
-                        <label for="confirm-password">Confirm New Password</label>
-                        <input type="password" id="confirm-password" name="confirm-password">
-                    </div>
-                </div>
-            
-                <button type="submit" class="save-button">Save</button>
-            </form>
-        </div>
+      <div class="profile-image-section">
+        <img
+          id="profile-image"
+          src="assets/profile-icon.png"
+          alt="Profile Img"
+          class="profile-image"
+        />
+        <input
+          type="file"
+          id="profile-picture-upload"
+          class="profile-picture-upload"
+          accept="image/*"
+        />
+        <button class="upload-image-btn">Upload Image</button>
+      </div>
+      <div class="form-section">
+        <form id="profile-form">
+          <!-- Email Address -->
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" readonly />
+
+          <!-- Verification Status -->
+          <div class="verification-status">
+            <span class="not-verified">Not Verified</span>
+            <p>
+              Your account has not been verified.
+              <a href="#">Click here</a>
+              to resend verification request.
+            </p>
+          </div>
+
+          <!-- Name -->
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" />
+
+          <!-- Password Change -->
+          <div class="password-change">
+            <button type="button" id="toggle-password">Change password</button>
+            <div id="password-fields" class="hidden">
+              <label for="current-password">Current Password</label>
+              <input type="password" id="current-password" name="current-password" />
+
+              <label for="new-password">New Password</label>
+              <input type="password" id="new-password" name="new-password" />
+
+              <label for="confirm-password">Confirm New Password</label>
+              <input type="password" id="confirm-password" name="confirm-password" />
+            </div>
+          </div>
+
+          <button type="submit" class="save-button">Save</button>
+        </form>
+      </div>
     </div>
     <script src="profile.js"></script>
-</body>
-
+  </body>
 </html>

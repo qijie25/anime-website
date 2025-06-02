@@ -1,4 +1,4 @@
-const prisma = require("./prismaClient");
+const prisma = require('./prismaClient');
 
 module.exports.reportMessage = async function reportComment(messageId, user_id, description) {
   try {
@@ -8,7 +8,7 @@ module.exports.reportMessage = async function reportComment(messageId, user_id, 
         where: { id: messageId },
       });
       if (!messageExists) {
-        throw new Error("Message does not exist.");
+        throw new Error('Message does not exist.');
       }
 
       // Check if the person exists
@@ -16,18 +16,17 @@ module.exports.reportMessage = async function reportComment(messageId, user_id, 
         where: { id: user_id },
       });
       if (!userExists) {
-        throw new Error("User does not exist.");
+        throw new Error('User does not exist.');
       }
 
       // Create the report
       await tx.messageReport.create({
-        data: { message_id: messageId, user_id: user_id, description },
+        data: { message_id: messageId, user_id, description },
       });
     });
-
   } catch (error) {
-    if (error.code === "P2002") {
-      throw new Error("User has already reported this comment.");
+    if (error.code === 'P2002') {
+      throw new Error('User has already reported this comment.');
     }
     throw error;
   }
@@ -52,7 +51,5 @@ module.exports.getAllReports = function getAllReports() {
         user: { select: { id: true, username: true, email: true } }, // User who reported the comment
       },
     })
-    .then((reports) => {
-      return reports;
-    });
+    .then((reports) => reports);
 };

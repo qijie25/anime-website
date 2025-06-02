@@ -1,27 +1,27 @@
-const app = require("./app");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
+const app = require('./app');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
 // require("dotenv").config();
-const prisma = require("./models/prismaClient");
-const { createMessage } = require("./models/Message.model");
+const prisma = require('./models/prismaClient');
+const { createMessage } = require('./models/Message.model');
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "*", // allow frontend to connect
-    methods: ["GET", "POST"],
+    origin: '*', // allow frontend to connect
+    methods: ['GET', 'POST'],
   },
 });
 
 // Setup event listeners
-io.on("connection", (socket) => {
-  socket.on("newMessage", async (messageData, callback) => {
+io.on('connection', (socket) => {
+  socket.on('newMessage', async (messageData, callback) => {
     try {
       const newMessage = await createMessage(
         messageData.user_id,
         messageData.text,
-        messageData.parent_id
+        messageData.parent_id,
       );
 
       const fullMessage = await prisma.message.findUnique({
@@ -51,34 +51,34 @@ io.on("connection", (socket) => {
       });
 
       // After creating a message
-      io.emit("newMessage", fullMessage);
+      io.emit('newMessage', fullMessage);
 
       if (callback) {
         callback(fullMessage); // <- this lets the sender immediately see their message too
       }
     } catch (err) {
-      console.error("Error saving new message", err);
+      console.error('Error saving new message', err);
     }
   });
 
-  socket.on("likeMessage", ({ messageId, likeCount }) => {
-    io.emit("likeUpdated", { messageId, likeCount });
+  socket.on('likeMessage', ({ messageId, likeCount }) => {
+    io.emit('likeUpdated', { messageId, likeCount });
   });
 
-  socket.on("updateMessage", (updatedMessage) => {
-    io.emit("messageUpdated", updatedMessage);
+  socket.on('updateMessage', (updatedMessage) => {
+    io.emit('messageUpdated', updatedMessage);
   });
 
-  socket.on("deleteMessage", (messageId) => {
-    io.emit("messageDeleted", messageId);
+  socket.on('deleteMessage', (messageId) => {
+    io.emit('messageDeleted', messageId);
   });
 
-  socket.on("addReply", (replyMessage) => {
-    io.emit("replyAdded", replyMessage);
+  socket.on('addReply', (replyMessage) => {
+    io.emit('replyAdded', replyMessage);
   });
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
   });
 });
 

@@ -1,119 +1,145 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Cache-Control" content="no-store" />
     <title>Contact Us</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body class="contact-page">
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  </head>
+  <body class="contact-page">
     <header class="header">
-        <div class="hamburger" id="hamburger">
-            <i class='bx bx-menu'></i>
+      <div class="hamburger" id="hamburger">
+        <i class="bx bx-menu"></i>
+      </div>
+      <a href="index.html" class="logo">AniTube</a>
+      <!-- Left section: Nav -->
+      <div class="nav-left">
+        <nav class="navbar">
+          <a href="index.html">Home</a>
+          <a href="anime.html">Anime</a>
+          <a href="community.html">Community</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <!-- Center: Search bar -->
+      <form action="#" class="search-btn" id="search-form">
+        <input type="search" placeholder="Search" class="search-input" id="search-input" />
+        <button type="submit" title="Search"><i class="bx bx-search"></i></button>
+      </form>
+      <ul id="search-suggestions" class="search-suggestions"></ul>
+      <!-- Right: Notification, login/profile -->
+      <div class="nav-right">
+        <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+        <div id="user-notification" style="display: none">
+          <a href="#" class="notification" id="notificationIcon">
+            <i class="bx bxs-bell bx-tada-hover"></i>
+          </a>
         </div>
-        <a href="index.html" class="logo">AniTube</a>
-        <!-- Left section: Nav -->
-        <div class="nav-left">
-            <nav class="navbar">
-                <a href="index.html">Home</a>
-                <a href="anime.html">Anime</a>
-                <a href="community.html">Community</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+        <div id="user-profile" style="display: none">
+          <a href="#" class="profile" id="profileIcon">
+            <img src="assets/profile-icon(2).png" alt="Profile" id="profileImage" />
+          </a>
+          <div class="profile-menu" id="profileMenu">
+            <ul>
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
+            </ul>
+          </div>
         </div>
-        <!-- Center: Search bar -->
-        <form action="#" class="search-btn" id="search-form">
-            <input type="search" placeholder="Search" class="search-input" id="search-input">
-            <button type="submit" title="Search"><i class='bx bx-search'></i></button>
-        </form>
-        <ul id="search-suggestions" class="search-suggestions"></ul>
-        <!-- Right: Notification, login/profile -->
-        <div class="nav-right">
-            <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
-            <div id="user-notification" style="display: none;">
-                <a href="#" class="notification" id="notificationIcon">
-                    <i class='bx bxs-bell bx-tada-hover'></i>
-                </a>
-            </div>
-            <div id="user-profile" style="display: none;">
-                <a href="#" class="profile" id="profileIcon">
-                    <img src="assets/profile-icon(2).png" alt="Profile" id="profileImage">
-                </a>
-                <div class="profile-menu" id="profileMenu">
-                    <ul>
-                        <li><a href="profile.html">Profile</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      </div>
     </header>
     <main>
-        <h1>Contact Us <span>- AniTube</span></h1>
-        <div class="contact-container">
-            <!-- Left: Contact Form -->
-            <form action="https://api.web3forms.com/submit" method="post" class="contact-left">
-                <div class="contact-left-title">
-                    <h2>Get in Touch</h2>
-                    <hr>
-                </div>
-                <input type="hidden" name="access_key" value="bc4837f9-3253-4675-a00e-2d0974e5a064">
-                <div class="input-group">
-                    <i class='bx bx-user'></i>
-                    <input type="text" name="name" placeholder="Your Name" class="contact-inputs" required>
-                </div>
-                <div class="input-group">
-                    <i class='bx bx-envelope'></i>
-                    <input type="email" name="email" placeholder="Your Email" class="contact-inputs" required>
-                </div>
-                <div class="input-group">
-                    <i class='bx bx-phone'></i>
-                    <input type="tel" name="phone" placeholder="Your Phone (Optional)" class="contact-inputs">
-                </div>
-                <div class="input-group">
-                    <textarea name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
-                </div>
-                <button type="submit">
-                    <i class='bx bx-paper-plane'></i> Send Message
-                </button>
-            </form>
-    
-            <!-- Right: Contact Info/Image -->
-            <div class="contact-right">
-                <img src="assets/contact-img.jpg" alt="Anime characters chatting">
-                <div class="contact-info">
-                    <h3>Other Ways to Reach Us</h3>
-                    <div class="info-item">
-                        <i class='bx bx-envelope'></i>
-                        <p>support@anitube.com</p>
-                    </div>
-                    <div class="info-item">
-                        <i class='bx bxl-discord-alt'></i>
-                        <p>Join our Discord</p>
-                    </div>
-                    <div class="info-item">
-                        <i class='bx bxl-twitter'></i>
-                        <p>@AniTubeOfficial</p>
-                    </div>
-                </div>
+      <h1>
+        Contact Us
+        <span>- AniTube</span>
+      </h1>
+      <div class="contact-container">
+        <!-- Left: Contact Form -->
+        <form action="https://api.web3forms.com/submit" method="post" class="contact-left">
+          <div class="contact-left-title">
+            <h2>Get in Touch</h2>
+            <hr />
+          </div>
+          <input type="hidden" name="access_key" value="bc4837f9-3253-4675-a00e-2d0974e5a064" />
+          <div class="input-group">
+            <i class="bx bx-user"></i>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              class="contact-inputs"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="bx bx-envelope"></i>
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              class="contact-inputs"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="bx bx-phone"></i>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Your Phone (Optional)"
+              class="contact-inputs"
+            />
+          </div>
+          <div class="input-group">
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              class="contact-inputs"
+              required
+            ></textarea>
+          </div>
+          <button type="submit">
+            <i class="bx bx-paper-plane"></i>
+            Send Message
+          </button>
+        </form>
+
+        <!-- Right: Contact Info/Image -->
+        <div class="contact-right">
+          <img src="assets/contact-img.jpg" alt="Anime characters chatting" />
+          <div class="contact-info">
+            <h3>Other Ways to Reach Us</h3>
+            <div class="info-item">
+              <i class="bx bx-envelope"></i>
+              <p>support@anitube.com</p>
             </div>
+            <div class="info-item">
+              <i class="bx bxl-discord-alt"></i>
+              <p>Join our Discord</p>
+            </div>
+            <div class="info-item">
+              <i class="bx bxl-twitter"></i>
+              <p>@AniTubeOfficial</p>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
 
     <div id="footer-placeholder"></div>
-    
+
     <script>
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            });
+      fetch('footer.html')
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById('footer-placeholder').innerHTML = data;
+        });
     </script>
 
     <script src="index.js"></script>
-</body>
+  </body>
 </html>

@@ -1,4 +1,4 @@
-const prisma = require("./prismaClient");
+const prisma = require('./prismaClient');
 
 module.exports.createRating = async function createRating(animeId, userId, score) {
   // Upsert user rating
@@ -47,15 +47,12 @@ module.exports.getRatingByAnimeId = async function getRatingByAnimeId(animeId) {
     },
   });
 
-  if (!anime) throw new Error("Anime not found");
+  if (!anime) throw new Error('Anime not found');
 
   return anime;
 };
 
-module.exports.getUserRatingForAnime = async function getUserRatingForAnime(
-  userId,
-  animeId
-) {
+module.exports.getUserRatingForAnime = async function getUserRatingForAnime(userId, animeId) {
   const rating = await prisma.rating.findUnique({
     where: {
       animeId_userId: {

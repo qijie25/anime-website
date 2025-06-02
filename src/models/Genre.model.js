@@ -1,7 +1,5 @@
-const prisma = require("./prismaClient");
+const prisma = require('./prismaClient');
 
 module.exports.getAllGenres = function getAllGenres() {
-    return prisma.genre.findMany({}).then((genres) => {
-        return genres;
-    });
+  return prisma.genre.findMany({}).then((genres) => genres);
 };

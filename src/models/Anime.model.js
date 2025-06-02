@@ -1,4 +1,4 @@
-const prisma = require("./prismaClient");
+const prisma = require('./prismaClient');
 
 function formatAnimeGenres(animes) {
   return animes.map((anime) => ({
@@ -10,7 +10,7 @@ function formatAnimeGenres(animes) {
 module.exports.getAllAnimes = async function getAllAnimes() {
   const animes = await prisma.anime.findMany({
     orderBy: {
-      created_at: "asc",
+      created_at: 'asc',
     },
     include: {
       ratings: {
@@ -65,7 +65,7 @@ module.exports.getAnimeByGenre = async function getAnimeByGenre(genreName) {
             is: {
               name: {
                 equals: genreName,
-                mode: "insensitive",
+                mode: 'insensitive',
               },
             },
           },
@@ -85,10 +85,10 @@ module.exports.getAnimeByGenre = async function getAnimeByGenre(genreName) {
 };
 
 module.exports.updateAnime = async function updateAnime(id, data) {
-  const anime = await prisma.anime.findUnique({where: {id} });
+  const anime = await prisma.anime.findUnique({ where: { id } });
 
   if (!anime) {
-    throw new Error("Anime not found");
+    throw new Error('Anime not found');
   }
 
   let genresData;
@@ -114,11 +114,11 @@ module.exports.updateAnime = async function updateAnime(id, data) {
   }
 
   return prisma.anime.update({
-    where: {id},
+    where: { id },
     data: {
       ...data,
       ...(genresData && { genres: genresData }),
-    }
+    },
   });
 };
 
@@ -197,8 +197,13 @@ module.exports.updateAnime = async function updateAnime(id, data) {
 //   return formatAnimeGenres(result);
 // };
 
-module.exports.getAnimeByQuery = async function getAnimeByQuery({query, type, status, limit = null}) {
-  if (!query || query.trim() === "") {
+module.exports.getAnimeByQuery = async function getAnimeByQuery({
+  query,
+  type,
+  status,
+  limit = null,
+}) {
+  if (!query || query.trim() === '') {
     return [];
   }
 
@@ -219,7 +224,7 @@ module.exports.getAnimeByQuery = async function getAnimeByQuery({query, type, st
     values.push(status);
   }
 
-  const whereClause = conditions.length > 0 ? `AND ${conditions.join(" AND ")}` : "";
+  const whereClause = conditions.length > 0 ? `AND ${conditions.join(' AND ')}` : '';
 
   // Run full-text search on search_vector
   const rawAnimes = await prisma.$queryRawUnsafe(
@@ -229,9 +234,9 @@ module.exports.getAnimeByQuery = async function getAnimeByQuery({query, type, st
     WHERE "search_vector" @@ plainto_tsquery('english', $1)
     ${whereClause}
     ORDER BY rank DESC
-    ${limit ? `LIMIT ${limit}` : ""}
+    ${limit ? `LIMIT ${limit}` : ''}
     `,
-    ...values
+    ...values,
   );
 
   if (!rawAnimes.length) return [];
@@ -311,19 +316,19 @@ module.exports.createAnime = async function createAnime(data, imageUrl) {
 };
 
 module.exports.deleteAnime = async function deleteAnime(id) {
-  return prisma.anime.delete({where: {id}});
-}
+  return prisma.anime.delete({ where: { id } });
+};
 
 module.exports.getAnimeByStatus = async function getAnimeByStatus(status) {
   const animes = await prisma.anime.findMany({
     where: {
       status: {
         equals: status,
-        mode: "insensitive",
+        mode: 'insensitive',
       },
     },
     orderBy: {
-      date_aired: "desc",
+      date_aired: 'desc',
     },
     include: {
       genres: {
@@ -342,7 +347,7 @@ module.exports.getFilteredAnimes = async function getFilteredAnimes(filters) {
 
   const where = {
     ...(type && { type }),
-    ...(status && { status: { equals: status, mode: "insensitive" } }),
+    ...(status && { status: { equals: status, mode: 'insensitive' } }),
     ...(yearList.length > 0 && {
       OR: yearList.map((y) => ({
         date_aired: {
@@ -357,7 +362,7 @@ module.exports.getFilteredAnimes = async function getFilteredAnimes(filters) {
           genre: {
             name: {
               in: genreList,
-              mode: "insensitive",
+              mode: 'insensitive',
             },
           },
         },
@@ -375,7 +380,7 @@ module.exports.getFilteredAnimes = async function getFilteredAnimes(filters) {
       },
     },
     orderBy: {
-      date_aired: "desc",
+      date_aired: 'desc',
     },
   });
 
@@ -383,9 +388,7 @@ module.exports.getFilteredAnimes = async function getFilteredAnimes(filters) {
   const finalAnimes =
     genreList.length > 0
       ? potentialAnimes.filter((anime) => {
-          const animeGenres = anime.genres.map((ag) =>
-            ag.genre.name.toLowerCase()
-          );
+          const animeGenres = anime.genres.map((ag) => ag.genre.name.toLowerCase());
           return genreList.every((g) => animeGenres.includes(g));
         })
       : potentialAnimes;
@@ -393,12 +396,10 @@ module.exports.getFilteredAnimes = async function getFilteredAnimes(filters) {
   return formatAnimeGenres(finalAnimes);
 };
 
-module.exports.getTopRatedAnimes = async function getTopRatedAnimes(
-  limit = 10
-) {
+module.exports.getTopRatedAnimes = async function getTopRatedAnimes(limit = 10) {
   const animes = await prisma.anime.findMany({
     orderBy: {
-      avgRating: "desc",
+      avgRating: 'desc',
     },
     take: limit,
     where: {

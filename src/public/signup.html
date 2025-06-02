@@ -1,150 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Cache-Control" content="no-store" />
     <title>Sign-in</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  </head>
 
-<body class="register-page">
+  <body class="register-page">
     <header class="header">
-        <div class="hamburger" id="hamburger">
-            <i class='bx bx-menu'></i>
-        </div>
-        <a href="index.html" class="logo">AniTube</a>
-        <!-- Left section: Nav -->
-        <div class="nav-left">
-            <nav class="navbar">
-                <a href="index.html">Home</a>
-                <a href="anime.html">Anime</a>
-                <a href="community.html">Community</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-        <!-- Center: Search bar -->
-        <form action="#" class="search-btn">
-            <input type="text" placeholder="Search" class="search-input">
-            <button type="submit" title="Search"><i class='bx bx-search'></i></button>
-        </form>
-        <!-- Right: Notification, login/profile -->
-        <div class="nav-right">
-            <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
-        </div>
+      <div class="hamburger" id="hamburger">
+        <i class="bx bx-menu"></i>
+      </div>
+      <a href="index.html" class="logo">AniTube</a>
+      <!-- Left section: Nav -->
+      <div class="nav-left">
+        <nav class="navbar">
+          <a href="index.html">Home</a>
+          <a href="anime.html">Anime</a>
+          <a href="community.html">Community</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <!-- Center: Search bar -->
+      <form action="#" class="search-btn">
+        <input type="text" placeholder="Search" class="search-input" />
+        <button type="submit" title="Search"><i class="bx bx-search"></i></button>
+      </form>
+      <!-- Right: Notification, login/profile -->
+      <div class="nav-right">
+        <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+      </div>
     </header>
 
     <div class="container register">
-        <div class="left-section register">
-            <video class="anime_video" autoplay muted loop>
-                <source src="./assets/231156_medium.mp4" type="video/mp4">
-            </video>
-            <!-- Video by <a href="https://pixabay.com/users/syahronanda-17148518/?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Bobby
+      <div class="left-section register">
+        <video class="anime_video" autoplay muted loop>
+          <source src="./assets/231156_medium.mp4" type="video/mp4" />
+        </video>
+        <!-- Video by <a href="https://pixabay.com/users/syahronanda-17148518/?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Bobby
                 Syahronanda</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Pixabay</a> -->
-        </div>
-        <div class="right-section">
-            <div class="form-box register">
-                <form id="signupForm" action="#" method="post">
-                    <h2>Register</h2>
-                    <p style="padding-bottom: 20px;">Please fill in this form to create an account. To become a member, enjoy the full features of the
-                        site</p>
-                    <div class="input-row">
-                        <div class="input-box register">
-                            <span class="icon"><i class='bx bxs-user'></i></span>
-                            <input type="text" name="username" id="username" maxlength="100" placeholder="" required>
-                            <label for="username">Username</label>
-                            <p class="error-message" id="usernameError"></p>
-                        </div>
-                    </div>
-                    <div class="input-row">
-                        <div class="input-box register">
-                            <span class="icon"><i class='bx bxs-envelope'></i></span>
-                            <input type="email" name="email" id="email" maxlength="100" placeholder="" required>
-                            <label for="email">Email</label>
-                            <p class="error-message" id="emailError"></p>
-                        </div>
-                    </div>
-                    <div class="input-row">
-                        <div class="input-box register">
-                            <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                            <input type="password" name="password" id="password" maxlength="50" placeholder="" required>
-                            <label for="password">Password</label>
-                            <p class="error-message" id="passwordError"></p>
-                        </div>
-                    </div>
-                    <div class="input-row">
-                        <div class="input-box register">
-                            <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                            <input type="password" name="confirmPassword" id="confirmPassword" maxlength="50" placeholder=""
-                                required>
-                            <label for="confirmPassword">Confirm Password</label>
-                            <p class="error-message" id="confirmPasswordError"></p>
-                        </div>
-                    </div>
-                    <div class="form-options">
-                        <label for="rememberMe"><input type="checkbox" name="rememberMe" id="rememberMe"> I agree to the
-                            terms & conditions</label>
-                        <p class="error-message" id="checkboxError"></p>
-                    </div>
-                    <button class="btn" type="submit" name="registerBtn" id="registerBtn" disabled>Register</button>
-                    <div class="footer">
-                        <p>Already have an account? <a href="signin.html">Log in</a></p>
-                    </div>
-                </form>
+      </div>
+      <div class="right-section">
+        <div class="form-box register">
+          <form id="signupForm" action="#" method="post">
+            <h2>Register</h2>
+            <p style="padding-bottom: 20px">
+              Please fill in this form to create an account. To become a member, enjoy the full
+              features of the site
+            </p>
+            <div class="input-row">
+              <div class="input-box register">
+                <span class="icon"><i class="bx bxs-user"></i></span>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  maxlength="100"
+                  placeholder=""
+                  required
+                />
+                <label for="username">Username</label>
+                <p class="error-message" id="usernameError"></p>
+              </div>
             </div>
+            <div class="input-row">
+              <div class="input-box register">
+                <span class="icon"><i class="bx bxs-envelope"></i></span>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  maxlength="100"
+                  placeholder=""
+                  required
+                />
+                <label for="email">Email</label>
+                <p class="error-message" id="emailError"></p>
+              </div>
+            </div>
+            <div class="input-row">
+              <div class="input-box register">
+                <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  maxlength="50"
+                  placeholder=""
+                  required
+                />
+                <label for="password">Password</label>
+                <p class="error-message" id="passwordError"></p>
+              </div>
+            </div>
+            <div class="input-row">
+              <div class="input-box register">
+                <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  maxlength="50"
+                  placeholder=""
+                  required
+                />
+                <label for="confirmPassword">Confirm Password</label>
+                <p class="error-message" id="confirmPasswordError"></p>
+              </div>
+            </div>
+            <div class="form-options">
+              <label for="rememberMe">
+                <input type="checkbox" name="rememberMe" id="rememberMe" />
+                I agree to the terms & conditions
+              </label>
+              <p class="error-message" id="checkboxError"></p>
+            </div>
+            <button class="btn" type="submit" name="registerBtn" id="registerBtn" disabled>
+              Register
+            </button>
+            <div class="footer">
+              <p>
+                Already have an account?
+                <a href="signin.html">Log in</a>
+              </p>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
     <script src="register.js"></script>
     <script>
-        const hamburger = document.getElementById("hamburger");
-        const navbar = document.querySelector(".navbar");
+      const hamburger = document.getElementById('hamburger');
+      const navbar = document.querySelector('.navbar');
 
-        hamburger.addEventListener("click", () => {
-            navbar.classList.toggle("show");
-        });
-        document.getElementById("signupForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent form submission
+      hamburger.addEventListener('click', () => {
+        navbar.classList.toggle('show');
+      });
+      document.getElementById('signupForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
 
-            // Get form values
-            const username = document.getElementById("username").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
+        // Get form values
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
 
-            // Check if passwords match
-            if (password !== confirmPassword) {
-                alert("Passwords do not match!");
-                return;
+        // Check if passwords match
+        if (password !== confirmPassword) {
+          alert('Passwords do not match!');
+          return;
+        }
+
+        // Send the request with the form data as JSON
+        fetch('/users/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, email, password }),
+        })
+          .then(function (response) {
+            if (response.ok) {
+              return response.json().then(function (data) {
+                alert('Registration successful!');
+                window.location.href = '/signin.html'; // Redirect to login page
+              });
+            } else {
+              return response.json().then(function (errorData) {
+                throw new Error(errorData.message || 'Registration failed');
+              });
             }
-
-            // Send the request with the form data as JSON
-            fetch("/users/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username, email, password })
-            })
-            .then(function (response) {
-                if (response.ok) {
-                    return response.json().then(function (data) {
-                        alert("Registration successful!");
-                        window.location.href = "/signin.html"; // Redirect to login page
-                     });
-                } else {
-                    return response.json().then(function (errorData) {
-                        throw new Error(errorData.message || "Registration failed");
-                    });
-                }
-            })
-            .catch(function (error) {
-                alert(error.message || "An error occurred during registration");
-            });
-        });
+          })
+          .catch(function (error) {
+            alert(error.message || 'An error occurred during registration');
+          });
+      });
     </script>
-</body>
-
+  </body>
 </html>

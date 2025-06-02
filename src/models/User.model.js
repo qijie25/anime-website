@@ -1,15 +1,15 @@
-const prisma = require("./prismaClient");
-const bcrypt = require("bcrypt");
+const prisma = require('./prismaClient');
+const bcrypt = require('bcrypt');
 
 module.exports.login = async function login(email, password) {
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) {
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    throw new Error("Invalid password");
+    throw new Error('Invalid password');
   }
 
   return user;
@@ -41,16 +41,16 @@ module.exports.updateProfile = async function updateProfile(id, updatedFields) {
 module.exports.verifyCurrentPassword = async function verifyCurrentPassword(id, currentPassword) {
   const user = await prisma.user.findUnique({ where: { id } });
   if (!user) {
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 
   const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
   return isPasswordValid;
 };
 
-module.exports.updateProfilePicture = async function updateProfilePicture(userId,imageUrl) {
+module.exports.updateProfilePicture = async function updateProfilePicture(userId, imageUrl) {
   const user = await prisma.user.findUnique({ where: { id: userId } });
-  if (!user) throw new Error("User not found");
+  if (!user) throw new Error('User not found');
 
   const now = new Date();
   const lastUpdate = user.lastProfilePictureUpdate;
@@ -82,7 +82,7 @@ module.exports.getUserProfilePictures = async function getUserProfilePictures(us
     select: { profile_imgs: true },
   });
 
-  if (!user) throw new Error("User not found");
+  if (!user) throw new Error('User not found');
 
   return user.profile_imgs;
 };

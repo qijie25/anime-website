@@ -1,10 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const stars = document.querySelectorAll(".rating-stars i");
-  const animeId = sessionStorage.getItem("selectedAnimeId");
-  const userId = sessionStorage.getItem("id");
+document.addEventListener('DOMContentLoaded', () => {
+  const stars = document.querySelectorAll('.rating-stars i');
+  const animeId = sessionStorage.getItem('selectedAnimeId');
+  const userId = sessionStorage.getItem('id');
 
   if (!animeId || !userId) {
-    alert("Missing anime or user info. Please go back and try again.");
+    alert('Missing anime or user info. Please go back and try again.');
     return;
   }
 
@@ -14,26 +14,26 @@ document.addEventListener("DOMContentLoaded", () => {
   function highlightStars(index) {
     stars.forEach((star, i) => {
       if (i <= index) {
-        star.classList.add("highlighted");
+        star.classList.add('highlighted');
       } else {
-        star.classList.remove("highlighted");
+        star.classList.remove('highlighted');
       }
     });
   }
 
   stars.forEach((star, index) => {
-    star.addEventListener("mouseover", () => highlightStars(index));
-    star.addEventListener("mouseout", () => highlightStars(selectedRating - 1));
+    star.addEventListener('mouseover', () => highlightStars(index));
+    star.addEventListener('mouseout', () => highlightStars(selectedRating - 1));
 
-    star.addEventListener("click", () => {
+    star.addEventListener('click', () => {
       selectedRating = (index + 1) * 2; // 1 star = 2 points, 5 stars = 10
       highlightStars(index);
 
       // Send rating to the server
-      fetch("/ratings", {
-        method: "POST",
+      fetch('/ratings', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           animeId: parseInt(animeId),
@@ -43,16 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          alert(`Thanks for rating! Current Avg: ${data.avgRating.toFixed(1)} from ${data.totalRatings} ratings.`);
+          alert(
+            `Thanks for rating! Current Avg: ${data.avgRating.toFixed(1)} from ${data.totalRatings} ratings.`,
+          );
         })
         .catch((err) => {
-          console.error("Rating failed:", err);
-          alert("Something went wrong while submitting your rating.");
+          console.error('Rating failed:', err);
+          alert('Something went wrong while submitting your rating.');
         });
     });
   });
 
-  const resultDisplay = document.getElementById("result");
+  const resultDisplay = document.getElementById('result');
 
   // Fetch anime details and user's previous rating
   Promise.all([
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
     .catch((err) => {
-      console.error("Error loading anime or rating data:", err);
-      resultDisplay.textContent = "Failed to load previous rating.";
+      console.error('Error loading anime or rating data:', err);
+      resultDisplay.textContent = 'Failed to load previous rating.';
     });
 });

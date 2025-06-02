@@ -1,104 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Cache-Control" content="no-store" />
     <title>Admin Dashboard</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="/admin-assets/adminStyle.css" rel="stylesheet">
-</head>
-<body class="admin-page">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/admin-assets/adminStyle.css" rel="stylesheet" />
+  </head>
+  <body class="admin-page">
     <section class="sidebar">
-        <a href="#" class="brand">
-            <i class='bx bxs-face-mask'></i>
-            <span class="sidebar-header">AniTube</span>
-        </a>
-        <ul class="side-menu top">
-            <li>
-                <a href="/admin">
-                    <i class='bx bxs-dashboard'></i>
-                    <span class="sidebar-text">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="/admin/anime-management">
-                    <i class='bx bxs-videos'></i>
-                    <span class="sidebar-text">Anime</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bxs-user'></i>
-                    <span class="sidebar-text">User</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bxs-message-dots'></i>
-                    <span class="sidebar-text">Message</span>
-                </a>
-            </li>
-        </ul>
-        <ul class="side-menu bottom">
-            <li>
-                <a href="#">
-                    <i class='bx bxs-cog bx-spin-hover'></i>
-                    <span class="sidebar-text">Settings</span>
-                </a>
-            </li>
-            <li id="side-logout">
-                <a href="#">
-                    <i class='bx bx-log-out bx-burst-hover'></i>
-                    <span class="sidebar-text">Logout</span>
-                </a>
-            </li>
-        </ul>
+      <a href="#" class="brand">
+        <i class="bx bxs-face-mask"></i>
+        <span class="sidebar-header">AniTube</span>
+      </a>
+      <ul class="side-menu top">
+        <li>
+          <a href="/admin">
+            <i class="bx bxs-dashboard"></i>
+            <span class="sidebar-text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="/admin/anime-management">
+            <i class="bx bxs-videos"></i>
+            <span class="sidebar-text">Anime</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bxs-user"></i>
+            <span class="sidebar-text">User</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bxs-message-dots"></i>
+            <span class="sidebar-text">Message</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="side-menu bottom">
+        <li>
+          <a href="#">
+            <i class="bx bxs-cog bx-spin-hover"></i>
+            <span class="sidebar-text">Settings</span>
+          </a>
+        </li>
+        <li id="side-logout">
+          <a href="#">
+            <i class="bx bx-log-out bx-burst-hover"></i>
+            <span class="sidebar-text">Logout</span>
+          </a>
+        </li>
+      </ul>
     </section>
     <div class="dashboard-content">
-        <nav class="dashboard-nav">
-            <i class="bx bx-menu"></i>
-            <form action="#">
-                <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button type="submit" class="search-button"><i class='bx bx-search'></i></button>
-                </div>
-            </form>
-            <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
-            <div id="user-notification" style="display: none;">
-                <a href="#" class="notification" id="notificationIcon">
-                    <i class='bx bxs-bell bx-tada-hover'></i>
-                </a>
-            </div>
-            <div id="user-profile" style="display: none;">
-                <a href="#" class="profile" id="profileIcon">
-                    <img src="/assets/profile-icon(2).png" alt="Profile" id="profileImage">
-                </a>
-                <div class="profile-menu" id="profileMenu">
-                    <ul>
-                        <li><a href="profile.html">Profile</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <main>
-            <div class="content-title">
-                <div class="left">
-                    <h1>Dashboard</h1>
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="#">Dashboard</a>
-                        </li>
-                        <li><i class='bx bx-chevron-right'></i></li>
-                        <li><a class="active" href="#">Home</a></li>
-                    </ul>
-                </div>
-            </div>
-        </main>
+      <nav class="dashboard-nav">
+        <i class="bx bx-menu"></i>
+        <form action="#">
+          <div class="form-input">
+            <input type="search" placeholder="Search..." />
+            <button type="submit" class="search-button"><i class="bx bx-search"></i></button>
+          </div>
+        </form>
+        <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+        <div id="user-notification" style="display: none">
+          <a href="#" class="notification" id="notificationIcon">
+            <i class="bx bxs-bell bx-tada-hover"></i>
+          </a>
+        </div>
+        <div id="user-profile" style="display: none">
+          <a href="#" class="profile" id="profileIcon">
+            <img src="/assets/profile-icon(2).png" alt="Profile" id="profileImage" />
+          </a>
+          <div class="profile-menu" id="profileMenu">
+            <ul>
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <main>
+        <div class="content-title">
+          <div class="left">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a href="#">Dashboard</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i></li>
+              <li><a class="active" href="#">Home</a></li>
+            </ul>
+          </div>
+        </div>
+      </main>
     </div>
     <script src="/index.js"></script>
     <script src="/admin-assets/admin.js"></script>
-</body>
+  </body>
 </html>

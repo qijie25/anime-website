@@ -1,10 +1,10 @@
-const multer = require("multer");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("cloudinary").v2;
-require("dotenv").config();
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
 
 cloudinary.config({
-  cloud_name: "dfcd70ihi",
+  cloud_name: 'dfcd70ihi',
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
@@ -12,8 +12,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "profile_pictures",
-    allowed_formats: ["jpg", "jpeg", "png"],
+    folder: 'profile_pictures',
+    allowed_formats: ['jpg', 'jpeg', 'png'],
   },
 });
 
@@ -22,8 +22,8 @@ const upload = multer({ storage });
 const animeStorage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "anime_images",
-    allowed_formats: ["jpg", "jpeg", "png"],
+    folder: 'anime_images',
+    allowed_formats: ['jpg', 'jpeg', 'png'],
   },
 });
 const animeUpload = multer({ storage: animeStorage });

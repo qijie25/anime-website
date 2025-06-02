@@ -15,6 +15,13 @@
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.4.1",
+    "globals": "^16.2.0",
+    "prettier": "^3.5.3",
     "prisma": "^6.4.1"
   },
   "prisma": {
@@ -27,6 +34,10 @@
     "migration:reset": "dotenv -e .env.development -- npx prisma migrate reset",
     "migration:deploy": "dotenv -e .env.production -- npx prisma migrate deploy",
     "seed:dev": "dotenv -e .env.development -- node prisma/seed.js",
-    "seed:deploy": "dotenv -e .env.production -- node prisma/seed.js"
+    "seed:deploy": "dotenv -e .env.production -- node prisma/seed.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   }
 }

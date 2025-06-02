@@ -1,137 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Cache-Control" content="no-store" />
     <title>Sign-in</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  </head>
 
-<body class="login-page">
+  <body class="login-page">
     <header class="header">
-        <div class="hamburger" id="hamburger">
-            <i class='bx bx-menu'></i>
-        </div>
-        <a href="index.html" class="logo">AniTube</a>
-        <!-- Left section: Nav -->
-        <div class="nav-left">
-            <nav class="navbar">
-                <a href="index.html">Home</a>
-                <a href="anime.html">Anime</a>
-                <a href="community.html">Community</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-        <!-- Center: Search bar -->
-        <form action="#" class="search-btn">
-            <input type="text" placeholder="Search" class="search-input">
-            <button type="submit" title="Search"><i class='bx bx-search'></i></button>
-        </form>
-        <!-- Right: Notification, login/profile -->
-        <div class="nav-right">
-            <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
-        </div>
+      <div class="hamburger" id="hamburger">
+        <i class="bx bx-menu"></i>
+      </div>
+      <a href="index.html" class="logo">AniTube</a>
+      <!-- Left section: Nav -->
+      <div class="nav-left">
+        <nav class="navbar">
+          <a href="index.html">Home</a>
+          <a href="anime.html">Anime</a>
+          <a href="community.html">Community</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <!-- Center: Search bar -->
+      <form action="#" class="search-btn">
+        <input type="text" placeholder="Search" class="search-input" />
+        <button type="submit" title="Search"><i class="bx bx-search"></i></button>
+      </form>
+      <!-- Right: Notification, login/profile -->
+      <div class="nav-right">
+        <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+      </div>
     </header>
 
     <div class="container login">
-        <div class="left-section register">
-            <video class="anime_video" autoplay muted loop>
-                <source src="./assets/231156_medium.mp4" type="video/mp4">
-            </video>
-            <!-- Video by <a href="https://pixabay.com/users/syahronanda-17148518/?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Bobby
+      <div class="left-section register">
+        <video class="anime_video" autoplay muted loop>
+          <source src="./assets/231156_medium.mp4" type="video/mp4" />
+        </video>
+        <!-- Video by <a href="https://pixabay.com/users/syahronanda-17148518/?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Bobby
                 Syahronanda</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=231156">Pixabay</a> -->
-        </div>
-        <div class="right-section">
-            <div class="form-box login">
-                <form id="signinForm" action="#" method="post">
-                    <h2>Login</h2>
-                    <p style="padding-bottom: 20px;">AniTube - The best anime streaming platform in the world!</p>
-                    <div class="input-row">
-                        <div class="input-box login">
-                            <span class="icon"><i class='bx bxs-envelope'></i></span>
-                            <input type="email" name="email" maxlength="50" placeholder="" id="email" required>
-                            <label for="email">Email</label>
-                        </div>
-                    </div>
-                    <div class="input-row">
-                        <div class="input-box login">
-                            <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                            <input type="password" name="password" maxlength="50" placeholder="" id="password" required>
-                            <label for="password">Password</label>
-                        </div>
-                    </div>
-                    <div class="form-options">
-                        <label for="rememberMe"><input type="checkbox" name="rememberMe" id="rememberMe"> Remember
-                            me</label>
-                        <a href="#">Forgot password?</a>
-                    </div>
-                    <button class="btn" type="submit">Login</button>
-                    <div class="footer">
-                        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-                    </div>
-                </form>
+      </div>
+      <div class="right-section">
+        <div class="form-box login">
+          <form id="signinForm" action="#" method="post">
+            <h2>Login</h2>
+            <p style="padding-bottom: 20px">
+              AniTube - The best anime streaming platform in the world!
+            </p>
+            <div class="input-row">
+              <div class="input-box login">
+                <span class="icon"><i class="bx bxs-envelope"></i></span>
+                <input
+                  type="email"
+                  name="email"
+                  maxlength="50"
+                  placeholder=""
+                  id="email"
+                  required
+                />
+                <label for="email">Email</label>
+              </div>
             </div>
+            <div class="input-row">
+              <div class="input-box login">
+                <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                <input
+                  type="password"
+                  name="password"
+                  maxlength="50"
+                  placeholder=""
+                  id="password"
+                  required
+                />
+                <label for="password">Password</label>
+              </div>
+            </div>
+            <div class="form-options">
+              <label for="rememberMe">
+                <input type="checkbox" name="rememberMe" id="rememberMe" />
+                Remember me
+              </label>
+              <a href="#">Forgot password?</a>
+            </div>
+            <button class="btn" type="submit">Login</button>
+            <div class="footer">
+              <p>
+                Don't have an account?
+                <a href="signup.html">Sign up</a>
+              </p>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
     <script>
-        const hamburger = document.getElementById("hamburger");
-        const navbar = document.querySelector(".navbar");
+      const hamburger = document.getElementById('hamburger');
+      const navbar = document.querySelector('.navbar');
 
-        hamburger.addEventListener("click", () => {
-            navbar.classList.toggle("show");
-        });
-        document.getElementById("signinForm").addEventListener("submit", function (event) {
-                event.preventDefault(); // Prevent form submission
+      hamburger.addEventListener('click', () => {
+        navbar.classList.toggle('show');
+      });
+      document.getElementById('signinForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
 
-                // Get email and password values
-                const email = document.getElementById("email").value.trim();
-                const password = document.getElementById("password").value;
+        // Get email and password values
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
 
-                // Send the request with the email and password as JSON data using fetch
-                fetch("/users/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ email: email, password: password })
-                })
-                    .then(function (response) {
-                        if (response.ok) {
-                            return response.json().then(function (data) {
-                                console.log("Login successful:", data);
+        // Send the request with the email and password as JSON data using fetch
+        fetch('/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: email, password: password }),
+        })
+          .then(function (response) {
+            if (response.ok) {
+              return response.json().then(function (data) {
+                console.log('Login successful:', data);
 
-                                // Store token and user details in sessionStorage
-                                sessionStorage.setItem('token', data.token);
-                                sessionStorage.setItem('username', data.user.username);
-                                sessionStorage.setItem('email', data.user.email);
-                                sessionStorage.setItem('id', data.user.id);
-                                sessionStorage.setItem('isAdmin', data.user.isAdmin);
+                // Store token and user details in sessionStorage
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('username', data.user.username);
+                sessionStorage.setItem('email', data.user.email);
+                sessionStorage.setItem('id', data.user.id);
+                sessionStorage.setItem('isAdmin', data.user.isAdmin);
 
-                                sessionStorage.setItem('loginStatus', "success");
+                sessionStorage.setItem('loginStatus', 'success');
 
-                                // Redirect to the appropriate page based on admin status
-                                if (data.user.isAdmin) {
-                                    window.location.href = "/admin";
-                                } else {
-                                    window.location.href = "/index.html";
-                                }
-                            });
-                        } else {
-                            // If the response is not OK, parse the error message
-                            return response.json().then(function (errorData) {
-                                throw new Error(errorData.message || "Login failed");
-                            });
-                        }
-                    })
-                    .catch(function (error) {
-                        alert(error.message || "An error occurred during login");
-                    });
-            });
+                // Redirect to the appropriate page based on admin status
+                if (data.user.isAdmin) {
+                  window.location.href = '/admin';
+                } else {
+                  window.location.href = '/index.html';
+                }
+              });
+            } else {
+              // If the response is not OK, parse the error message
+              return response.json().then(function (errorData) {
+                throw new Error(errorData.message || 'Login failed');
+              });
+            }
+          })
+          .catch(function (error) {
+            alert(error.message || 'An error occurred during login');
+          });
+      });
     </script>
-</body>
-
+  </body>
 </html>
