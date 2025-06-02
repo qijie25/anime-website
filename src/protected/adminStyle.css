@@ -1,12 +1,68 @@
-html {
-    font-size: 62.5%;
-    height: 100%;
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    height: 100%;
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.4rem;
+}
+
+h1, h2, h3, h4, h5, button, input, label {
+    line-height: 1.1;
+}
+  
+a {
+    text-decoration: none;
+    color: inherit;
+}
+  
+ul, ol {
+    list-style: none;
+}
+  
+i {
+    cursor: pointer;
+}
+  
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+  
+input, button, textarea, select {
+    font: inherit;
+}
+  
+p, h1, h2, h3, h4, h5, h6, span {
+    overflow-wrap: break-word;
+}
+  
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+  
+img, svg, video, canvas, picture {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 /* Admin Page */
@@ -18,25 +74,17 @@ html {
     font-size: 1.6rem;
 }
 
-.sidebar a {
-    text-decoration: none;
-}
-
-.sidebar li {
-    list-style: none;
-}
-
 .sidebar {
     display: flex;
     flex-direction: column;
-    width: 22rem;
+    width: 20rem;
     height: 100%;
     background: #eee;
 }
 
 .sidebar .brand {
     display: flex;
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-weight: 800;
     height: 5.6rem;
     align-items: center;
@@ -81,7 +129,7 @@ html {
     display: flex;
     align-items: center;
     border-radius: 2rem;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     color: #233;
     overflow-x: hidden;
     white-space: nowrap;
@@ -95,7 +143,7 @@ html {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    width: calc(100% - 22rem);
+    width: calc(100% - 20rem);
 }
 
 .dashboard-nav {
@@ -413,4 +461,45 @@ html {
     cursor: pointer;
     margin-top: 1rem;
     border-radius: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 18rem;
+    }
+
+    .dashboard-content {
+        width: calc(100% - 6rem);
+        left: 20rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        width: 6rem;
+    }
+
+    .sidebar-header {
+        display: none;
+    }
+
+    .dashboard-content .form-input input {
+        display: none;
+    }
+
+    .dashboard-content .form-input button {
+        width: auto;
+        height: auto;
+        background: transparent;
+        border-radius: none;
+        color: #2f2f2f;
+    }
+
+    .side-menu li a {
+        font-size: 1.2rem;
+    }
+
+    .sidebar-text {
+        display: none;
+    }
 }

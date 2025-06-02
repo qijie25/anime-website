@@ -1,26 +1,42 @@
-* {
-    margin: 0;
-    padding: 0;
+*, *::before, *::after {
     box-sizing: border-box;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 body {
-    background: #121212;
-    color: #f3f4f6;
-    font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  background: #121212;
+  color: #f3f4f6;
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.4rem;
+}
+
+h1, h2, h3, h4, h5, button, input, label {
+  line-height: 1.1;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
-li {
-    list-style: none;
+ul, ol {
+  list-style: none;
 }
 
 i {
@@ -33,22 +49,41 @@ button {
   cursor: pointer;
 }
 
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6, span {
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+img, svg, video, canvas, picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #1a202c;
+  background: #1a202c;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #4a5568;
-    border-radius: 4px;
+  background: #4a5568;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #718096;
+  background: #718096;
 }
 
 /* Loading animation */
@@ -56,11 +91,11 @@ button {
 
   0%,
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 
   50% {
-      opacity: 0.5;
+    opacity: 0.5;
   }
 }
 
@@ -70,198 +105,190 @@ button {
 
 /* Header */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 2.5rem 4%;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.5rem 4%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 50;
 }
 
 .logo {
-    font-size: 2.4rem;
-    font-weight: 700;
-    text-decoration: none;
-    color: #ad46ff;
-    margin-right: 4rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #ad46ff;
+  margin-right: 4rem;
 }
 
 .nav-left {
-    flex: 1;
-    max-width: 60rem;
-    display: flex;
+  flex: 1;
+  max-width: 60rem;
+  display: flex;
 }
 
 .navbar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .navbar a {
-    position: relative;
-    font-size: 1.8rem;
-    color: white;
-    font-family: 'Times New Roman', Times, serif !important;
-    text-decoration: none;
-    font-weight: 500;
-    margin-right: 3rem;
+  position: relative;
+  font-size: 1.8rem;
+  color: white;
+  font-family: 'Times New Roman', Times, serif !important;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 3rem;
 }
 
 .navbar a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 0.2rem;
-    background: white;
-    border-radius: 0.5rem;
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: transform .5s;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 0.2rem;
+  background: white;
+  border-radius: 0.5rem;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform .5s;
 }
 
 .navbar a:hover::after {
-    transform-origin: left;
-    transform: scaleX(1);
+  transform-origin: left;
+  transform: scaleX(1);
 }
 
 .search-btn {
-    flex: 2;
-    max-width: 26rem;
-    height: 4.5rem;
-    background: transparent;
-    border: 2px solid white;
-    border-radius: 0.6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  flex: 2;
+  max-width: 26rem;
+  height: 4.5rem;
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-input {
-    flex: 1;
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 1.5rem;
-    padding-left: 0.6rem !important;
+  flex: 1;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1.5rem;
+  padding-left: 0.6rem !important;
 }
 
 .search-btn input::placeholder {
-    font-size: 1.5rem;
-    color: white;
+  font-size: 1.5rem;
+  color: white;
 }
 
 .search-btn button {
-    width: 4rem;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  width: 4rem;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-btn button i {
-    color: white;
-    font-size: 2rem;
+  color: white;
+  font-size: 2rem;
 }
 
 .nav-right {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .login-btn {
-    background: #ffdd95;
-    color: #000;
-    border: none;
-    padding: 1.25rem 2.4rem;
-    border-radius: 0.5rem;
-    align-items: center;
-    cursor: pointer;
-    font-size: 1.6rem;
-    transition: 0.3s ease;
-    margin-left: 4rem;
+  background: #ffdd95;
+  color: #000;
+  padding: 1.25rem 2.4rem;
+  border-radius: 0.5rem;
+  align-items: center;
+  font-size: 1.6rem;
+  transition: 0.3s ease;
+  margin-left: 4rem;
 }
 
 .login-btn:hover {
-    filter: brightness(1.1);
+  filter: brightness(1.1);
 }
 
 .login-btn a {
-    color: #000;
-    text-decoration: none;
-    text-align: center;
+  color: #000;
+  text-decoration: none;
+  text-align: center;
 }
 
 .login-btn a:hover {
-    color: #333;
+  color: #333;
 }
 
 #user-profile {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .logout-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.6rem;
-    cursor: pointer;
+  background: none;
+  color: white;
+  font-size: 1.6rem;
 }
 
 .header .notification {
 	font-size: 2.2rem;
 	position: relative;
-    color: #fff;
+  color: #fff;
 }
 
 .header .profile img {
 	width: 3.6rem;
 	height: 3.6rem;
-    color: white;
+  color: white;
 	object-fit: cover;
 	border-radius: 50%;
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .header .profile-menu {
-    display: none;
-    position: absolute;
-    top: 56px;
-    right: 0;
-    background: #eee;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 1.5rem;
-    width: 20rem;
-    z-index: 100;
+  display: none;
+  position: absolute;
+  top: 56px;
+  right: 0;
+  background: #eee;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5rem;
+  width: 20rem;
+  z-index: 100;
 }
 
 .header .profile-menu ul {
-    list-style: none;
-    padding: 1rem;
-    margin: 0;
+  padding: 1rem;
+  margin: 0;
 }
 
 .header .profile-menu li {
-    padding: 1rem;
-    border-bottom: 1px solid #ddd;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
 }
 
 .header .profile-menu li:hover {
@@ -270,20 +297,18 @@ button {
 }
 
 .header .profile-menu li a {
-    color: #222;
-    font-size: 1.6rem;
-    text-decoration: none;
+  color: #222;
+  font-size: 1.6rem;
 }
 
 .header .profile-menu.show {
-    display: block;
+  display: block;
 }
 
 .hamburger {
-    display: none;
-    font-size: 3rem;
-    color: white;
-    cursor: pointer;
+  display: none;
+  font-size: 3rem;
+  color: white;
 }
 
 .search-suggestions {
@@ -365,7 +390,7 @@ button {
     max-width: 120rem;
     margin: 0 auto;
     padding: 2.4rem 1.6rem;
-  }
+}
   
   .main-grid {
     display: flex;
@@ -440,7 +465,6 @@ button {
   
   .player-btn {
     background: transparent;
-    border: none;
     color: #e2e8f0;
     font-size: 1.6rem;
     opacity: 0.7;
@@ -526,7 +550,6 @@ button {
   .rating-stars i {
     font-size: 1.8rem;
     color: gray;
-    cursor: pointer;
     transition: color 0.2s;
   }
 
@@ -633,10 +656,8 @@ button {
     padding: 0.6rem 1rem;
     background-color: #4a5568;
     color: white;
-    border: none;
     border-radius: 0.4rem;
     font-size: 1.2rem;
-    cursor: pointer;
     transition: background-color 0.3s ease;
   }
   

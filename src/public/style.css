@@ -1,11 +1,34 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
     font-size: 62.5%;
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    color: #f3f4f6;
+    background-color: #1b1b1b;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, button, input, label {
+  line-height: 1.1;
 }
 
 a {
@@ -13,7 +36,7 @@ a {
     color: inherit;
 }
 
-li {
+ul, ol {
     list-style: none;
 }
 
@@ -25,6 +48,24 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6, span {
+    overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+img, svg, video, canvas, picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Header */
@@ -124,12 +165,9 @@ button {
     width: 4rem;
     height: 100%;
     background: transparent;
-    border: none;
-    outline: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
 }
 
 .search-btn button i {
@@ -147,12 +185,9 @@ button {
 .login-btn {
     background: #ffdd95;
     color: #000;
-    border: none;
     padding: 1.25rem 2.4rem;
     border-radius: 0.5rem;
     align-items: center;
-    cursor: pointer;
-    font-size: 1.6rem;
     transition: 0.3s ease;
     margin-left: 4rem;
 }
@@ -179,10 +214,7 @@ button {
 
 .logout-btn {
     background: none;
-    border: none;
     color: white;
-    font-size: 1.6rem;
-    cursor: pointer;
 }
 
 .header .notification {
@@ -230,7 +262,6 @@ button {
 
 .header .profile-menu li a {
     color: #222;
-    font-size: 1.6rem;
     text-decoration: none;
 }
 
@@ -242,7 +273,6 @@ button {
     display: none;
     font-size: 3rem;
     color: white;
-    cursor: pointer;
 }
 
 /* Footer */
@@ -267,7 +297,6 @@ button {
   }
 
   .footer-section h3 {
-    font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 1.6rem;
     color: white;
@@ -301,7 +330,7 @@ button {
   .social-icons {
     display: flex;
     gap: 1.6rem;
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
   
   .footer-bottom {
@@ -309,10 +338,9 @@ button {
     margin-top: 6.4rem;
     padding-top: 3rem;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #cbd5e0;
   }
-
 
 
 /* Login & Register Page  */
@@ -324,10 +352,7 @@ button {
 	background: url("./assets/ani-background.jpeg") no-repeat center center;
 	background-size: cover;
 	background-attachment: fixed;
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
     padding: 8rem 0 0 0;
-    margin: 0;
 }
 
 .container.login, .container.register {
@@ -419,7 +444,6 @@ button {
 }
 
 .form-box p {
-    font-size: 1.6rem;
 	display: inline-block;
     text-align: center;
     margin: 1rem 0;
@@ -450,7 +474,6 @@ button {
     border-radius: 1rem;
     background: transparent;
     color: #ddd;
-    font-size: 1.6rem;
     margin: 0 1rem 0 1rem;
 }
 
@@ -468,7 +491,6 @@ button {
     top: 35%;
     left: 1.6%;
     transform: translateY(-50%);
-    font-size: 1.6rem;
     font-weight: 500;
     color: #ddd;
     transition: 0.5s ease;
@@ -531,12 +553,8 @@ button {
     width: 95%;
     height: 4.5rem;
     background: #CC0000;
-    border: none;
-    outline: none;
     margin: 0 1rem 0 1rem;
     border-radius: 0.4rem;
-    cursor: pointer;
-    font-size: 1.6rem;
     color: #ddd;
     font-weight: 500;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -572,10 +590,6 @@ button {
 
 
 /* Home Page */
-.home-page {
-    background: #121212;
-}
-
 .help-container {
   position: relative;
   text-align: right;
@@ -587,7 +601,6 @@ button {
 
 .help-container i {
   font-size: 2.4rem;
-  cursor: pointer;
   color: #ddd;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
   transition: color 0.3s;
@@ -607,15 +620,16 @@ button {
   height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.5);
+  color: #222;
 }
 
 .help-modal-content {
   background-color: #fff;
   margin: 15% auto;
   padding: 2rem;
-  border-radius: 10px;
+  border-radius: 1rem;
   width: 80%;
-  max-width: 500px;
+  max-width: 50rem;
   position: relative;
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -654,9 +668,7 @@ button {
     padding: 0.6rem 1.2rem;
     background-color: #007bff;
     color: white;
-    border: none;
     border-radius: 0.5rem;
-    cursor: pointer;
     font-size: 1rem;
     margin: 2rem 1rem 0 0;
     transition: background-color 0.3s;
@@ -679,17 +691,23 @@ button {
   to { opacity: 1; transform: scale(1); }
 }
 
+.main-wrapper {
+    width: 100%;
+    max-width: 140rem;
+    margin: auto;
+}
+
 .hero-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5rem;
+    gap: 5rem;
     background-color: #181818;
 }
 
 .hero-left {
     flex: 1;
-    padding-right: 5rem;
 }
 
 .hero-right {
@@ -697,14 +715,14 @@ button {
 }
 
 .hero-left h1 {
-    font-size: 3.6rem;
-    font-weight: 800;
+    font-size: 3.4rem;
+    font-weight: 700;
     margin-bottom: 2rem;
     color: #ddd;
 }
 
 .hero-left p {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     line-height: 1.5;
     color: #c0d8e8;
 }
@@ -712,12 +730,9 @@ button {
 .hero-left button {
     padding: 1rem 2rem;
     margin-top: 2rem;
-    font-size: 1.6rem;
     background-color: #007bff;
     color: #fff;
-    border: none;
     border-radius: 0.5rem;
-    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
@@ -938,12 +953,9 @@ button {
 
 .recommendation-container button {
     padding: 1.2rem 2.5rem;
-    font-size: 1.6rem;
     background-color: #f39c12;
     color: white;
-    border: none;
     border-radius: 2.5rem;
-    cursor: pointer;
     transition: transform 0.3s ease;
 }
 
@@ -970,12 +982,12 @@ blockquote {
 }
 
 blockquote p {
-    font-size: 3.2rem;
+    font-size: 2.8rem;
     margin-bottom: 2rem;
 }
 
 .quote-footer {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     color: #8d8989;
 }
 
@@ -989,13 +1001,15 @@ blockquote p::after {
 
 .call-to-action-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    max-width: 86%;
+    padding: 4rem;
+    margin: 0 auto;
+    gap: 5rem;
     background-color: #26282A;
     color: #fff;
     border-radius: 1rem;
-    margin: 4rem 16rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 
@@ -1004,34 +1018,29 @@ blockquote p::after {
 }
 
 .call-to-action-left {
-    padding-right: 1.5rem;
     flex: 1;
 }
 
-.call-to-action-container h1 {
-    font-size: 3rem;
+.call-to-action-container h3 {
+    font-size: 2.5rem;
     color: #fff;
-    margin-bottom: 0.5rem;
-    margin-left: 5rem;
+    margin-bottom: 0.7rem;
+    margin-left: 3rem;
 }
   
 .call-to-action-container p {
-    font-size: 1.6rem;
     color: #fff;
     margin-bottom: 1.5rem;
-    margin-left: 5rem;
+    margin-left: 3rem;
 }
   
 .call-to-action-container button {
     padding: 1rem 2rem;
-    font-size: 1.6rem;
     background-color: #007791;
     color: #fff;
-    border: none;
     border-radius: 0.5rem;
-    cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-right: 5rem;
+    margin-right: 3rem;
 }
   
 .call-to-action-container button:hover {
@@ -1047,22 +1056,8 @@ blockquote p::after {
     text-decoration: underline;
 }
 
-.page-footer {
-    background-color: #1F2937;
-    padding: 0.6rem;
-    text-align: center;
-    color: white;
-    margin-top: 3rem;
-}
-
-
 /* Profile Page */
 .profile-body {
-    font-family: Arial, sans-serif;
-    background-color: #1c1c1c;
-    color: #fff;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1074,7 +1069,6 @@ blockquote p::after {
     background: linear-gradient(90deg, #1c1c1c, #565051);
     padding: 2.5rem 0;
     text-align: center;
-    font-size: 1.6rem;
     color: white;
 }
 
@@ -1089,7 +1083,7 @@ blockquote p::after {
 }
 
 .profile-nav a {
-    margin: 0 20px;
+    margin: 0 2rem;
     color: #fff;
     text-decoration: none;
 }
@@ -1110,7 +1104,7 @@ blockquote p::after {
     padding: 2rem;
     border-radius: 1rem;
     width: 90%;
-    max-width: 700px;
+    max-width: 70rem;
     margin-top: 1rem;
     display: flex;
     align-items: center;
@@ -1119,19 +1113,35 @@ blockquote p::after {
 }
 
 .profile-image-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    flex-direction: column;
     flex: 1;
 }
 
 .profile-image {
-    width: 100px;
-    height: 100px;
+    width: 8rem;
+    height: 8rem;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #f39c12;
 }
 
-.change-image-btn {
+.profile-picture-upload {
+    border: none;
+    outline: none;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: #1c1c1c;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.upload-image-btn {
     display: block;
     margin: 1rem auto;
     background-color: transparent;
@@ -1139,11 +1149,10 @@ blockquote p::after {
     border: 1px solid #f39c12;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    cursor: pointer;
     font-size: 1.4rem;
 }
 
-.change-image-btn:hover {
+.upload-image-btn:hover {
     background-color: #f39c12;
     color: #1c1c1c;
 }
@@ -1178,8 +1187,6 @@ blockquote p::after {
 #toggle-password {
     background-color: transparent;
     color: #f39c12;
-    border: none;
-    cursor: pointer;
     text-align: left;
     padding: 0;
     font-size: 1.4rem;
@@ -1195,10 +1202,7 @@ blockquote p::after {
     background-color: #f39c12;
     color: #1c1c1c;
     padding: 1rem;
-    border: none;
     border-radius: 0.5rem;
-    font-size: 1.6rem;
-    cursor: pointer;
 }
 
 .save-button:hover {
@@ -1208,10 +1212,7 @@ blockquote p::after {
 
 /* About Page */
 .about-page {
-    font-family: 'Arial', sans-serif;
     height: 100%;
-    background-color: #1b1b1b;
-    color: #fff;
     overflow-x: hidden;
 }
 
@@ -1235,7 +1236,7 @@ blockquote p::after {
 .about-content p {
     font-size: 1.8rem;
     line-height: 1.6;
-    max-width: 600px;
+    max-width: 60rem;
     margin: 0 auto 4rem auto;
 }
 
@@ -1314,7 +1315,6 @@ blockquote p::after {
 }
 
 .community-callout p {
-    font-size: 1.6rem;
     margin: 2rem 4rem 3rem;
 }
 
@@ -1323,9 +1323,7 @@ blockquote p::after {
     color: white;
     padding: 1.2rem 3rem;
     font-size: 1.8rem;
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
     transition: background-color 0.3s;
 }
 
@@ -1350,10 +1348,6 @@ blockquote p::after {
 
 .mission-section h2 {
     font-size: 3.2rem;
-}
-
-.mission-section p {
-    font-size: 1.6rem;
 }
 
 .team-section {
@@ -1388,14 +1382,6 @@ blockquote p::after {
 
 
 /* Community Page */
-.community-page {
-    color: #fff;
-    background-color: #1b1b1b;
-    font-family: sans-serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-}
-
 .main-container.community {
     position: relative;
     display: flex;
@@ -1440,7 +1426,7 @@ blockquote p::after {
 }
 
 .community-header {
-    font-size: 6rem;
+    font-size: 5.4rem;
     font-weight: 800;
     text-align: center;
     color: white;
@@ -1477,7 +1463,7 @@ blockquote p::after {
 }
 
 .message-textbox {
-    width: 98%;
+    width: calc(100% - 1rem);
     height: 100%;
     min-height: 6.2rem;
     display: flex;
@@ -1488,7 +1474,7 @@ blockquote p::after {
 }
 
 .message-textbox input {
-    width: 87%;
+    width: 90%;
     height: 4.8rem;
     border: none;
     outline: none;
@@ -1503,16 +1489,13 @@ blockquote p::after {
 }
 
 .message-textbox button {
-    width: 12%;
+    width: 9%;
     height: 4.8rem;
-    border: none;
-    outline: none;
     background-color: #f39c12;
     color: #000;
     font-size: 1.4rem;
     font-weight: 600;
     border-radius: 0.5rem;
-    cursor: pointer;
 }
 
 .message-historybox {
@@ -1523,7 +1506,6 @@ blockquote p::after {
     border: none;
     outline: none;
     color: white;
-    font-size: 1.6rem;
     padding-left: 1rem;
     display: flex;
     flex-direction: column;
@@ -1562,7 +1544,7 @@ blockquote p::after {
     position: relative;
     width: 100%;
     min-width: 30rem;
-    max-width: 70%;
+    max-width: 76%;
     min-height: 7.6rem;
     padding: 1.5rem 2rem 1.5rem 1.5rem;
     background-color: #2d2d2d;
@@ -1596,12 +1578,7 @@ blockquote p::after {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    cursor: pointer;
     font-size: 1.8rem;
-}
-      
-.bx {
-    cursor: pointer;
 }
       
 .like-wrapper {
@@ -1611,7 +1588,6 @@ blockquote p::after {
 }
       
 .like-wrapper .bx-like {
-    font-size: 1.6rem;
     color: #f39c12;
     margin-right: 0.5rem;
     margin-left: 0.8rem;
@@ -1636,8 +1612,6 @@ blockquote p::after {
     padding: 0.8rem 2rem;
     background-color: #5d85d4;
     color: white;
-    border: none;
-    cursor: pointer;
     margin-top: 1rem;
     border-radius: 0.5rem;
 }
@@ -1677,11 +1651,9 @@ blockquote p::after {
 
 .option-menu button {
     background: none;
-    border: none;
     color: inherit;
     font: inherit;
     padding: 0.5rem 0;
-    cursor: pointer;
     width: 100%;
     text-align: left;
 }
@@ -1729,7 +1701,6 @@ blockquote p::after {
     float: right;
     font-size: 2.5rem;
     font-weight: 700;
-    cursor: pointer;
 }
 
 .close-btn:hover {
@@ -1770,7 +1741,7 @@ blockquote p::after {
 
 .events-section {
     width: 80%;
-    margin: 4rem auto 2rem;
+    margin: 4rem auto 0;
     background-color: #555555;
     padding: 2rem;
     border-radius: 1rem;
@@ -1856,6 +1827,7 @@ blockquote p::after {
 }
 
 .accordion-answer{
+    font-size: 1.4rem;
     padding: 1rem 0;
     color: #121212;
 }
@@ -1878,10 +1850,8 @@ blockquote p::after {
 
 /* Contact Us Page */
 .contact-page {
-    font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #faf3e0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -1982,9 +1952,7 @@ textarea.contact-inputs {
     font-weight: 600;
     color: white;
     background: linear-gradient(45deg, #ff994f, #fa6d86);
-    border: none;
     border-radius: 5rem;
-    cursor: pointer;
     transition: all 0.3s;
     display: flex;
     align-items: center;
@@ -2034,7 +2002,6 @@ textarea.contact-inputs {
     align-items: center;
     gap: 0.8rem;
     margin-bottom: 0.8rem;
-    font-size: 1.6rem;
 }
 
 .info-item i {
@@ -2044,7 +2011,6 @@ textarea.contact-inputs {
 
 /* Anime page */
 .anime-page {
-    background: #121212;
     overflow-x: hidden;
 }
 
@@ -2058,6 +2024,7 @@ textarea.contact-inputs {
 .main-content {
     flex: 1;
     min-width: 0;
+    width: 76%;
 }
 
 .swiper {
@@ -2096,7 +2063,6 @@ textarea.contact-inputs {
 .swiper-slide img {
     width: 100%;
     height: 100%;
-    display: block;
     object-fit: cover;
     z-index: 1;
     border-radius: 1rem;
@@ -2155,7 +2121,7 @@ textarea.contact-inputs {
 }
 
 .anime-sidebar {
-    width: 28rem;
+    width: 24%;
     background-color: transparent;
     padding: 0 0 1rem;
     border-radius: 1rem;
@@ -2245,10 +2211,7 @@ textarea.contact-inputs {
     background-color: #790e79;
     color: white;
     padding: 1rem;
-    font-size: 1.6rem;
-    border: none;
     border-radius: 0.8rem;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2308,14 +2271,10 @@ textarea.contact-inputs {
 
 /* Search Page */
 .search-page {
-    font-family: "Poppins", sans-serif;
-    background-color: #1b1b1b;
-    color: white;
     overflow-x: hidden;
 }
 
 .filter-page {
-    background: #121212;
     overflow-x: hidden;
 }
 
@@ -2379,37 +2338,47 @@ textarea.contact-inputs {
 
 
 /* Responsive Design */
-@media screen and (min-width: 980px) {
-    .search-btn {
-        display: flex;
+@media (min-width: 768px) {
+    .call-to-action-container p {
+        font-size: 1.4rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
-@media screen and (min-width: 769px) and (max-width: 979px) {
-  .header {
-    flex-wrap: nowrap;
-  }
 
-  .nav-group {
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
+/* Most smartphones (portrait) */
+@media (min-width: 376px) and (max-width: 767px) {
+    .container.register {
+        padding: 1.5rem;
+    }
 
-  .navbar {
-    flex-direction: row;
-    display: flex;
-  }
+    .left-section.register {
+        width: 0%;
+    }
 
-  .search-btn {
-    display: none;
-  }
+    .right-section {
+        width: 100%;
+    }
 
-  .hamburger {
-    display: none;
-  }
-}
+    .form-box h2 {
+        font-size: 2.8rem;
+    }
 
-@media screen and (max-width: 768px) {
+    .input-box input {
+        height: 4.5rem;
+    }
+
+    .recommendations-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    }
+
+    .recently-updated-grid {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    }
+
     .contact-container {
         flex-direction: column;
     }
@@ -2451,27 +2420,147 @@ textarea.contact-inputs {
         margin-left: 0;
     }
 
-    .recommendations-grid {
-        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    .hero-container {
+        flex-direction: column;
+        padding: 2rem 3rem;
+        gap: 3rem;
     }
 
-    .recently-updated-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    .hero-left {
+        order: 2;
+    }
+
+    .hero-right {
+        order: 1;
+    }
+
+    .hero-left h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-left button {
+        width: 100%;
+    }
+
+    .call-to-action-container {
+        flex-direction: column;
+        max-width: 90%;
+    }
+
+    .call-to-action-left {
+        order: 1;
+    }
+
+    .call-to-action-right {
+        order: 2;
+    }
+
+    .anime-container {
+        flex-direction: column;
+    }
+
+    .main-content {
+        width: 98%;
+    }
+
+    .anime-sidebar {
+        width: 98%;
+    }
+
+    .community-container {
+        width: 98%;
+    }
+
+    .community-header {
+        font-size: 3.4rem;
+    }
+
+    .message-container {
+        min-width: 22rem;
+        max-width: 86%;
+    }
+
+    .message-wrapper {
+        gap: 0.6rem;
+    }
+
+    .profile-icon {
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+
+    .message {
+        font-size: 1.2rem;
+    }
+
+    .message-username {
+        font-size: 1.3rem;
+    }
+
+    .message-textbox input {
+        height: 4.5rem;
+        width: 99%;
+        font-size: 1.2rem;
+    }
+
+    .message-textbox button {
+        display: none;
     }
 }
 
-@media screen and (max-width: 600px) {
-    .recommendations-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+/* Tablets (portrait) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container.register {
+        max-width: 90%;
     }
 
-    .recently-updated-grid {
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    .left-section.register {
+        width: 0%;
+    }
+
+    .right-section {
+        width: 100%;
+    }
+
+    .input-row {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .header {
+        flex-wrap: nowrap;
+    }
+    
+    .nav-group {
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    
+    .navbar {
+        flex-direction: row;
+        display: flex;
+    }
+    
+    .search-btn {
+        display: none;
+    }
+    
+    .hamburger {
+        display: none;
     }
 }
 
-@media (min-width: 768px) {
-    .footer-grid {
-      grid-template-columns: repeat(4, 1fr);
+/* Tablets (landscape) & small laptops */
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .left-section.register {
+        width: 50%;
     }
-  }
+
+    .right-section {
+        width: 50%;
+    }
+
+    .search-btn {
+        display: flex;
+    }
+}
