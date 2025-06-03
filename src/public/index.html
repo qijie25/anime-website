@@ -1,182 +1,196 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-Control" content="no-store" />
-    <title>Home page</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  </head>
 
-  <body class="home-page">
-    <header class="header">
-      <div class="hamburger" id="hamburger">
-        <i class="bx bx-menu"></i>
-      </div>
-      <a href="index.html" class="logo">AniTube</a>
-      <!-- Left section: Nav -->
-      <div class="nav-left">
-        <nav class="navbar">
-          <a href="index.html">Home</a>
-          <a href="anime.html">Anime</a>
-          <a href="community.html">Community</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-      </div>
-      <!-- Center: Search bar -->
-      <form action="#" class="search-btn" id="search-form">
-        <input type="search" placeholder="Search" class="search-input" id="search-input" />
-        <button type="submit" title="Search"><i class="bx bx-search"></i></button>
-      </form>
-      <ul id="search-suggestions" class="search-suggestions"></ul>
-      <!-- Right: Notification, login/profile -->
-      <div class="nav-right">
-        <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
-        <div id="user-notification" style="display: none">
-          <a href="#" class="notification" id="notificationIcon">
-            <i class="bx bxs-bell bx-tada-hover"></i>
-          </a>
-        </div>
-        <div id="user-profile" style="display: none">
-          <a href="#" class="profile" id="profileIcon">
-            <img src="assets/profile-icon(2).png" alt="Profile" id="profileImage" />
-          </a>
-          <div class="profile-menu" id="profileMenu">
-            <ul>
-              <li><a href="profile.html">Profile</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div class="help-container">
-      <i class="bx bx-help-circle bx-tada-hover" id="helpIcon"></i>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Home page</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body class="home-page">
+  <header class="header">
+    <div class="hamburger" id="hamburger">
+      <i class="bx bx-menu"></i>
     </div>
-    <div class="main-wrapper">
-      <div class="hero-container">
-        <div class="hero-left">
-          <h1>Welcome to my awesome anime website</h1>
-          <p>
-            Embark on an unforgettable journey into the captivating world of anime. Dive deep into
-            vibrant realms, where every frame pulses with emotion and every character springs to
-            life. Our anime sanctuary awaits, ready to ignite your imagination and stir your soul.
-            Join us as we celebrate the power of storytelling, the beauty of artistry, and the magic
-            of anime
-          </p>
-          <button class="signup-btn" id="signup-btn"><a href="signup.html">Sign up</a></button>
-          <button class="about-btn" id="about-btn"><a href="about.html">Learn more</a></button>
-        </div>
-        <div class="hero-right">
-          <img
-            src="https://img.goodfon.com/wallpaper/big/b/7b/boku-no-hero-academia-art.webp"
-            alt=""
-          />
-        </div>
-      </div>
-      <div class="recommendation-container">
-        <h2>Anime Recommendation</h2>
-        <div class="recommendations-grid" id="recommendations-grid">
-          <!-- Anime recommendations will be displayed here by JavaScript -->
-        </div>
-        <a href="anime.html"><button id="view-more">View More</button></a>
-      </div>
-      <br />
-      <div class="quote-container">
-        <blockquote cite="https://quotetheanime.com/quotes/trigun-quotes/">
-          <p>Every journey begins with a single step. We just have to have patience.</p>
-          <footer class="quote-footer">-Milly Thompson (Trigun)</footer>
-        </blockquote>
-      </div>
-      <br />
-      <br />
-      <div class="call-to-action-container">
-        <div class="call-to-action-left">
-          <h3>Immerse Yourself in Anime - Let's Begin!</h3>
-          <p>
-            Sign up to not miss a single update of your favorite anime by clicking that button right
-            over there!
-          </p>
-        </div>
-        <div class="call-to-action-right">
-          <button><a href="signup.html">Sign up</a></button>
-        </div>
-      </div>
+    <a href="index.html" class="logo">AniTube</a>
+    <!-- Left section: Nav -->
+    <div class="nav-left">
+      <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="anime.html">Anime</a>
+        <a href="community.html">Community</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <template id="anime-card-template">
-      <div class="recommendation-box">
-        <div class="box-head">
-          <img src="" alt="" />
-          <div class="box-content">
-            <i class="bx bx-bookmark favorite-btn"></i>
-            <div class="rating-wrapper">
-              <i class="bx bx-star rating-btn"></i>
-              <span class="rating-num">0.0</span>
-            </div>
-            <i class="bx bx-play-circle play-btn"></i>
-          </div>
-        </div>
-        <div class="box-body">
-          <h3 class="box-title"></h3>
-          <div class="box-footer">
-            <p class="genre"></p>
-            <p class="release-date"></p>
-          </div>
-        </div>
+    <!-- Center: Search bar -->
+    <form action="#" class="search-btn" id="search-form">
+      <input type="search" placeholder="Search" class="search-input" id="search-input" />
+      <button type="submit" title="Search"><i class="bx bx-search"></i></button>
+    </form>
+    <ul id="search-suggestions" class="search-suggestions"></ul>
+    <!-- Right: Notification, login/profile -->
+    <div class="nav-right">
+      <button id="login-btn" class="login-btn"><a href="signin.html">Login</a></button>
+      <div id="user-notification" style="display: none">
+        <a href="#" class="notification" id="notificationIcon">
+          <i class="bx bxs-bell bx-tada-hover"></i>
+        </a>
       </div>
-    </template>
-    <div class="help-modal">
-      <div class="help-modal-content">
-        <span class="close-btn">&times;</span>
-        <div class="help-page active">
-          <h2>Help - Login Info</h2>
-          <p>Email: john@tester.com</p>
-          <p>Password: abc123</p>
-          <br />
-          <p>Email: dexter@anitube.com (admin)</p>
-          <p>Password: password123 (admin)</p>
-        </div>
-        <div class="help-page">
-          <h2>Help - Main Features</h2>
+      <div id="user-profile" style="display: none">
+        <a href="#" class="profile" id="profileIcon">
+          <img src="assets/profile-icon(2).png" alt="Profile" id="profileImage" loading="lazy" />
+        </a>
+        <div class="profile-menu" id="profileMenu">
           <ul>
-            <li>Search for an anime using the search bar.</li>
-            <li>Click on an anime to view its details.</li>
-            <li>Filter animes by genre or/and release date, status, type.</li>
-            <li>Send messages in the community page in real-time.</li>
-            <li>Click on profile icon to view your profile.</li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#" id="logout-btn" class="logout-btn">Logout</a></li>
           </ul>
         </div>
-        <div class="help-page">
-          <h2>Help - Main Features (admin)</h2>
-          <ul>
-            <li>View all animes.</li>
-            <li>Create an anime.</li>
-            <li>Update an anime.</li>
-            <li>Delete an anime.</li>
-            <li>Search for animes using the search bar.</li>
-          </ul>
+      </div>
+    </div>
+  </header>
+  <div class="help-container">
+    <i class="bx bx-help-circle bx-tada-hover" id="helpIcon"></i>
+  </div>
+  <div class="main-wrapper">
+    <div class="hero-container">
+      <div class="hero-left">
+        <h1>Welcome to my awesome anime website</h1>
+        <p>
+          Embark on an unforgettable journey into the captivating world of anime. Dive deep into
+          vibrant realms, where every frame pulses with emotion and every character springs to
+          life. Our anime sanctuary awaits, ready to ignite your imagination and stir your soul.
+          Join us as we celebrate the power of storytelling, the beauty of artistry, and the magic
+          of anime
+        </p>
+        <button class="signup-btn" id="signup-btn"><a href="signup.html">Sign up</a></button>
+        <button class="about-btn" id="about-btn"><a href="about.html">Learn more</a></button>
+      </div>
+      <div class="hero-right">
+          <link rel="preload" as="image" href="https://img.goodfon.com/wallpaper/big/b/7b/boku-no-hero-academia-art.webp" type="image/webp" />
+          <img src="https://img.goodfon.com/wallpaper/big/b/7b/boku-no-hero-academia-art.webp" alt="My Hero Academia" width="600" height="400" loading="lazy" fetchpriority="high" />
+      </div>
+    </div>
+    <div class="recommendation-container" id="lazy-recommendations">
+      <h2>Anime Recommendation</h2>
+      <div class="recommendations-grid" id="recommendations-grid">
+        <!-- Anime recommendations will be displayed here by JavaScript -->
+      </div>
+      <a href="anime.html"><button id="view-more">View More</button></a>
+    </div>
+    <br />
+    <div class="quote-container">
+      <blockquote cite="https://quotetheanime.com/quotes/trigun-quotes/">
+        <p>Every journey begins with a single step. We just have to have patience.</p>
+        <footer class="quote-footer">-Milly Thompson (Trigun)</footer>
+      </blockquote>
+    </div>
+    <br />
+    <br />
+    <div class="call-to-action-container">
+      <div class="call-to-action-left">
+        <h3>Immerse Yourself in Anime - Let's Begin!</h3>
+        <p>
+          Sign up to not miss a single update of your favorite anime by clicking that button right
+          over there!
+        </p>
+      </div>
+      <div class="call-to-action-right">
+        <button><a href="signup.html">Sign up</a></button>
+      </div>
+    </div>
+  </div>
+  <template id="anime-card-template">
+    <div class="recommendation-box">
+      <div class="box-head">
+        <img 
+          data-src="https://placehold.co/200x320/webp" 
+          src="https://placehold.co/20x20/transparent/222/webp" 
+          alt="" 
+          class="lazy-load" 
+          width="200"
+          height="320" 
+        />
+        <div class="box-content">
+          <i class="bx bx-bookmark favorite-btn"></i>
+          <div class="rating-wrapper">
+            <i class="bx bx-star rating-btn"></i>
+            <span class="rating-num">0.0</span>
+          </div>
+          <i class="bx bx-play-circle play-btn"></i>
         </div>
-        <div class="help-modal-controls">
-          <button class="prev-btn">Previous</button>
-          <button class="next-btn">Next</button>
+      </div>
+      <div class="box-body">
+        <h3 class="box-title"></h3>
+        <div class="box-footer">
+          <p class="genre"></p>
+          <p class="release-date"></p>
         </div>
       </div>
     </div>
+  </template>
+  <div class="help-modal">
+    <div class="help-modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="help-page active">
+        <h2>Help - Login Info</h2>
+        <p>Email: john@tester.com</p>
+        <p>Password: abc123</p>
+        <br />
+        <p>Email: dexter@anitube.com (admin)</p>
+        <p>Password: password123 (admin)</p>
+      </div>
+      <div class="help-page">
+        <h2>Help - Main Features</h2>
+        <ul>
+          <li>Search for an anime using the search bar.</li>
+          <li>Click on an anime to view its details.</li>
+          <li>Filter animes by genre or/and release date, status, type.</li>
+          <li>Send messages in the community page in real-time.</li>
+          <li>Click on profile icon to view your profile.</li>
+        </ul>
+      </div>
+      <div class="help-page">
+        <h2>Help - Main Features (admin)</h2>
+        <ul>
+          <li>View all animes.</li>
+          <li>Create an anime.</li>
+          <li>Update an anime.</li>
+          <li>Delete an anime.</li>
+          <li>Search for animes using the search bar.</li>
+        </ul>
+      </div>
+      <div class="help-modal-controls">
+        <button class="prev-btn">Previous</button>
+        <button class="next-btn">Next</button>
+      </div>
+    </div>
+  </div>
 
-    <div id="footer-placeholder"></div>
+  <script async type="module"
+    src="https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js"></script>
+  <zapier-interfaces-chatbot-embed is-popup="true"
+    chatbot-id="cmbf5ltbr005hoqxs5z9q8blm"></zapier-interfaces-chatbot-embed>
 
-    <script>
+  <div id="footer-placeholder"></div>
+
+  <script>
+    window.addEventListener('load', () => {
       fetch('footer.html')
         .then((response) => response.text())
         .then((data) => {
           document.getElementById('footer-placeholder').innerHTML = data;
         });
-    </script>
+    });
+  </script>
 
-    <script src="index.js"></script>
-    <script src="script.js"></script>
-  </body>
+  <script src="index.js"></script>
+  <script src="script.js"></script>
+</body>
+
 </html>

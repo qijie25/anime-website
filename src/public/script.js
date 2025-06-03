@@ -67,14 +67,14 @@ function createAnimeCard(anime) {
   const clone = template.content.cloneNode(true);
 
   const box = clone.querySelector('.recommendation-box');
-  const img = clone.querySelector('img');
+  const img = clone.querySelector('.lazy-load');
   const ratingBtn = clone.querySelector('.rating-btn');
   const ratingNum = clone.querySelector('.rating-num');
   const title = clone.querySelector('.box-title');
   const genreText = clone.querySelector('.genre');
   const releaseDate = clone.querySelector('.release-date');
 
-  img.src = anime.img_url;
+  img.dataset.src = anime.img_url;
   img.alt = anime.title;
   ratingNum.textContent = anime.avgRating ? anime.avgRating.toFixed(1) : '0.0';
   title.textContent = anime.title;
@@ -106,7 +106,7 @@ function createAnimeCard(anime) {
 }
 
 function generateRecommendations() {
-  fetch(`/animes/top-rated`)
+  fetch('/animes/top-rated')
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -115,16 +115,47 @@ function generateRecommendations() {
     })
     .then((animeRecommendations) => {
       const recommendationsGrid = document.getElementById('recommendations-grid');
-      recommendationsGrid.innerHTML = ''; // Clear existing content
+      recommendationsGrid.innerHTML = '';
 
       animeRecommendations.forEach((anime) => {
         const card = createAnimeCard(anime);
         recommendationsGrid.appendChild(card);
       });
+
+      lazyLoadImages();
     })
     .catch((error) => {
       console.error('Error fetching anime recommendations:', error);
     });
+}
+
+function lazyLoadImages() {
+  const lazyImages = document.querySelectorAll('img.lazy-load');
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.onload = () => {
+            img.classList.add('loaded');
+          }
+          img.removeAttribute('data-src');
+          img.classList.remove('lazy-load');
+          obs.unobserve(img);
+        }
+      });
+    },
+    {
+      rootMargin: '0px 0px 100px 0px',
+      threshold: 0.01,
+    },
+  );
+
+  lazyImages.forEach((img) => {
+    observer.observe(img);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
