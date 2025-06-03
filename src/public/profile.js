@@ -26,13 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  let originalProfileImageUrl = 'assets/profile-icon.png';
+  let hasExistingProfileImage = false;
+
   // Load existing profile pictures
   async function loadProfilePictures() {
     try {
       const response = await fetch(`/users/profile-pictures/${userId}`);
       const data = await response.json();
       if (data.pictures.length > 0) {
-        profileImg.src = data.pictures[data.pictures.length - 1]; // Show latest picture
+        originalProfileImageUrl = data.pictures[data.pictures.length - 1];
+        hasExistingProfileImage = true;
+        profileImg.src = originalProfileImageUrl;
       }
     } catch (error) {
       console.error('Error loading profile pictures:', error);
@@ -41,11 +46,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadProfilePictures();
 
-  // Upload new profile picture
-  // eslint-disable-next-line consistent-return
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const currentImageUrl = profileImg.src;
+
+      if (currentImageUrl.includes('assets/profile-icon.png')) {
+        // Keep the existing originalProfileImageUrl
+      } else if (!currentImageUrl.startsWith('blob:')) {
+        originalProfileImageUrl = currentImageUrl;
+      }
+
+      // Create preview
+      const imageUrl = URL.createObjectURL(file);
+      profileImg.src = imageUrl;
+
+      profileImg.onload = function () {
+        URL.revokeObjectURL(imageUrl);
+      };
+    }
+  });
+
   uploadBtn.addEventListener('click', async () => {
     const file = fileInput.files[0];
-    if (!file) return alert('Please select a file!');
+    if (!file) {
+      alert('Please select a file!');
+      return;
+    }
 
     const formData = new FormData();
     formData.append('image', file);
@@ -59,13 +86,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const result = await response.json();
       if (response.ok) {
         alert('Profile picture uploaded!');
-        profileImg.src = result.user.profile_imgs[result.user.profile_imgs.length - 1]; // Update latest image
+        // Update the original image URL to the new one
+        if (result.user.profile_imgs && result.user.profile_imgs.length > 0) {
+          originalProfileImageUrl = result.user.profile_imgs[result.user.profile_imgs.length - 1];
+          hasExistingProfileImage = true;
+        }
       } else {
         alert(`Error: ${result.message}`);
+        profileImg.src = originalProfileImageUrl;
       }
     } catch (error) {
       console.error('Upload failed:', error);
       alert('Failed to upload image.');
+      profileImg.src = originalProfileImageUrl;
     }
   });
 
